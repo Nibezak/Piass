@@ -135,6 +135,7 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
+		'Illuminate\Html\HtmlServiceProvider',
 
 		/*
 		 * Application Service Providers...
@@ -145,6 +146,18 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 
+		/**
+		 * Third Party service providers
+		 */
+		'Laracasts\Generators\GeneratorsServiceProvider',
+		'Laracasts\Flash\FlashServiceProvider',
+		'Sentinel\SentinelServiceProvider',   
+
+		/**
+		 * Custom service providers
+		 */
+		
+		'App\Providers\ViewComposersProvider',
 	],
 
 	/*
@@ -193,6 +206,12 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 
+		/**
+		 * Customer facade
+		 */
+		'Form'		=>	'Illuminate\Html\FormFacade',
+		'Html'		=>	'Illuminate\Html\HtmlFacade',
+		'Flash'		=> 'Laracasts\Flash\Flash',
 	],
 
 ];

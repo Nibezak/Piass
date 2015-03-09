@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,8 +11,12 @@
     <!-- Ionicons -->
     <link href="{{Url()}}/assets/ionicons/ionicons.min.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
-    <link href="{{Url()}}/assets/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-    <!-- AdminLTE Skins. Choose a skin from the css/skins 
+    <link href="{{Url()}}/assets/dist/css/piassStudent.css" rel="stylesheet" type="text/css" />
+  
+    <!-- Drop zone -->
+     <link href="{{Url()}}/assets/dropzone/dropzone.css" rel="stylesheet" type="text/css" />
+     <script src="{{Url()}}/assets/dropzone/dropzone.js"></script>
+    <!-- PIASS Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
     <link href="{{Url()}}/assets/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 
@@ -38,21 +41,24 @@
           @include('partials.leftnav')
         <!-- /.sidebar -->
       </aside>
-
+ 
       <!-- =============================================== -->
 
       <!-- Right side column. Contains the navbar and content of the page -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
           @include('partials.contentHeader')
+
+          @include('partials.notification')
         <!-- Main content -->
         <section class="content">
-
+          
           <!-- Default box -->
            @include('partials.container')
           <!-- /.box -->
 
         </section><!-- /.content -->
+
       </div><!-- /.content-wrapper -->
 
       @include('partials.footer')
@@ -66,7 +72,16 @@
     <script src="{{Url()}}/assets/plugins/slimScroll/jquery.slimScroll.min.js" type="text/javascript"></script>
     <!-- FastClick -->
     <script src='{{Url()}}/assets/plugins/fastclick/fastclick.min.js'></script>
-    <!-- AdminLTE App -->
+    <!-- DATEPICKER App -->
     <script src="{{Url()}}/assets/dist/js/app.min.js" type="text/javascript"></script>
+
+    <script src="{{Url()}}/assets/dist/js/datepickr.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+            new datepickr('date', {
+                'dateFormat': 'Y-m-d'
+            });
+            
+        </script>  
   </body>
 </html>

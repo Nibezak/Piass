@@ -8,7 +8,7 @@ Dashboard
 Welcome to PIASS Student Management System, below are important statistics.
 @stop
 
-@section('body')
+@section('content')
 
 <section class="content">
 <div class="row">

@@ -3,6 +3,19 @@
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
+/**
+ * Student events
+ */
+use App\Events\StudentWasRegisteredEvent;
+use App\Handlers\Events\NotifyAboutRegisteredStudent;
+
+
+/**
+ * Fees Events
+ */
+use App\Events\FeeWasRegisteredEvent;
+use App\Handlers\Events\FeeWasRegisteredEventHandler;
+
 class EventServiceProvider extends ServiceProvider {
 
 	/**
@@ -11,8 +24,14 @@ class EventServiceProvider extends ServiceProvider {
 	 * @var array
 	 */
 	protected $listen = [
-		'event.name' => [
-			'EventListener',
+		/** Events for the Student */
+		StudentWasRegisteredEvent::class => [
+			NotifyAboutRegisteredStudent::class,
+		],
+
+		/** Events for the Fee */
+		FeeWasRegisteredEvent::class=>[
+			FeeWasRegisteredEventHandler::class,
 		],
 	];
 
