@@ -59,11 +59,11 @@ class StudentController extends Controller {
 	 */
 	public function store(StudentRegisterRequest $request)
 	{
-		$this->dispatch(new StudentRegisterCommand($request));
+		$student = $this->dispatch(new StudentRegisterCommand($request))->student;
 
-		Flash::success('New Student was registered successfully ');
+		Flash::success('New student '.$student->names.' was registered successfully. ');
 
-		return Redirect::route('students.index');
+		return Redirect::route('students.edit',$student->id);
 	}
 
 	/**

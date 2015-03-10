@@ -19,6 +19,11 @@ class Student extends Model {
 							'mother_name'    ,
 	];
 
+	public function educations()
+	{
+		return $this->hasOne('App\Models\StudentEducation');
+	}
+
     /**
 	 * Realationshi with the FeeTransaction Model
 	 * 

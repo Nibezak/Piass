@@ -12,14 +12,19 @@ Modify below information then click on save to edit this student information
 @section('content')
 <div class="box">
       
-{!! Form::open(['url' => '/students/'.$student->id]) !!}       
+{!! Form::open(['route' => ['students.update',$student->id,'method'=>'PUT']]) !!}       
 
 	@include('students.form',['button'=>'Save'])
 
-	@include('students.educations',['button'=>'Edit'])
-
-{!!  Form::close() !!}  	
+{!!  Form::close() !!}  
+	
 	@include('students.files')
+
+{!! Form::open(['route' => ['students.educations.update',$student->id],'method'=>'PUT']) !!}       
+	
+	@include('students.educations',['button'=>'Register education'])
+
+{!!  Form::close() !!}  
    
 </div><!-- /.box-body -->
 

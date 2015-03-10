@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class DepartmentUpdateRequest extends Request {
+class ModuleUpdateRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -22,10 +22,7 @@ class DepartmentUpdateRequest extends Request {
 	public function rules()
 	{
 		return [
-			'name'		  => 'required',
-			'description' =>'required',
-			'levels'	  =>'required|numeric|min:1',
-			'faculity'    => 'required|numeric',
+			//
 		];
 	}
 

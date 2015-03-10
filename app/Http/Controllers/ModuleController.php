@@ -3,6 +3,7 @@
 use Flash,Redirect;
 use App\Http\Requests;
 use App\Http\Requests\ModuleRegisterRequest;
+use App\Http\Requests\ModuleUpdateRequest;
 use App\Models\Module;
 use App\Models\Department;
 use App\Http\Controllers\Controller;
@@ -18,6 +19,7 @@ class ModuleController extends Controller {
 	function __construct(Module $module,Department $department) 
     {
 		$this->module = $module;
+
 		$this->department = $department;
 	}
 
@@ -28,7 +30,9 @@ class ModuleController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$modules = $this->module->paginate(20);
+
+		return view('modules.index',compact('modules'));
 	}
 
 	/**
@@ -36,9 +40,13 @@ class ModuleController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create($department,$level)
+	public function create($department=0,$level=0)
 	{
-		 $department =  $this->department->findOrFail($department);
+		 if ($department)
+		 {
+		 	$department =  $this->department->findOrFail($department);
+		 }
+		 
 
 		 $module =  new $this->module;
 
@@ -100,9 +108,15 @@ class ModuleController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(ModuleUpdateRequest $request,$id)
 	{
-		//
+		$module = $this->module->findOrFail($id);
+
+		$module->update((array) $request->all());
+
+		Flash::success('Module '.$request->name. ' was updated successfully.');
+
+		return Redirect::route('modules.index');
 	}
 
 	/**
@@ -113,7 +127,13 @@ class ModuleController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+	    $module = $this->module->findOrFail($id);
+
+		$module->update((array) $request->all());
+
+		Flash::success('Module '.$request->name. ' was updated successfully.');
+
+		return Redirect::route('modules.index');
 	}
 
 }

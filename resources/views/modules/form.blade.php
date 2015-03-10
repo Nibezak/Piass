@@ -8,9 +8,11 @@
                     
 
                     <!-- text input -->
-                    {!! Form::hidden('department_level', $level) !!}
+                    @if($department && $level)
+                      {!! Form::hidden('department_level', $level) !!}
                     
                     {!! Form::hidden('department_id', $department->id) !!}
+                    @endif
 
                     <div class="form-group {!! ($errors->has('name')) ? 'has-error' : '' !!}">
                       {!! Form::label('name', 'module Name') !!}

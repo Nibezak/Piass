@@ -1,10 +1,9 @@
-<div class="box-body">
-
-   <div class="box box-primary">
+<div class="row">
+	 @yield('content')
+</div>
+         
              
-              @yield('content')
+        
 
-   </div>         
-</div><!-- /.box-body -->
             
     

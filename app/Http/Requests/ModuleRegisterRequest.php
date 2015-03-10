@@ -25,9 +25,7 @@ class ModuleRegisterRequest extends Request {
 			'name' =>'required|unique:modules',
 			'code' =>'required|unique:modules',
 			'credits' =>'required|numeric',
-			'credit_cost' => 'required|numeric',
-			'department_level' => 'required|numeric',
-			'department_id'	   => 'required|numeric',
+			'credit_cost' => 'required|numeric'
 		];
 	}
 

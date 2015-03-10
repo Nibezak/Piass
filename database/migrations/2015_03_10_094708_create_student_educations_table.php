@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFilesTable extends Migration {
+class CreateStudentEducationsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,15 @@ class CreateFilesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('files', function(Blueprint $table)
+		Schema::create('student_educations', function(Blueprint $table)
 		{
 			$table->increments('id');
 			
-			$table->string('name');
+			$table->string('qualification',10);
+			$table->string('subjects');
+			$table->string('school_attended');
+			$table->string('completion_year');
 			$table->integer('student_id');
-			$table->foreign('student_id')->references('id')->on('students')->onDelete('CASCADE');
-
 			$table->timestamps();
 		});
 	}
@@ -31,7 +32,7 @@ class CreateFilesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('files');
+		Schema::drop('student_educations');
 	}
 
 }

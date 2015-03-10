@@ -11,14 +11,11 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                 <div class="box-footer">
-                  <form action="#" method="post">
-                    <div class="input-group">
-                      <input type="text" name="message" placeholder="Type Message ..." class="form-control">
-                      <span class="input-group-btn">
-                        <button type="button" class="btn btn-primary btn-flat">{!! $button !!}</button>
-                      </span>
-                    </div>
-                  </form>
+                  
+                  @include('students.educationForm')
+                  
+                  {!! Form::submit($button, ['class' => 'btn btn-success']) !!}
+
                 </div><!-- /.box-footer-->
               </div><!--/.direct-chat -->
             </div>

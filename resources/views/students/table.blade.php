@@ -10,9 +10,6 @@
         						<th>E-Mail </th>
         						<th>Occupation </th>
         						<th>Residence </th>
-        						<th>Nationality </th>
-        						<th>Father </th>
-        						<th>Mother </th>
         						<th><i class="fa fa-gear"></i> </th>
                     </tr>
 					@foreach($students as $student)
@@ -26,10 +23,7 @@
                       <td>{{ $student->email }}</td>
                       <td>{{ $student->occupation }}</td>
                       <td>{{ $student->residence }}</td>
-                      <td>{{ $student->nationality }}</td>
-                      <td>{{ $student->father_name }}</td>
-                      <td>{{ $student->mother_name }}</td>
-                      <td><a href="{{route('students.edit',$student->id)}}"><i class="fa fa-pencil"></i></a></td>
+                      <td><a href="{{route('students.edit',$student->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a></td>
                     </tr>
 					@endforeach
                   </tbody>

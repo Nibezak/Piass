@@ -3,8 +3,12 @@
 Route::get('/', ['as'=>'home','uses'=>'DashboardController@index']);
 Route::get('/dashboard', ['as'=>'dashboard','uses'=>'DashboardController@index']);
 
-
+Route::group(['prefix'=>'students'],	function()
+	{
+		 Route::resource('educations', 'StudentEducationController');
+	});
 Route::resource('students', 'StudentController');
+
 Route::resource('fees', 'FeeController');
 Route::resource('transactions', 'TransactionController');
 Route::resource('files','FileController');

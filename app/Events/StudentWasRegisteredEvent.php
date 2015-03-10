@@ -9,6 +9,7 @@ class StudentWasRegisteredEvent extends Event {
 	use SerializesModels;
 
 	public $student;
+	public $id;
 	/**
 	 * Create a new event instance.
 	 *
@@ -17,5 +18,7 @@ class StudentWasRegisteredEvent extends Event {
 	public function __construct(Student $student)
 	{
 		$this->student = $student;
+
+		$this->id = $student->id;
 	}
 }

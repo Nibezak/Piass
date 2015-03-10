@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('title')
-Add new module to level {!! $level !!} of {!! $department->name !!} deparatment
+Add new module @if($department) to  level {!! $level !!} of {!! $department->name !!} deparatment @endif
 @stop
 
 @section('description')

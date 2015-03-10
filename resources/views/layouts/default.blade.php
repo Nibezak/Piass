@@ -81,7 +81,6 @@
             new datepickr('date', {
                 'dateFormat': 'Y-m-d'
             });
-            
         </script>  
   </body>
 </html>
