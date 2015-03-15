@@ -28,7 +28,7 @@
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
             </li>
-
+{{-- 
             <li class="{{(Request::is('fees*') ? 'active' : '')}} treeview">
               <a href="{{Url()}}/fees">
                 <i class="fa fa-money"></i>
@@ -43,7 +43,7 @@
                 <span>Transactions</span>
               </a>
               
-            </li>
+            </li> --}}
 
             <li class="{{(Request::is('students*') ? 'active' : '')}} treeview">
               <a href="/students">

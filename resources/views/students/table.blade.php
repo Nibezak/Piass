@@ -3,7 +3,7 @@
                     <tbody><tr>
         						<th>names </th>
         						<th>Date of Birth </th>
-        						<th>gender </th>
+        						<th>Gender </th>
         						<th>Martial </th>
         						<th>NID </th>
         						<th>Phone </th>
@@ -23,7 +23,14 @@
                       <td>{{ $student->email }}</td>
                       <td>{{ $student->occupation }}</td>
                       <td>{{ $student->residence }}</td>
-                      <td><a href="{{route('students.edit',$student->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a></td>
+                      <td>
+                      <a href="{{route('fees.show',$student->id)}}" class="btn btn-sm btn-success"><i class="fa fa-book">Courses</i>
+                        
+                      </a>
+                        <a href="{{route('fees.show',$student->id)}}" class="btn btn-sm btn-warning"><i class="fa fa-money"></i>
+                          Fees
+                        </a>
+                        <a href="{{route('students.edit',$student->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a></td>
                     </tr>
 					@endforeach
                   </tbody>

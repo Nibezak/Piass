@@ -17,7 +17,7 @@
                       <td>{{ $student->telephone }}</td>
                       <td>{{ $student->email }}</td>
                       <td>{{ $student->balance() }}</td>
-                      <td><a href="{{route('fees.show',$student->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Register Fee</a></td>
+                      <td><a href="{{route('fees.show',$student->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-money"></i> Register Fee</a></td>
                     </tr>
 					@endforeach
                   </tbody>
