@@ -40,6 +40,8 @@ class ViewComposersProvider extends ServiceProvider {
 	public function departmentFormcomposer()
 	{
 		view()->composer('departments.form','App\Http\Composers\ViewComposer@departmentForm');
+
+		view()->composer('studentModules.form','App\Http\Composers\ViewComposer@departmentForm');
 	}
 
 }

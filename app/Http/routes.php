@@ -1,18 +1,39 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| Home routes
+|--------------------------------------------------------------------------
+*/
+	Route::get('/', ['as'=>'home','uses'=>'DashboardController@index']);
+	Route::get('/dashboard', ['as'=>'dashboard','uses'=>'DashboardController@index']);
 
-Route::get('/', ['as'=>'home','uses'=>'DashboardController@index']);
-Route::get('/dashboard', ['as'=>'dashboard','uses'=>'DashboardController@index']);
-
-Route::group(['prefix'=>'students'],	function()
+/*
+|--------------------------------------------------------------------------
+| Student routes
+|--------------------------------------------------------------------------
+*/
+   Route::group(['prefix'=>'students'],	function()
 	{
 		 Route::resource('educations', 'StudentEducationController');
-	});
-Route::resource('students', 'StudentController');
 
+		 Route::resource('modules','StudentModulesController');
+	});
+
+	Route::resource('students', 'StudentController');
+/*
+|--------------------------------------------------------------------------
+| Fees, Transactions and files routes
+|--------------------------------------------------------------------------
+*/
 Route::resource('fees', 'FeeController');
 Route::resource('transactions', 'TransactionController');
 Route::resource('files','FileController');
 
+/*
+|--------------------------------------------------------------------------
+| Section of Menu
+|--------------------------------------------------------------------------
+*/
 Route::resource('modules','ModuleController');
 Route::get('modules/{id}/create/{level}',['as'=>'modules.department.create','uses'=>'ModuleController@create']);
 

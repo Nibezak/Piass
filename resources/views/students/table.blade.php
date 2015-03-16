@@ -24,7 +24,7 @@
                       <td>{{ $student->occupation }}</td>
                       <td>{{ $student->residence }}</td>
                       <td>
-                      <a href="{{route('fees.show',$student->id)}}" class="btn btn-sm btn-success"><i class="fa fa-book">Courses</i>
+                      <a href="{{route('students.modules.show',$student->id)}}" class="btn btn-sm btn-success"><i class="fa fa-book">Courses</i>
                         
                       </a>
                         <a href="{{route('fees.show',$student->id)}}" class="btn btn-sm btn-warning"><i class="fa fa-money"></i>
