@@ -19,6 +19,14 @@ class Student extends Model {
 							'mother_name'    ,
 	];
 
+
+	/** RelattionShip with the registered Module */
+	public function registeredModules()
+	{
+		return $this->hasMany('App\Models\StudentModules');
+	}
+	
+	/** Relationship with the edication history model */
 	public function educations()
 	{
 		return $this->hasOne('App\Models\StudentEducation');

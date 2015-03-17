@@ -2,7 +2,7 @@
               <!-- general form elements disabled -->
               <div class="box box-warning">
                 <div class="box-header">
-                  <h3 class="box-title">Register Fees</h3>
+                  <h3 class="box-title">Register Fees </h3> <label class="label pull-right bg-primary" style="font-size:22px;">Blance: {!! $student->balance() !!}</label>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     

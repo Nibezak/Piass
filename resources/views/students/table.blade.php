@@ -9,7 +9,6 @@
         						<th>Phone </th>
         						<th>E-Mail </th>
         						<th>Occupation </th>
-        						<th>Residence </th>
         						<th><i class="fa fa-gear"></i> </th>
                     </tr>
 					@foreach($students as $student)
@@ -22,13 +21,12 @@
                       <td>{{ $student->telephone }}</td>
                       <td>{{ $student->email }}</td>
                       <td>{{ $student->occupation }}</td>
-                      <td>{{ $student->residence }}</td>
                       <td>
                       <a href="{{route('students.modules.show',$student->id)}}" class="btn btn-sm btn-success"><i class="fa fa-book">Courses</i>
                         
                       </a>
                         <a href="{{route('fees.show',$student->id)}}" class="btn btn-sm btn-warning"><i class="fa fa-money"></i>
-                          Fees
+                          Payment
                         </a>
                         <a href="{{route('students.edit',$student->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a></td>
                     </tr>

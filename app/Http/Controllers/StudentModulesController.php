@@ -1,9 +1,11 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use Flash,Redirect;
+use App\Http\Requests\StudentModuleRegisterRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\StudentModules;
+use App\Commands\StudentModuleRegisterCommad;
 
 use Illuminate\Http\Request;
 
@@ -33,9 +35,28 @@ class StudentModulesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(StudentModuleRegisterRequest $request)
 	{
-		//
+		$StudentModules 	     	= (array) $request->all();
+		$StudentModules['modules'] 	=  $this->arraysMatchIndexes($request->get('ids'),$request->get('credits'));
+
+		// Remove unecessary indexes
+		unset($StudentModules['ids'],$StudentModules['credits']);
+		
+		$this->dispatch(
+			new StudentModuleRegisterCommad((object) $StudentModules)
+		);
+
+		Flash::success("New modules added to the student ");
+
+		return Redirect::route('students.index');
+	}
+
+	public function registeredModules($studentId)
+	{
+		$student = $this->student->findOrFail($studentId);
+
+		return view('studentModules.registeredmodules',compact('student'));
 	}
 	
 }

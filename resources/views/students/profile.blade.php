@@ -7,7 +7,12 @@
             </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-md-4 col-lg-4 " align="center"><img src="http://localhost:8000/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="Student Image">
+                <div class="col-md-4 col-lg-4 " align="center">
+                  <div class="img-circle" alt="Student Image" align="center">
+                      
+                      <i class="fa fa fa-graduation-cap" style="font-size:100px;"></i>
+
+                  </div>
       <div class="col-xs-10 col-sm-10 "> <br>
                   <dl>
                     <dt>STUDENT ID</dt>
@@ -70,7 +75,7 @@
                     </tbody>
                   </table>
                   
-                  <a href="#" class="btn btn-success"><i class="fa fa-line-chart"></i> See my payment history</a>
+                  <a href="{{ route('student.registered.modules',$student->id)}}" class="btn btn-success"><i class="fa fa-line-chart"></i>Registered modules</a>
                   <a href="#" class="btn btn-primary"><i class="fa fa-folder-o"></i> View my files</a>
                 </div>
               </div>

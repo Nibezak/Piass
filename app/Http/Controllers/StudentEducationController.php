@@ -34,7 +34,7 @@ class StudentEducationController extends Controller {
 		}
 		$data = (array) $request->all();
 
-		$data['subjects'] = $this->getEducation( $data['subject'] ,$data['grade']);
+		$data['subjects'] = $this->arraysMatchIndexes( $data['subject'] ,$data['grade']);
 
 		unset($data['subject'],$data['grade'],$data['_method'],$data['_token']); // Remove unwanted information
 
@@ -45,15 +45,5 @@ class StudentEducationController extends Controller {
 		return Redirect::back();
 	}
 
-	public function getEducation($subject,$grade)
-	{
-		$education = [];
-
-		foreach ($subject as $key => $value) 
-		{
-			$education[$value] = $grade[$key];
-		}
-
-		return json_encode($education);
-	}
+	
 }

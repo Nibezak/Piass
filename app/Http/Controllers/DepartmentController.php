@@ -2,10 +2,13 @@
 
 use Redirect,Flash;
 use App\Http\Requests;
+use App\Http\Requests\ApiRequest;
 use App\Http\Requests\DepartmentRegisterRequest;
 use App\Http\Requests\DepartmentUpdateRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
+use App\Models\Faculity;
+use App\Models\Module;
 use App\Commands\DepartmentRegisterCommand; 
 
 use Illuminate\Http\Request;
@@ -13,10 +16,13 @@ use Illuminate\Http\Request;
 class DepartmentController extends Controller {
 
     private $department; 
+    private $faculity;
 
-    function __construct(Department $department ) 
+    function __construct(Department $department ,Faculity $faculity) 
     {
     	$this->department = $department;
+
+    	$this->faculity   = $faculity;
     }
 	/**
 	 * Display a listing of the resource.
@@ -110,4 +116,53 @@ class DepartmentController extends Controller {
 		return Redirect::route('settings.departments.index');
 	}
 
+   
+	/*
+	|--------------------------------------------------------------------------
+	| Section of API
+	|--------------------------------------------------------------------------
+	*/
+
+	/**
+	 * Get lists of the Departments
+	 * 
+	 * @param  ApiRequest $request     
+	 * @param  $faculity_id 
+	 * @return json object @example {id,name}      
+	 */
+	public function apiDepartments(ApiRequest $request,$faculity_id)
+	{
+		 $departments = $this->faculity->findOrFail($faculity_id)
+		 							   ->departments->lists('name','id');
+
+	     return response()->json((array) $departments);
+	}
+	/**
+	 * Get the level of a given api
+	 * 
+	 * @param  ApiRequest $request 
+	 * @param  $department 
+	 * @return id @example {1}
+	 */
+	public function apiLevel(ApiRequest $request,$department)
+	{
+		$level  = $this->department->findOrFail($department)->levels;
+
+		return response()->json($level);
+	}	
+
+	/**
+	 * Get all modules under a given department and level
+	 *
+	 * @param ApiRequest $request 
+	 * @param integer departmentId Id of the department we are going to look for
+	 * @param integer level Department level
+	 */
+
+	public function apiModules(ApiRequest $request,$departmentId,$level)
+	{
+		$modules = $this->department->findOrFail($departmentId)->modules->where('department_level',$level);
+
+		return response()->json($modules);
+	}
 }
