@@ -18,7 +18,7 @@ Modify below information then click on save to edit this student information
 
 {!!  Form::close() !!}  
 	
-	@include('students.files')
+	@include('files.upload')
 
 {!! Form::open(['route' => ['students.educations.update',$student->id],'method'=>'PUT']) !!}       
 	

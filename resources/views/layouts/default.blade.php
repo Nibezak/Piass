@@ -75,6 +75,7 @@
     <!-- DATEPICKER App -->
     <script src="{{Url()}}/assets/dist/js/app.min.js" type="text/javascript"></script>
     <script src="{{Url()}}/assets/dist/js/datepickr.js" type="text/javascript"></script>
+    <script src="{{Url()}}/assets/js/jquery.wallform.js"></script>
     <script src="{{ Url() }}/assets/js/app.js" type="text/javascript"></script>
 
     <script type="text/javascript">

@@ -61,9 +61,10 @@ $(document).ready(function()
 /**  SECTION FOR  UPLOADING IMAGES AND FILES */
  $(document).ready(function() { 
         
-            $('#photoimg').die('click').live('change', function()           { 
+
+            $('#photoimg').on('change', function()           { 
                        //$("#preview").html('');
-                
+                 console.log('ttest');
                 $("#imageform").ajaxForm({target: '#preview', 
                      beforeSubmit:function(){ 
                     
