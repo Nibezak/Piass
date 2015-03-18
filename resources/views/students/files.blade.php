@@ -8,7 +8,8 @@
                   </div>
                 </div>
                 <div class="box-body">
-                  @include('students.upload')
+                
+                  @include('files.upload')
                 </div><!-- /.box-body -->
                 </div><!-- /.box -->
             </div>

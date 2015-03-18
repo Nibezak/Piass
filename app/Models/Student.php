@@ -32,6 +32,11 @@ class Student extends Model {
 		return $this->hasOne('App\Models\StudentEducation');
 	}
 
+	public function files()
+	{
+		return $this->hasMany('App\Models\file');
+	}
+
     /**
 	 * Realationshi with the FeeTransaction Model
 	 * 

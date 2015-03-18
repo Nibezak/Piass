@@ -4194,8 +4194,10 @@ Gradient Background colors
     border-top: 0;
 }
 .toppad
-{margin-top:20px;
+{
+  margin-top:20px;
 }
+
 #preview
 {
 color:#cc0000;
@@ -4203,10 +4205,12 @@ font-size:12px
 }
 .imgList 
 {
-max-height:150px;
+max-height:80px;
+max-width:40px
 margin-left:5px;
 border:1px solid #dedede;
 padding:4px;  
+margin-bottom: 10px;
 float:left; 
 }
 

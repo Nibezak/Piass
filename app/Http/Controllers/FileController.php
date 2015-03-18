@@ -46,16 +46,16 @@ class FileController extends Controller {
 
         $student = $this->student->findOrFail($input['student_id']);
         
-        $directory ='public/uploads/'.$student->names;
+        $directory ='uploads/student'.$student->id;
 
         $upload_success = $file->move($directory,$name=$file->getClientOriginalName()); 
 
         if( $upload_success ) 
         {
+        	$file = 'uploads/student'.$student->id.'/';
+        	$file .= $this->file->create(['name'=>$name,'student_id'=>$student->id])->name;
 
-        	$this->file->create(['name'=>$name,'student_id'=>$student->id]);
-
-        	return Response::json('success', 200);
+        	return view('files.show',compact('file'));
         } 
         else
          {

@@ -18,7 +18,7 @@ Please fill below fields in order to register new student
 
 {!!  Form::close() !!}     
 
-@include('students.files')
+	@include('students.files')
 
 {!! Form::open(['route' => ['students.educations.create',$student->id],'method'=>'PUT']) !!}       
 	

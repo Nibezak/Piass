@@ -526,9 +526,10 @@ $.fn.ajaxSubmit = function(options) {
 			//return data;
 			// Modification www.9lessons.info
 			var exp = /<img[^>]+>/i;
-		
+		    var exp2 = /<i[^>]+>/i;
             expResult = data.match(exp);
-           if(expResult == null)
+            expResult2 = data.match(exp2);
+           if(expResult == null && expResult2==null )
            {
             alert("Something went wrong.");
            }
