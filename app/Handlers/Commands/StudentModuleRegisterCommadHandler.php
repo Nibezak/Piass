@@ -40,20 +40,25 @@ class StudentModuleRegisterCommadHandler {
 
 			$module = $this->module->findOrFail($moduleId)->toArray();
 
-			$module['credits'] 		= 	$credits; // Change the credits first
+			$module['credits'] 		= 	(int) $credits; // Change the credits first
 
-			$module['amount']  		= 	$module['credits']*$module['credit_cost']; // Change the amount to reflect credit too.
+			$module['amount']  		= 	(int) $module['credits']*$module['credit_cost']; // Change the amount to reflect credit too.
 
-			$module['student_id']	= 	$command->student_id; // Who is getting this module?
+			$module['student_id']	= 	(int) $command->student_id; // Who is getting this module?
 
-			$module['module_id']	=	$module['id'];
-
-			$module['user_id']		=	\Sentry::getUser()->id;
+			$module['module_id']	=	(int) $module['id'];
 
 			$debitAmount+= $module['amount'];
 
-			$this->studentModule->create($module);
+			//Remove unecessary indixes so that we may remove the confusion
+			unset($module['id'],$module['created_at'],$module['updated_at']);
 
+			// If a module added then increase student debit amount
+			
+			if($studentModule=$this->studentModule->findOrCreate($module))
+			{
+				$debitAmount+= $module['amount'];
+			}
 			
 		}
        

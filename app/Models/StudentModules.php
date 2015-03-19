@@ -26,4 +26,19 @@ class StudentModules extends Model {
   {
   	return $this->belongsTo('App\Models\Module');
   }
+
+// Put this in any model and use
+// Modelname::findOrCreate($id);
+public static function findOrCreate($data)
+{
+    $model = (bool) static::where(['student_id'    =>  $data['student_id'],
+                            'module_id'      => $data['module_id'],
+                            ])
+                    ->get()->count();
+
+    $data['user_id']    = \Sentry::getUser()->id;
+
+    return $model ? false : static::create($data);
+}
+
 }
