@@ -8,6 +8,7 @@ Create New User
 
 {{-- Content --}}
 @section('content')
+<div class="container">
 <form method="POST" action="{{ route('sentinel.users.store') }}" accept-charset="UTF-8">
   <div class="row">
         <div class="small-6 large-centered columns">
@@ -70,8 +71,8 @@ Create New User
                        
         </div>
     </div>            
-{{ Form::close() }}
-
+{!! Form::close() !!}
+ </div>    
 
 
 @stop

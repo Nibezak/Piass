@@ -4,7 +4,7 @@
 | Home routes
 |--------------------------------------------------------------------------
 */
-	Route::get('/', ['as'=>'home','uses'=>'DashboardController@index']);
+	Route::get('/', ['as'=>'home','before'=>'Sentinel\hasAccess:user','uses'=>'DashboardController@index']);
 	Route::get('/dashboard', ['as'=>'dashboard','uses'=>'DashboardController@index']);
 
 /*
@@ -12,7 +12,7 @@
 | Student routes
 |--------------------------------------------------------------------------
 */
-   Route::group(['prefix'=>'students'],	function()
+   Route::group(['prefix'=>'students','before'=>'Sentinel\hasAccess:user'],	function()
 	{
 		 Route::resource('educations', 'StudentEducationController');
 
