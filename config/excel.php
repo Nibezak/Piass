@@ -22,7 +22,7 @@ return array(
         | memory|gzip|serialized|igbinary|discISAM|apc|memcache|temp|wincache|sqlite|sqlite3
         |
         */
-        'driver'   => 'memory',
+        'driver'   => 'sqlite',
 
         /*
         |--------------------------------------------------------------------------
@@ -58,15 +58,15 @@ return array(
     ),
 
     'properties' => array(
-        'creator'        => 'Maatwebsite',
-        'lastModifiedBy' => 'Maatwebsite',
+        'creator'        => 'Piass Student',
+        'lastModifiedBy' => 'Piass Student',
         'title'          => 'Spreadsheet',
-        'description'    => 'Default spreadsheet export',
+        'description'    => 'Spreadsheet exported by Piass Student software',
         'subject'        => 'Spreadsheet export',
-        'keywords'       => 'maatwebsite, excel, export',
+        'keywords'       => 'Kamaro, excel, export,Piass Student',
         'category'       => 'Excel',
-        'manager'        => 'Maatwebsite',
-        'company'        => 'Maatwebsite',
+        'manager'        => 'PiassStudent',
+        'company'        => 'Piass',
     ),
 
     /*
@@ -106,7 +106,7 @@ return array(
     |
     */
 
-    'creator'    => 'Maatwebsite',
+    'creator'    => 'Kamaro Lambert via Piass Student software',
 
     'csv'        => array(
         /*
@@ -539,7 +539,9 @@ return array(
             'th'     => array(
                 'font' => array(
                     'bold' => true,
-                    'size' => 12,
+                    'size' => 14,
+                    'background' => '#222',
+                    'color' =>  '#eaeaea',
                 )
             ),
 
