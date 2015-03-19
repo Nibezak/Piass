@@ -152,6 +152,7 @@ return [
 		'Laracasts\Generators\GeneratorsServiceProvider',
 		'Laracasts\Flash\FlashServiceProvider',
 		'Sentinel\SentinelServiceProvider',   
+		'Maatwebsite\Excel\ExcelServiceProvider',
 
 		/**
 		 * Custom service providers
@@ -212,6 +213,7 @@ return [
 		'Form'		=>	'Illuminate\Html\FormFacade',
 		'Html'		=>	'Illuminate\Html\HtmlFacade',
 		'Flash'		=> 'Laracasts\Flash\Flash',
+		'Excel' => 'Maatwebsite\Excel\Facades\Excel',
 	],
 
 ];
