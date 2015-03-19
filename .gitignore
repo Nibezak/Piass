@@ -1,5 +1,5 @@
 /.phpintel
 .phpintel
-/vendor
+vendor
 /node_modules
 .env
