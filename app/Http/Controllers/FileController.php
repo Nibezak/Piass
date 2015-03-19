@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use Response,File,Validator,Input;
+use Response,File,Validator,Input,Redirect;
 use App\Http\Requests;
 use App\Models\Student;
 use App\Models\File as FileModel;
@@ -53,9 +53,12 @@ class FileController extends Controller {
         if( $upload_success ) 
         {
         	$file = 'uploads/student'.$student->id.'/';
-        	$file .= $this->file->create(['name'=>$name,'student_id'=>$student->id])->name;
 
-        	return view('files.show',compact('file'));
+        	$fileInfo = $this->file->create(['name'=>$name,'student_id'=>$student->id]);
+
+        	$file .= $fileInfo->name;
+
+        	return view('files.show',compact('file','fileInfo'));
         } 
         else
          {
@@ -72,7 +75,15 @@ class FileController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$fileInfo = $this->file->findOrFail($id);
+        
+		$file = 'uploads/student'.$fileInfo->student_id.'/'.$fileInfo->name;
+
+		$this->file->destroy($id);
+		// Delete a single file
+		File::delete($file);
+
+		return Redirect::back();
 	}
 
 }

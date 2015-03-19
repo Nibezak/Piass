@@ -6,7 +6,7 @@
 	    @if(strpos(strtolower($file->name),'pdf'))
 	      <div class='imgList'>
 	       
-  			 {!! $file->name !!}
+  			 {!! $file->name !!} <a href="{!! route('student.file.delete',$file->id)!!}" "email me">X</a>
   			 <br> 
 	      <i class="fa fa-file-pdf-o" style="font-size:60px;"></i>
 	       
@@ -14,7 +14,8 @@
 
 	      <?php continue ?>
 	    @endif
-
+{!! $file->name !!} <a href="{!! route('student.file.delete',$file->id)!!}" "email me">X</a>
+<br/>
 		<img src='{!! Url() !!}/uploads/student{!! $student->id !!}/{!! $file->name !!}' class='imgList'>
 	@endforeach
 @endif
