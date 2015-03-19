@@ -18,6 +18,8 @@
 
 		 Route::resource('modules','StudentModulesController');
 
+		 Route::get('/file/{id}/delete',['as'=>'student.file.delete','uses'=>'FileController@destroy']);
+
 		 Route::get('{studentId}/modules/registered/',['as'=>'student.registered.modules','uses'=>'StudentModulesController@registeredModules']);
 	});
 
@@ -63,7 +65,7 @@ Route::group(['prefix'=>'api'], function()
 		Route::get('department/level/{departmentId}', 'DepartmentController@apiLevel');
 
 		Route::get('department/{departmentId}/level/{level}', 'DepartmentController@apiModules');
-
+      
 		Route::get('export',function()
 			{
 				
