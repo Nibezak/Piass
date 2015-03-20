@@ -30,17 +30,17 @@ Current Users
 		<tbody>
 			@foreach ($users as $user)
 				<tr>
-					<td><a href="{{ action('Sentinel\UserController@show', array($user->hash)) }}">{{ $user->email }}</a></td>
+					<td><a href="{{ route('sentinel.users.show', array($user->hash)) }}">{{ $user->email }}</a></td>
 					<td>{{ $user->status }} </td>
 					<td>
-						<button class="btn btn btn-sm  btn-info" type="button" onClick="location.href='{{ action('Sentinel\UserController@edit', array($user->hash)) }}'" >Edit</button> 
+						<button class="btn btn btn-sm  btn-info" type="button" onClick="location.href='{{ route('sentinel.users.edit', array($user->hash)) }}'" >Edit</button> 
 						@if ($user->status != 'Suspended')
-							<button class="btn btn-sm btn-warning" type="button" onClick="location.href='{{ action('Sentinel\UserController@suspend', array($user->hash)) }}'">Suspend</button> 
+							<button class="btn btn-sm btn-warning" type="button" onClick="location.href='{{ route('sentinel.users.suspend', array($user->hash)) }}'">Suspend</button> 
 						@else
-							<button class="btn btn-sm " type="button" onClick="location.href='{{ action('Sentinel\UserController@unsuspend', array($user->hash)) }}'">Un-Suspend</button> 
+							<button class="btn btn-sm " type="button" onClick="location.href='{{ route('sentinel.users.unsuspend', array($user->hash)) }}'">Un-Suspend</button> 
 						@endif
 						
-						<button class="btn btn btn-sm btn-danger" href="{{ action('Sentinel\UserController@destroy', array($user->hash)) }}" data-token="{{ Session::getToken() }}" data-method="delete">Delete</button>
+						<button class="btn btn btn-sm btn-danger" href="{{ route('sentinel.users.destroy', array($user->hash)) }}" data-token="{{ Session::getToken() }}" data-method="delete">Delete</button>
 					</td>
 				</tr>
 			@endforeach

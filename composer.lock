@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b6f1f975788ce78af566f123ce5efef0",
+    "hash": "894749f3c3dc96228c217018ffdb468e",
     "packages": [
         {
             "name": "cartalyst/sentry",
@@ -963,16 +963,16 @@
         },
         {
             "name": "maatwebsite/excel",
-            "version": "2.0.1",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
-                "reference": "cd2ecfcc5208d96445df6d5b9170efb3786509a3"
+                "reference": "5da62ad9c8250fe332a6322d0b110559174e30d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/cd2ecfcc5208d96445df6d5b9170efb3786509a3",
-                "reference": "cd2ecfcc5208d96445df6d5b9170efb3786509a3",
+                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/5da62ad9c8250fe332a6322d0b110559174e30d5",
+                "reference": "5da62ad9c8250fe332a6322d0b110559174e30d5",
                 "shasum": ""
             },
             "require": {
@@ -1026,7 +1026,7 @@
                 "import",
                 "laravel"
             ],
-            "time": "2015-02-16 11:12:55"
+            "time": "2015-03-19 13:47:43"
         },
         {
             "name": "monolog/monolog",
