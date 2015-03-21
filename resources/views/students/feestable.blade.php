@@ -47,8 +47,8 @@
 					  <td> {!! $fee->balance !!}</td>
 					</tr>
 					@endforeach
-				@endif
-				<tr style="border-top:1px solid #000;">
+
+						<tr style="border-top:1px solid #000;">
 					<td colspan="3" align="right">  Grand Totals : </b></td>
 					<td > <b> {!! $debit !!}</b> </td> 
 					<td > <b> {!! $credit !!}</b> </td> 
@@ -64,7 +64,12 @@
                       </td>
                       <td><span class="badge bg-green">{!! ($debit==0) ? 0 :round(($credit*100)/$debit) !!}%</span></td>
                     </tr>
-				</tbody>
+				@else
+				<tr >
+					 <th colspan="6" align="center"> No transaction made so far </th>
+				</tr>
+				@endif
+							</tbody>
 				</table>
                     </div>
                   </div><!-- /.row -->
