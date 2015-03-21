@@ -39,7 +39,7 @@
 				 <?php  $debit=0; $credit= 0;?>
 					@foreach($student->fees as $fee)
 					<tr>
-					  <td> {!! $fee->id !!}</td>
+					  <td> {!! $fee->payslip_number !!}</td>
 					  <td> {!! date('Y-m-d',strtotime($fee->date)) !!}</td>
 					  <td> {!! $fee->description !!}</td>
 					  <td> {!! $debit+=$fee->debit !!}</td>
