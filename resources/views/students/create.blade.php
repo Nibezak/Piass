@@ -20,7 +20,7 @@ Please fill below fields in order to register new student
 
 	@include('students.files')
 
-{!! Form::open(['route' => ['students.educations.create',$student->id],'method'=>'PUT']) !!}       
+{!! Form::open(['route' => ['students.educations.create',$student->id],'method'=>'PUT','onsubmit'=>'myButton.disabled = true; return true;']) !!}       
 	
 	@include('students.educations',['button'=>'Register education'])
 

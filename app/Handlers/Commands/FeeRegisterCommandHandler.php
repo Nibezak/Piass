@@ -28,6 +28,7 @@ class FeeRegisterCommandHandler {
 	 */
 	public function handle(FeeRegisterCommand $fee)
 	{
+		
 		$feeTransaction = $this->save($fee);
 
 		$event = new FeeWasRegisteredEvent($feeTransaction);

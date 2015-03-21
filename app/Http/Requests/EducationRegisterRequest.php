@@ -22,7 +22,7 @@ class EducationRegisterRequest extends Request {
 	public function rules()
 	{
 		return [
-			//
+			// Rules
 		];
 	}
 

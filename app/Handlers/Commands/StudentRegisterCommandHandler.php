@@ -17,7 +17,11 @@ class StudentRegisterCommandHandler {
 	 */
 	public function handle(StudentRegisterCommand $studentData)
 	{
-		$student =  Student::create((array) $studentData);
+		// Prepare data before registering new student
+		$studentInfo 							= (array) $studentData;
+		$studentInfo['DOB']						= date('Y-m-d h:i:s',strtotime($studentData->DOB));
+		$studentInfo['registration_number'] 	= $this->getRegistrationNumber();
+		$student =  Student::create($studentInfo);
 		
 		$event 	 = new StudentWasRegisteredEvent($student);
 
@@ -26,4 +30,16 @@ class StudentRegisterCommandHandler {
 		return $event;
 	}
 
+	/**
+	 * Get unique registration number as per PIASS policy
+	 * 
+	 * @return string registration number
+	 */
+	private function getRegistrationNumber()
+	{		
+		// Get total number of registered student then add 1
+		    $countStudents = Student::count()+1;
+
+			return 'PIASS/'.date('y').'/'.$countStudents;
+	}
 }

@@ -5,6 +5,7 @@ use Redirect,Input,Flash;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Student; 
+use App\Models\FeeTransaction;
 use App\Http\Requests\StudentRegisterRequest;
 use App\Http\Requests\StudentUpdateRequest;
 use App\Commands\StudentRegisterCommand;
@@ -18,10 +19,11 @@ class StudentController extends Controller {
 	 * @var App\Http\Models\Student 
 	 */
 	protected $student;
-
-	function __construct(Student $student)
+	protected $fees;
+	function __construct(Student $student,FeeTransaction $fees)
 	 {
 		$this->student = $student;
+		$this->fees    = $fees;
 	}
 	/**
 	 * Display a listing of the student.
@@ -66,16 +68,6 @@ class StudentController extends Controller {
 		return Redirect::route('students.edit',$student->id);
 	}
 
-	/**
-	 * Display the specified student.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
 
 	/**
 	 * Show the form for editing the specified student.
@@ -85,7 +77,9 @@ class StudentController extends Controller {
 	 */
 	public function edit($id)
 	{
+
 		$student = $this->student->findOrFail($id);
+
 
 		return view('students.edit',compact('student'));
 	}
@@ -100,13 +94,24 @@ class StudentController extends Controller {
 	{
 		$student = Student::findOrFail($id);
 
-		$student->update((array) $request->all());
+		// Prepare data 
+		$studentData 	= (array) $request->all();
+		$studentData['DOB']	= date('Y-m-d h:i:s',strtotime($request->DOB));
+		
+		$student->update($studentData);
 
 		Flash::success($request->names.' has been updated successfully');
 
-		return Redirect::route('students.index');
+		return Redirect::route('students.edit',$student->id);
 	}
 
+
+	public function fees($studentId)
+	{
+		$student = $this->student->findOrFail($studentId);
+
+		return view('students.fees',compact('student'));
+	}
 	/**
 	 * Remove the specified student from storage.
 	 *

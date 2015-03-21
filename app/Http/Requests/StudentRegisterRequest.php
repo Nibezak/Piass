@@ -27,13 +27,13 @@ class StudentRegisterRequest extends Request {
 			'gender'         =>'required',   
 			'martial_status' =>'required',           
 			'NID'            =>'required|numeric|unique:students',
-			'telephone'      =>'required|numeric|unique:students',      
-			'email'          =>'required|email|unique:students',  
-			'occupation'     =>'required',       
-			'residence'      =>'required',      
+			'telephone'      =>'numeric|unique:students',      
+			'email'          =>'email|unique:students',  
+			'occupation'     =>'alpha_spaces',       
+			'residence'      =>'alpha_spaces',      
 			'nationality'    =>'required',        
-			'father_name'    =>'required',        
-			'mother_name'    =>'required',        
+			'father_name'    =>'alpha_spaces',        
+			'mother_name'    =>'alpha_spaces',        
 		];
 	}
 

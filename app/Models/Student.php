@@ -17,6 +17,10 @@ class Student extends Model {
 							'nationality'    ,
 							'father_name'    ,
 							'mother_name'    ,
+							'mode_of_study'	,
+							'session',
+							'registration_number',
+							'campus',
 	];
 
 

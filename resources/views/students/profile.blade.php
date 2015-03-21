@@ -13,15 +13,18 @@
                       <i class="fa fa fa-graduation-cap" style="font-size:100px;"></i>
 
                   </div>
-      <div class="col-xs-10 col-sm-10 "> <br>
-                  <dl>
-                    <dt>STUDENT ID</dt>
-                    <dd>BBICT|3181|12</dd>
-                     <dt>STUDY MODE</dt>
-                    <dd>Evening</dd>
-                    <dt>INTAKE</dt>
-                    <dd>2014/2015</dd>
-                    <dt>GENDER</dt>
+      <div class="col-xs-10 col-sm-10"> <br>
+                  <dl style="text-align:left">
+                   <dt>Campus </dt>
+                    <dd>{!! $student->campus !!}</dd>
+                   
+                    <dt>Registration number </dt>
+                    <dd>{!! $student->registration_number !!}</dd>
+                    <dt>Study session</dt>
+                    <dd>{!! $student->mode_of_study !!}</dd>
+                     <dt>Study session</dt>
+                    <dd>{!! $student->session !!}</dd>
+                     <dt>Gender</dt>
                     <dd>{{$student->gender}}</dd>
                   </dl>
                 </div>
@@ -76,7 +79,9 @@
                   </table>
                   
                   <a href="{{ route('student.registered.modules',$student->id)}}" class="btn btn-success"><i class="fa fa-line-chart"></i>Registered modules</a>
-                  <a href="#" class="btn btn-primary"><i class="fa fa-folder-o"></i> View my files</a>
+                  <a href="{{ route('student.fees',$student->id)}}" class="btn btn-primary">
+                    <i class="fa fa-folder-o"></i> View my fees
+                    </a>
                 </div>
               </div>
             </div>

@@ -12,7 +12,7 @@
                   </div>
       <div class="col-xs-10 col-sm-10 "> <br>
                   <dl>
-                    <dt>Residence
+                    <dt>Residence <em style="font-size:12px;font-weight:100">(Sector, District...)</em>
                       {!! $errors->first('residence','<em class="has-error">(:message)</em>') !!} 
                     </dt>
                     <dd class=" {{ ($errors->has('residence')) ? 'has-error' : '' }}">
@@ -36,8 +36,22 @@
                     <dd class=" {{ ($errors->has('mother_name')) ? 'has-error' : '' }}">
                         {!! Form::text('mother_name', $student->mother_name, ['class'=>'form-control','placeholder'=>'Mother\'s names ']) !!}
                     </dd>
+                   <dt>Campus
+                     {!! $errors->first('Campus','<em class="has-error">(:message)</em>') !!} 
+                    </dt>
+                    <dd class=" {{ ($errors->has('Campus')) ? 'has-error' : '' }}">
+                        {!! Form::select('campus',['Huye'=>'Huye','Karongi'=>'Karongi'], $student->campus, ['class'=>'form-control','placeholder'=>'Campus']) !!}
+                    </dd>
+                    <dt>Study mode
+                     {!! $errors->first('mode_of_study','<em class="has-error">(:message)</em>') !!} 
+                    </dt>
+                    <dd class=" {{ ($errors->has('mode_of_study')) ? 'has-error' : '' }}">
+                       {!! Form::select('mode_of_study',['Full time'=>'Full time','Part time'=>'Part time','Holidays'=>'Holidays'],$student->mode_of_study) !!}
+                       {!! Form::select('session',['Day'=>'Day','Evening'=>'Evening','Weekend'=>'Weekend'],$student->session) !!}
+                    </dd>
                   </dl>
                 </div>
+
                 </div>
                 
           
@@ -112,6 +126,11 @@
                     </tbody>
                   </table>
                   
+                 @if(isset($student->id))
+                     <a href="{!! route('students.modules.show',$student->id) !!}" class="btn btn-success">
+                     <i class="fa fa-book"></i> Register modules
+                     </a>
+                  @endif
                   <a href="{!!route('students.index')!!}" class="btn btn-warning"><i class="fa fa-remove"></i> Cancel</a>
                   <button href="#" class="btn btn-primary"><i class="fa fa-floppy-o"></i> {!! $button !!}</button>
 

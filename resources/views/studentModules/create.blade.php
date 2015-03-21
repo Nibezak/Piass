@@ -1,18 +1,18 @@
 @extends('layouts.default')
 
 @section('title')
- {!! $student->names !!}
+ Register programme details for  {!! $student->names !!}
 @stop
 
 @section('description')
-Below are the details for {!! $student->names !!} as of now.
+Fill below fields details about the programme you want to register for  {!! $student->names !!}.
 @stop
 
 @section('content')
 	
 		@include('students.profile')
 		
-		{!! Form::open(['route'=>'students.modules.store']) !!}
+		{!! Form::open(['route'=>'students.modules.store','onsubmit'=>'myButton.disabled = true; return true;']) !!}
 
 		    {!! Form::hidden('student_id', $student->id) !!}
 

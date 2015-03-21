@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class StudentEducation extends Model {
 
-	protected $fillable = ['qualification','subjects','school_attended','completion_year','student_id'];
+	protected $fillable = ['qualification','subjects','school_attended','completion_year','student_id','section_of_study'];
 
 	 /**
 	  * Update or Create

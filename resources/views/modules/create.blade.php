@@ -12,7 +12,7 @@ Fill below fields and click <strong>Register</strong> to add new module
 @section('content')
 <div class="box">
       
-{!! Form::open(['route' => 'modules.store']) !!}       
+{!! Form::open(['route' => 'modules.store','onsubmit'=>'myButton.disabled = true; return true;']) !!}       
 
 	@include('modules.form',['button'=>'Register module'])
 	

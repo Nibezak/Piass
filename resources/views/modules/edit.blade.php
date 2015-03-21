@@ -12,7 +12,7 @@ Modify below information then click on <strong>Edit</strong> to edit this module
 @section('content')
 <div class="box">
       
-{!! Form::open(['route'=>['modules.update',$module->id],'method' => 'PUT']) !!}       
+{!! Form::open(['route'=>['modules.update',$module->id],'method' => 'PUT','onsubmit'=>'myButton.disabled = true; return true;']) !!}       
 
 	@include('modules.form',['button'=>'Edit'])
 

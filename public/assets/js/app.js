@@ -48,7 +48,7 @@ $(document).ready(function()
             {
            $.each(data, function(modules,module)
             {
-                 $('tbody.levelmodules').append('<tr><td><input type="hidden" name="ids[]" value="'+module.id+'"/>'+module.name+'</td><td>'+module.code+'</td><td><input type="text" name="credits[]" size="4" value="'+module.credits+'"/></td><td>'+module.credit_cost+'</td></tr>');
+                 $('tbody.levelmodules').append('<tr><td><input type="hidden" name="ids[]" value="'+module.id+'"/>'+module.name+'</td><td>'+module.code+'</td><td><input type="text" name="credits[]" size="4" value="'+module.credits+'"/></td><td>'+module.credit_cost+'</td><td><td><button class="fa fa-times-circle btn btn-danger" onclick="deleteRow(this)"  /></td></td></tr>');
             });
                
 
@@ -86,3 +86,9 @@ $(document).ready(function()
         
             });
         }); 
+
+function deleteRow(row)
+{
+    var i=row.parentNode.parentNode.rowIndex;
+    document.getElementById('moduletable').deleteRow(i);
+}

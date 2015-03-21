@@ -33,6 +33,7 @@ class StudentModuleRegisterCommadHandler {
 		/** Ensure that the module injected is an array  */
 
 		$modules = (array) json_decode($command->modules);
+
 		$debitAmount = 0;
 
 		foreach ($modules as $moduleId => $credits) 
@@ -50,6 +51,7 @@ class StudentModuleRegisterCommadHandler {
 
 			$debitAmount+= $module['amount'];
 
+
 			//Remove unecessary indixes so that we may remove the confusion
 			unset($module['id'],$module['created_at'],$module['updated_at']);
 
@@ -61,7 +63,8 @@ class StudentModuleRegisterCommadHandler {
 			}
 			
 		}
-       
+		
+
 		//Register Fee transactions
 	    $this->saveFees($debitAmount,count($modules),$command->student_id);
 	}
@@ -69,6 +72,7 @@ class StudentModuleRegisterCommadHandler {
     /** Debit the account of the student */
 	public function saveFees($debitAmount,$countModule,$student_id)
 	{
+		$studentFee['date'] 			= 	date('Y-m-d h:i:s');
 		$studentFee['credit'] 			= 	0;
 		$studentFee['description']		= 	'Registerd for '.$countModule. ' modules ';
 		$studentFee['debit']  			= 	(float) $debitAmount;
@@ -78,6 +82,7 @@ class StudentModuleRegisterCommadHandler {
 
 		return $this->feeTransaction->create($studentFee);
 	}
+	
 	/**
 	 * Determine new balance to be added in the fees table 
 	 * @param  integer $studentID ID of the student we are recording

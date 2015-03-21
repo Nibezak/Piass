@@ -39,7 +39,7 @@
                     </div>
 
                    <div class="box-footer">
-                    {!! Form::submit($button, ['class'=>'btn btn-success']) !!}
+                    {!! Form::submit($button, ['class'=>'btn btn-success','onclick'=>'return confirm(\'Are you sure you want to do this? this action cannot be reverted\')']) !!}
                   </div>
             
                 </div><!-- /.box-body -->

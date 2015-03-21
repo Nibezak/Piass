@@ -12,7 +12,7 @@ Modify below information then click on save to edit this student information
 @section('content')
 <div class="box">
       
-{!! Form::open(['route' => ['students.update',$student->id,'method'=>'PUT']]) !!}       
+{!! Form::open(['route' => ['students.update',$student->id],'method'=>'PUT']) !!}       
 
 	@include('students.form',['button'=>'Save'])
 
@@ -20,7 +20,7 @@ Modify below information then click on save to edit this student information
 	
 	@include('students.files')
 
-{!! Form::open(['route' => ['students.educations.update',$student->id],'method'=>'PUT']) !!}       
+{!! Form::open(['route' => ['students.educations.update',$student->id],'method'=>'PUT','onsubmit'=>'myButton.disabled = true; return true;']) !!}       
 	
 	@include('students.educations',['button'=>'Register education'])
 

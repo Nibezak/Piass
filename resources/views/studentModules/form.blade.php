@@ -2,7 +2,9 @@
               <!-- general form elements disabled -->
               <div class="box box-warning">
                 <div class="box-header">
-                  <h3 class="box-title">Register new department level</h3>
+                  <h3 class="box-title" style="font-weight:600">Register modules </h3>
+                  <h4>Mode of study: <em>{!! $student->mode_of_study !!}</em> Session: <em>{!! $student->session !!}</em> </h4>
+                  
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     

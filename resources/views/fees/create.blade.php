@@ -12,7 +12,7 @@ Below are the details for {!! $student->names !!} as of now.
 	
 		@include('students.profile')
 		
-		{!! Form::open(['route'=>'fees.store']) !!}
+		{!! Form::open(['route'=>'fees.store','onsubmit'=>'myButton.disabled = true; return true;']) !!}
 			@include('fees.form')
 		{!! Form::close() !!}
 @stop
