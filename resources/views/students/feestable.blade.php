@@ -59,10 +59,10 @@
                      
                       <td colspan="4">
                         <div class="progress progress-xs progress-striped active">
-                          <div class="progress-bar progress-bar-success" style="width: {!! ($credit*100)/$debit !!}%"></div>
+                          <div class="progress-bar progress-bar-success" style="width:{!! ($debit==0) ? 0 :round(($credit*100)/$debit) !!}%"></div>
                         </div>
                       </td>
-                      <td><span class="badge bg-green">{!! round(($credit*100)/$debit) !!}%</span></td>
+                      <td><span class="badge bg-green">{!! ($debit==0) ? 0 :round(($credit*100)/$debit) !!}%</span></td>
                     </tr>
 				</tbody>
 				</table>
