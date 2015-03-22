@@ -60,7 +60,7 @@ Route::group(['prefix'=>'reports'],function()
 {
 	Route::get('/', function()
 		{
-			return  'Landed in the reports route';
+			return  App\Models\Student::all()->department;
 		});
 });
 
