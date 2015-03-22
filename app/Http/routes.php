@@ -77,36 +77,4 @@ Route::group(['prefix'=>'api'], function()
 
 		Route::get('department/{departmentId}/level/{level}', 'DepartmentController@apiModules');
       
-		Route::get('export',function()
-			{
-				
-				 $data = array(
-    array('data1', 'data2'),
-    array('data3', 'data4')
-);
-
-	 Excel::create('Students', function($excel) use($data) {
-
-    $excel->sheet('Students', function($sheet) use($data) {
-
-        $sheet->fromArray(\App\Models\Student::all());
-          $sheet->setOrientation('landscape');
-
-    });
-
-     $excel->sheet('users', function($sheet) use($data) {
-
-        $sheet->fromArray(\App\Models\User::all());
-          $sheet->setOrientation('landscape');
-
-    });
-    $excel->sheet('Fee_stransactions', function($sheet) use($data) {
-
-        $sheet->fromArray(\App\Models\FeeTransaction::all());
-          $sheet->setOrientation('landscape');
-
-    });
-
-})->export('pdf');
-			});
-	});
+});

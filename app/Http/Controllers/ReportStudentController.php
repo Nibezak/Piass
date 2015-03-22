@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use Input;
+use Input,Excel;
 use App\Http\Requests;
 use App\Models\Student;
 use App\Http\Controllers\Controller;
@@ -15,6 +15,11 @@ class ReportStudentController extends Controller {
 		$this->student = $student;
 	}
 
+	/**
+	 * Get student details in a report
+	 * 
+	 * @return mixed
+	 */
 	public function details()
 	{	
 		$faculity 		= Input::get('faculity');
@@ -24,6 +29,34 @@ class ReportStudentController extends Controller {
 
 		$students = $this->student->studentList($faculity,$department,$level,$module);
 		
+		
+
+		if(Input::get('export'))
+		{
+			$filename = 'students'.implode('_', Input::all());
+
+			$this->export($filename,$students);
+		
+		}
+
 		return view('reports.students.details',compact('students'));
+
+		
+	}
+
+	private function export($name,$data)
+	{
+		
+	 Excel::create($name, function($excel) use($data)
+	  {
+         $excel->sheet('Students', function($sheet) use($data) 
+         {
+
+        	$sheet->fromArray($data);
+
+    	  });
+
+     })->export('xlsx');
+	
 	}
 }
