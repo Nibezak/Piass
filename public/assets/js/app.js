@@ -1,28 +1,28 @@
 $(document).ready(function()
 {
     /** If a facutlity is chosen the load it's departments */
-   $('select#faculities').change(function()
-   {
-        var faculityId = $(this).val();
+   // $('select#faculities').change(function()
+   // {
+   //      var faculityId = $(this).val();
     
-        document.getElementById('department_section').style.display = 'block';
+   //      document.getElementById('department_section').style.display = 'block';
 
-        $.get('/api/departments/'+faculityId, function(data)
-        {
+   //      $.get('/api/departments/'+faculityId, function(data)
+   //      {
             
-            $('select#departments').html('<option value="0">Select Department</option>');
+   //          $('select#departments').html('<option value="0">Select Department</option>');
 
-            $.each(data, function(id, name)
-            {
-                $('select#departments').append('<option value="'+id+'">'+name+'</option>');
-            });
-        }, 'json');
-    });
+   //          $.each(data, function(id, name)
+   //          {
+   //              $('select#departments').append('<option value="'+id+'">'+name+'</option>');
+   //          });
+   //      }, 'json');
+   //  });
 
    /** If a department is chosen then load it's levels */
-   $('select#departments').change(function()
-    {
-        var departmentId = $(this).val();
+   // $('select#departments').change(function()
+   //  {
+        var departmentId = $('select#departments').val();
 
         document.getElementById('department_level').style.display="block";
 
@@ -36,7 +36,7 @@ $(document).ready(function()
                 };
 
             },'json');
-    });
+    // });
 
     /** If a department is chosen then load it's levels */
    $('select#departmentlevel').change(function()

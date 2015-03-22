@@ -49,22 +49,20 @@ class StudentModuleRegisterCommadHandler {
 
 			$module['module_id']	=	(int) $module['id'];
 
-			$debitAmount+= $module['amount'];
-
-
 			//Remove unecessary indixes so that we may remove the confusion
 			unset($module['id'],$module['created_at'],$module['updated_at']);
 
+
 			// If a module added then increase student debit amount
-			
-			if($studentModule=$this->studentModule->findOrCreate($module))
+			$studentModule=$this->studentModule->findOrCreate($module);
+
+			if($studentModule)
 			{
 				$debitAmount+= $module['amount'];
 			}
 			
 		}
 		
-
 		//Register Fee transactions
 	    $this->saveFees($debitAmount,count($modules),$command->student_id);
 	}

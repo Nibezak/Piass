@@ -24,7 +24,11 @@ class Student extends Model {
 							'department_id'
 	];
 
-
+	/** Student Department **/
+	public function department()
+	{
+		return $this->belongsTo('App\Models\Department');
+	}
 	/** RelattionShip with the registered Module */
 	public function registeredModules()
 	{

@@ -36,7 +36,7 @@
                     <tbody>
                       <tr>
                         <th>Department:</th>
-                        <td>Programming</td>
+                        <td>{!! $student->department->name !!}</td>
                       </tr>
                       <tr>
                         <th>Registration date:</th>
