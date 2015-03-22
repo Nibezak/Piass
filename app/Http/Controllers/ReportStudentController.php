@@ -29,8 +29,6 @@ class ReportStudentController extends Controller {
 
 		$students = $this->student->studentList($faculity,$department,$level,$module);
 		
-		
-
 		if(Input::get('export'))
 		{
 			$filename = 'students'.implode('_', Input::all());
@@ -44,6 +42,13 @@ class ReportStudentController extends Controller {
 		
 	}
 
+
+	/**
+	 * Export to excel
+	 * @param  [type]
+	 * @param  [type]
+	 * @return [type]
+	 */
 	private function export($name,$data)
 	{
 		

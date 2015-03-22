@@ -109,7 +109,12 @@
                 <span>Reports</span> 
               </a>
             </li>   
-            
+             <li class="{{(Request::is('users*') ? 'active' : '')}} treeview">
+              <a href="/users">
+                <i class="fa fa-users"></i> 
+                <span>users</span> 
+              </a>
+            </li>  
             <li class="{{(Request::is('settings*') ? 'active' : '')}} treeview">
               <a href="#">
                 <i class="fa fa-cogs"></i> <span>Settings</span> <i class="fa fa-angle-left pull-right"></i>
