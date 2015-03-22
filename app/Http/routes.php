@@ -53,14 +53,14 @@ Route::group(['prefix'=>'settings'],function()
 
 /*
 |--------------------------------------------------------------------------
-| Student routes
+| Student reports routes
 |--------------------------------------------------------------------------
 */
 Route::group(['prefix'=>'reports'],function()
 {
 	Route::get('/', function()
 		{
-			return  App\Models\Student::all()->department;
+			return  App\Models\Student::studentList(0,4,1,0);
 		});
 });
 

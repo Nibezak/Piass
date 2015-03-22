@@ -85,8 +85,31 @@ class Student extends Model {
   				 ->orWhere('mother_name','like',"%keyword%");
 	}
 
-	public static function studentList($faculityId=0,$departmentId=0,$level=0,$moduleId=0)
+	public static function studentList($faculityId=false,$departmentId=false,$level=false,$moduleId=false)
 	{
-		return 0;
+	return static::whereHas('department', function($query) use ($faculityId,$departmentId)
+		{	
+			// If we have department ID then search it
+		   !$departmentId ?	: $query->where('id',$departmentId);
+
+		   	// If we have faculity ID then use it for search
+		    if($faculityId) :
+
+			$query->whereHas('faculity', function($query) use($faculityId)
+			{
+				$query->where('id',$faculityId);
+			});
+
+			endif;
+
+		})
+		->whereHas('registeredModules',function($query) use ($moduleId,$level)
+		{
+			// Do we have moduleId? then search for it
+			!$moduleId ? : $query->where('module_id',$moduleId);
+
+			!$level ? : $query->where('department_level',$level);
+		})
+		->get();
 	}
 }
