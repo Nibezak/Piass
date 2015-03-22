@@ -58,10 +58,10 @@ Route::group(['prefix'=>'settings'],function()
 */
 Route::group(['prefix'=>'reports'],function()
 {
-	Route::get('/', function()
-		{
-			return  App\Models\Student::studentList(0,4,1,0);
-		});
+	Route::get('/','ReportController@index');
+
+	Route::get('/students/details', ['as'=>'reports.students.details','uses'=>'ReportStudentController@details']);
+
 });
 
 /*

@@ -45,12 +45,15 @@ class ViewComposersProvider extends ServiceProvider {
 
 		view()->composer('studentModules.form','App\Http\Composers\ViewComposer@faculityForm');
 
+		view()->composer('reports.students.filter','App\Http\Composers\ViewComposer@faculityForm');
+
 	}
 
 	public function departmentFormComposer()
 	{
 		view()->composer('students.form','App\Http\Composers\ViewComposer@departmentForm');
 		view()->composer('studentModules.form','App\Http\Composers\ViewComposer@departmentForm');
+		view()->composer('reports.students.filter','App\Http\Composers\ViewComposer@departmentForm');
 	}
 
 }
