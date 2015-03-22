@@ -1,8 +1,6 @@
-
-
 <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Monthly Recap Report</h3>
+                  <h3 class="box-title"> {!! $student->names !!}'s fees transactions</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <div class="btn-group">

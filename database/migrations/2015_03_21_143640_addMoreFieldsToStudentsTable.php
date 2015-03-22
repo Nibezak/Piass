@@ -19,6 +19,8 @@ class AddMoreFieldsToStudentsTable extends Migration {
 			$table->string('session');
 			$table->string('registration_number');
 			$table->string('campus');
+			$table->integer('department_id');
+			$table->foreign('department_id')->references('id')->on('departments');
 		});
 	}
 

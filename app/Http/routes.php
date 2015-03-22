@@ -50,10 +50,19 @@ Route::group(['prefix'=>'settings'],function()
 		Route::resource('departments','DepartmentController');
 	});
 
-Route::get('test',function()
-	{
-		return view('students.upload');
-	});
+
+/*
+|--------------------------------------------------------------------------
+| Student routes
+|--------------------------------------------------------------------------
+*/
+Route::group(['prefix'=>'reports'],function()
+{
+	Route::get('/', function()
+		{
+			return  'Landed in the reports route';
+		});
+});
 
 /*
 |--------------------------------------------------------------------------

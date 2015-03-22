@@ -101,12 +101,12 @@
                @endforeach
                
               </ul>
-            </li>     
-            <li class="{{(Request::is('users*') ? 'active' : '')}} treeview">
-              <a href="/users">
-                <i class="fa fa-users"></i> 
-                <span>Users</span> 
-                <small class="label pull-right bg-green">new</small>
+            </li> 
+
+            <li class="{{(Request::is('reports*') ? 'active' : '')}} treeview">
+              <a href="/reports">
+                <i class="fa fa-bar-chart"></i> 
+                <span>Reports</span> 
               </a>
             </li>   
             

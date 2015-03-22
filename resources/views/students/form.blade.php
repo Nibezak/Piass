@@ -123,6 +123,15 @@
                           {!! Form::text('telephone', $student->telephone, ['class'=>'form-control','placeholder'=>'Telephone or Mobile']) !!}
                         </td>
                       </tr>
+                      <tr>
+                        <th>Departments:
+                         {!! $errors->first('department_id','<em class="has-error">(:message)</em>') !!} 
+                        </th>
+                        <td class=" {{ ($errors->has('department_id')) ? 'has-error' : '' }}">
+                          
+                          {!! Form::select('department_id', $departments, $student->department_id, ['class'=>'form-control']) !!}
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                   

@@ -21,6 +21,7 @@ class Student extends Model {
 							'session',
 							'registration_number',
 							'campus',
+							'department_id'
 	];
 
 
@@ -60,11 +61,12 @@ class Student extends Model {
 
        	return 0;
     }
-
+    /** Get latest fees for this student **/
     public function latestFees()
     {
     	return  $this->fees()->orderBy('created_at','Desc');
     }
+
 	/**
 	 * Search in the student table
 	 * @param  [type] $query   [description]
@@ -79,5 +81,8 @@ class Student extends Model {
   				 ->orWhere('mother_name','like',"%keyword%");
 	}
 
-
+	public static function studentList($faculityId=0,$departmentId=0,$level=0,$moduleId=0)
+	{
+		return 0;
+	}
 }

@@ -13,7 +13,9 @@ class ViewComposersProvider extends ServiceProvider {
 	{
 		$this->leftNavComposer();
 
-		$this->departmentFormcomposer();
+		$this->faculityFormComposer();
+
+		$this->departmentFormComposer();
 	}
 
 	/**
@@ -37,11 +39,17 @@ class ViewComposersProvider extends ServiceProvider {
 		view()->composer('partials.leftnav','App\Http\Composers\ViewComposer@leftnav');
 	}
 
-	public function departmentFormcomposer()
+	public function faculityFormComposer()
 	{
-		view()->composer('departments.form','App\Http\Composers\ViewComposer@departmentForm');
+		view()->composer('departments.form','App\Http\Composers\ViewComposer@faculityForm');
 
-		view()->composer('studentModules.form','App\Http\Composers\ViewComposer@departmentForm');
+		view()->composer('studentModules.form','App\Http\Composers\ViewComposer@faculityForm');
+
+	}
+
+	public function departmentFormComposer()
+	{
+		view()->composer('students.form','App\Http\Composers\ViewComposer@departmentForm');
 	}
 
 }
