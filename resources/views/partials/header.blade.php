@@ -20,27 +20,21 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="{{Url()}}/assets/dist/img/avatar.png" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs"> {{ Sentry::getUser()->first_name }}  {{ Sentry::getUser()->last_name }} </span>
+                  <span class="hidden-xs"><i class="fa fa-circle text-success user-image"></i> {{ Sentry::getUser()->first_name }}  {{ Sentry::getUser()->last_name }} </span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
-                  <li class="user-header">
-                    <img src="{{Url()}}/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
-                    <p>
-                       {{ Sentry::getUser()->first_name }}  {{ Sentry::getUser()->last_name }} 
-                    </p>
-                  </li>
+                
                   <!-- Menu Body -->
                   
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="{{ route('sentinel.profile.show') }}" class="btn btn-default btn-flat">Profile</a>
+                      <a href="{{ route('sentinel.profile.show') }}" class="btn btn-success btn-flat">Profile</a>
                     
                     </div>
                     <div class="pull-right">
-                      <a class="btn btn-default btn-flat" href="{{ route('sentinel.logout') }}">Sign out</a>
+                      <a class="btn btn-danger btn-flat" href="{{ route('sentinel.logout') }}">Sign out</a>
                     </div>
                   </li>
                 </ul>
