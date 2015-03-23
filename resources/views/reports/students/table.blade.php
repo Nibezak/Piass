@@ -1,26 +1,33 @@
    @if(!$students->isEmpty())
       <table class="table table-striped">
-                    <tbody><tr>
+                    <tbody>
+                    <tr>
         						<th>names </th>
-        						<th>Date of Birth </th>
-        						<th>Gender </th>
-        						<th>Martial </th>
-        						<th>NID </th>
+                    <th>DOB </th>
+                    <th>Gender </th>
+                    <th>NID </th>
         						<th>Phone </th>
-        						<th>E-Mail </th>
-        						<th>Occupation </th>
+        						<th>E-Mail </th>        
+                    <th>Faculity</th>
+        						<th>Department </th>
+                    <th>Class / Level </th>
                     </tr>
 					@foreach($students as $student)
+          
+          <!-- IF STUDENT LEVEL DOESN'T MATCH go to next-->
+           @if(\Input::get('level') && $student->level()!=\Input::get('level'))
+            <?php continue; ?>
+           @endif
                     <tr>
-                      <td>{{ $student->names }}</td>
-                      <td>{{ date('d-M-Y',strtotime($student->DOB ))}}</td>
-                      <td>{{ $student->gender }}</td>
-                   	  <td>{{ $student->martial_status }}</td>
-                      <td>{{ $student->NID }}</td>
-                      <td>{{ $student->telephone }}</td>
-                      <td>{{ $student->email }}</td>
-                      <td>{{ $student->occupation }}</td>
-                     
+                      <td>{!! $student->names   !!}</td>
+                      <td>{!! date('d-M-Y',strtotime($student->DOB ))  !!}</td>
+                      <td>{!! $student->gender   !!}</td>
+                      <td>{!! $student->NID   !!}</td>
+                      <td>{!! $student->telephone   !!}</td>
+                      <td>{!! $student->email   !!}</td>
+                      <td>{!! $student->department->faculity->name !!}</td>
+                      <td>{!! $student->department->name !!}</td>
+                      <td>{!! $student->level() !!}</td>
                     </tr>
 					@endforeach
                   </tbody>

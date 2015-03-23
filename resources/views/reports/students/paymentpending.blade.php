@@ -1,7 +1,8 @@
 @extends('layouts.default')
 
 @section('title')
-Student details report
+Student  with pending payment reports
+
 @stop
 
 @section('content')
@@ -9,11 +10,11 @@ Student details report
 	<div class="row">
 	
 	<div class="col-md-9">
-	{!! Form::open(['route'=>'reports.students.details','method'=>'GET']) !!}
+	{!! Form::open(['route'=>'reports.students.payments.pending','method'=>'GET']) !!}
 			@include('reports.students.filter')
 	{!! Form::close() !!}
 	
-	 @include('reports.students.table')
+	 @include('reports.students.tablepayment')
 	</div>
 	
 	 <div class="col-md-3">

@@ -62,6 +62,11 @@ Route::group(['prefix'=>'reports'],function()
 
 	Route::get('/students/details', ['as'=>'reports.students.details','uses'=>'ReportStudentController@details']);
 
+	Route::get('/students/payments/progression',['as'=>'reports.students.payments.progression','uses'=>'ReportStudentController@paymentProgression'] );
+
+	Route::get('/students/payments/full',['as'=>'reports.students.payments.paid','uses'=>'ReportStudentController@fullPaid'] );
+	Route::get('/students/payments/pending',['as'=>'reports.students.payments.pending','uses'=>'ReportStudentController@pendingPayment'] );
+
 });
 
 /*

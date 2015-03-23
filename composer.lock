@@ -4,8 +4,53 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "894749f3c3dc96228c217018ffdb468e",
+    "hash": "623dccc11f98feec176624434ca42f86",
     "packages": [
+        {
+            "name": "anlutro/l4-settings",
+            "version": "0.2.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/anlutro/laravel-settings.git",
+                "reference": "3d4e89b0c1fea286ca0d4e37ca9dec5441a44f46"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/anlutro/laravel-settings/zipball/3d4e89b0c1fea286ca0d4e37ca9dec5441a44f46",
+                "reference": "3d4e89b0c1fea286ca0d4e37ca9dec5441a44f46",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=4.1 <6.0",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "illuminate/database": ">=4.1 <6.0",
+                "mockery/mockery": "0.9.*"
+            },
+            "suggest": {
+                "illuminate/database": "Save settings to a database table.",
+                "illuminate/filesystem": "Save settings to a JSON file."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "anlutro\\LaravelSettings\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Lutro",
+                    "email": "anlutro@gmail.com"
+                }
+            ],
+            "description": "Persistant settings in Laravel.",
+            "time": "2015-03-06 16:31:03"
+        },
         {
             "name": "cartalyst/sentry",
             "version": "v2.1.5",
