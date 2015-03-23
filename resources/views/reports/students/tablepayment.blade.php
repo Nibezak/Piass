@@ -31,7 +31,7 @@
                       <td>{!! number_format($student['Amount Paid so far']) !!}</td>
                       <td>{!! number_format($student['balance']) !!} </td>
                       <td><div class="progress-bar progress-bar-{!! $student['severity'] !!}" style="width:{!! $student['Payment progresss'] !!}"></div>
-                      <span class="badge text-{!! $student['severity'] !!}">width:{!! $student['Payment progresss'] !!}</span> </td>
+                      <span class="badge bg-{!! $student['severity'] !!}">width:{!! $student['Payment progresss'] !!}</span> </td>
                     </tr>
 					@endforeach
                   </tbody>
