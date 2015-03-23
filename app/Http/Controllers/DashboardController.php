@@ -24,7 +24,12 @@ class DashboardController extends Controller {
 	 */
 	public function index()
 	{
-		return view('dashboards.dashboard1');
+		$students 	=		\App\Models\Student::count();
+		$faculities =	 	\App\Models\Faculity::count();
+		$departments=		\App\Models\Department::count();
+        $modules	=		\App\Models\Module::count();
+
+		return view('dashboards.dashboard1',compact('students','faculities','departments','modules'));
 	}
 
 }

@@ -22,7 +22,7 @@
 
                     <div class="form-group {!! ($errors->has('levels')) ? 'has-error' : '' !!}">
                       {!! Form::label('levels', 'Department levels') !!}
-                      {!! Form::text('levels', $department->levels, ['class'=>'form-control']) !!}
+                      {!! Form::text('levels', isset($department->levels) ?$department->levels:'', ['class'=>'form-control']) !!}
                       {!! $errors->first('levels','<label class="has-error">:message</label>') !!} 
                     </div>
 

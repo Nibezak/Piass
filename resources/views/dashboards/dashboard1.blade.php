@@ -16,52 +16,52 @@ Welcome to PIASS Student Management System, below are important statistics.
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>150</h3>
-                  <p>New admissions requests</p>
+                  <h3>{!! $students !!}</h3>
+                  <p>Students</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-bag"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer"> <i class="fa fa-student"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
-                  <p>Paid school fees</p>
+                  <h3>{!! $faculities !!}</h3>
+                  <p>Faculties</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer"> <i class="fa fa-faculties"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-yellow">
                 <div class="inner">
-                  <h3>44</h3>
-                  <p>Student Registrations</p>
+                  <h3>{!! $departments !!}</h3>
+                  <p>Departments</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer"><i class="fa fa-department"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
-                  <h3>65</h3>
-                  <p>Have pending school fees</p>
+                  <h3>{!! $modules !!}</h3>
+                  <p>Modules</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer">  <i class="fa fa-modules"></i></a>
               </div>
             </div><!-- ./col -->
           </div>
@@ -112,7 +112,7 @@ Welcome to PIASS Student Management System, below are important statistics.
                         <div class="progress sm">
                           <div class="progress-bar progress-bar-green" style="width: 57%"></div>
                         </div>
-                      </div><!-- /.progress-group -->
+                      </div>/.progress-group
                       <div class="progress-group">
                         <span class="progress-text">New registrations</span>
                         <span class="progress-number"><b>250</b>/500</span>
