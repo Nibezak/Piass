@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('title')
-<a href="{!! $_SERVER['REQUEST_URI'] !!}&export=1" class="btn btn-sm btn-success"> <i class="fa fa-excel-o"> </i>Export </a>
+<a href="{!! Request::url() !!}/{!! isset($_SERVER['HTTP_GET_VARS ']) ?'&':'?' !!}export=1" class="btn btn-sm btn-success"> <i class="fa fa-excel-o"> </i>Export </a>
 @stop
 
 @section('content')

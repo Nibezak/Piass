@@ -65,10 +65,23 @@ class Student extends Model {
 
        	return 0;
     }
+
     /** Get latest fees for this student **/
     public function latestFees()
     {
     	return  $this->fees()->orderBy('created_at','Desc');
+    }
+
+    /** Get latest fees for this student **/
+    public function totalDebitAmount()
+    {
+    	return  $this->fees()->sum('debit');
+    }
+
+    /** Get latest fees for this student **/
+    public function totalCreditAmount()
+    {
+    	return  $this->fees()->sum('debit');
     }
 
 	/**

@@ -34,4 +34,5 @@ abstract class Controller extends BaseController {
 
 		return json_encode($finalArray);
 	}
+
 }
