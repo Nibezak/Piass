@@ -18,6 +18,10 @@ class StudentRegisterCommand extends Command {
    public $nationality;
    public $father_name;
    public $mother_name;
+   public $department_id;
+   public $mode_of_study;
+   public $session;
+   public $campus;
 
 	public function __construct($student)
 	{
@@ -34,6 +38,10 @@ class StudentRegisterCommand extends Command {
 		$this->nationality 		= $student->nationality;
 		$this->father_name 		= $student->father_name;
 		$this->mother_name 		= $student->mother_name;
+		$this->mode_of_study	= $student->mode_of_study;
+        $this->session 			= $student->session;
+        $this->campus			= $student->campus;
+		$this->department_id	= $student->department_id;
 	}
 
 

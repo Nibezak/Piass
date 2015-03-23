@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('title')
-Student Payment progression
+Student Payment who paid all fees
 
 @stop
 

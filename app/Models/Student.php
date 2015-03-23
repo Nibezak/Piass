@@ -167,7 +167,7 @@ class Student extends Model {
 				// Do we have moduleId? then search for it
 				!$moduleId ? : $query->where('module_id',$moduleId);
 
-				!$level ? : $query->where('department_level',$level)->orderBy('created_at','DESC')->take(1);
+				//!$level ? : $query->where('department_level',$level)->orderBy('created_at','DESC')->take(1);
 			})
 			->get();
 	}

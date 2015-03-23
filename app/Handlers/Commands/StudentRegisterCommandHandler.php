@@ -17,6 +17,7 @@ class StudentRegisterCommandHandler {
 	 */
 	public function handle(StudentRegisterCommand $studentData)
 	{
+	  
 		// Prepare data before registering new student
 		$studentInfo 							= (array) $studentData;
 		$studentInfo['DOB']						= date('Y-m-d h:i:s',strtotime($studentData->DOB));

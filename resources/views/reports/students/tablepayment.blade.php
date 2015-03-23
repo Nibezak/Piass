@@ -1,4 +1,5 @@
-   @if(!empty($students[0]))
+   @if(!empty($students))
+
 
       <table class="table table-striped">
                     <tbody>
@@ -15,6 +16,10 @@
                     <th> Progress </th>
                     </tr>
 					@foreach($students as $student)
+
+               @if(empty($student))
+                 <?php continue ?>
+                @endif
                    <tr>
                       <td>{!! $student['Names']   !!}</td>
                       <td>{!! $student['Telephone']   !!}</td>
