@@ -16,6 +16,10 @@ class Kernel extends HttpKernel {
 		'Illuminate\Session\Middleware\StartSession',
 		'Illuminate\View\Middleware\ShareErrorsFromSession',
 		'App\Http\Middleware\VerifyCsrfToken',
+		'App\Http\Middleware\FinanceMiddleWare',
+		'App\Http\Middleware\RegistrarMiddleWare',
+		'App\Http\Middleware\FaculityMiddleWare',
+		
 	];
 
 	/**
@@ -26,6 +30,9 @@ class Kernel extends HttpKernel {
 	protected $routeMiddleware = [
 	    'sentry.auth' => 'Sentinel\Middleware\SentryAuth',
         'sentry.admin' => 'Sentinel\Middleware\SentryAdminAccess',
+        'auth.finance' =>'App\Http\Middleware\FinanceMiddleWare',
+		'auth.registrar' =>'App\Http\Middleware\RegistrarMiddleWare',
+		'auth.faculity' =>'App\Http\Middleware\FaculityMiddleWare',
 	];
 
 }

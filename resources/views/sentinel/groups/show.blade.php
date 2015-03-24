@@ -8,7 +8,9 @@ View Group
 
 {!!-- Content --!!}
 @section('content')
-<div class="row">
+<section class="content">
+<div class="box">
+
 	<div class="small-8 columns">
 		<h4>{!! $group['name'] !!} Group</h4>
 
@@ -24,13 +26,12 @@ View Group
 		<button class="button" onClick="location.href='{!! route('sentinel.groups.edit', array($group->hash)) !!}'">Edit Group</button>
 	</div>
 
-</div>
 
-<div class="row">
 	<h4>Group Object</h4>
 	<div class="panel">
 		<pre>{!! var_dump($group) !!}</pre>
 	</div>
+</div>
 </div>
 
 @stop

@@ -49,7 +49,8 @@ class ReportStudentController extends Controller {
 	 */
 	public function paymentProgression()
 	{
-
+		$this->middleware('auth.finance'); // works
+		
 		$faculity 		= Input::get('faculity');
 		$department 	= Input::get('department');
 		$level 			= Input::get('level');

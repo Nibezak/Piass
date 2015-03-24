@@ -8,17 +8,19 @@ Groups
 
 {{-- Content --}}
 @section('content')
-<div class="row">
-	<div class="large-6 columns">
+<section class="content">
+<div class="box">
+
+	<div class="col-md-6 columns">
 		<h1>Available Groups</h1>
 	</div>
-	<div class="large-6 columns right">
+	<div class="col-md-6 columns right">
 		<button class="button" onClick="location.href='{{ route('sentinel.groups.create') }}'">New Group</button>
 	</div>
 </div>
 
-<div class="row">
-	<table class="full-width">
+
+	<table class="table table-striped">
 		<thead>
 			<th>Name</th>
 			<th>Permissions</th>
@@ -48,6 +50,7 @@ Groups
 		@endforeach
 		</tbody>
 	</table> 
+</div>
 </div>
 <!--  
 	The delete button uses Resftulizer.js to restfully submit with "Delete".  The "action_confirm" class triggers an optional confirm dialog.
