@@ -37,10 +37,31 @@ class Handler extends ExceptionHandler {
 	 */
 	public function render($request, Exception $e)
 	{
+		if($this->isHttpException($e)){
+            switch ($e->getStatusCode()) {
+                case '404':
+                            \Log::error($e);
+                        return  redirect('/');;
+                break;
+
+                case '500':
+                    \Log::error($exception);
+                        return redirect('/');; 
+                break;
+
+                default:
+                    return $tredirect('/');
+                break;
+            }
+        }
 		//add this to the render function
 		if ($e instanceof ModelNotFoundException)
             {
-                return response()->view('errors.'.'404');
+            	if(\Sentry::check()):
+            	 	return response()->view('errors.'.'404');
+                else:
+                	return \redirect('/');;
+                endif;
             }
 
 		return parent::render($request, $e);

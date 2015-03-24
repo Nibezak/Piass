@@ -12,8 +12,9 @@
 | Student routes
 |--------------------------------------------------------------------------
 */
-   Route::group(['prefix'=>'students','before'=>'Sentinel\hasAccess:finance'],	function()
+   Route::group(['prefix'=>'students'],	function()
 	{
+
 		 Route::resource('educations', 'StudentEducationController');
 
 		 Route::resource('modules','StudentModulesController');
@@ -31,18 +32,18 @@
 | Fees, Transactions and files routes
 |--------------------------------------------------------------------------
 */
-Route::resource('fees', 'FeeController');
-Route::resource('transactions', 'TransactionController');
-Route::resource('files','FileController');
+Route::resource('fees', 'FeeController',['middleware'=>'sentry.auth']);
+Route::resource('transactions', 'TransactionController',['middleware'=>'sentry.auth']);
+Route::resource('files','FileController',['middleware'=>'sentry.auth']);
 
 /*
 |--------------------------------------------------------------------------
 | Section of Menu
 |--------------------------------------------------------------------------
 */
-Route::resource('modules','ModuleController');
-Route::get('modules/{id}/create/{level}',['as'=>'modules.department.create','uses'=>'ModuleController@create']);
-Route::get('departments/{departmentid}/level/{levelid}',['as' =>'departments.levels','uses' =>'ModuleController@levelModules']);
+Route::resource('modules','ModuleController',['middleware'=>'sentry.auth']);
+Route::get('modules/{id}/create/{level}',['as'=>'modules.department.create','middleware'=>'sentry.auth','uses'=>'ModuleController@create']);
+Route::get('departments/{departmentid}/level/{levelid}',['as' =>'departments.levels','middleware'=>'sentry.auth','uses' =>'ModuleController@levelModules']);
 
 Route::group(['prefix'=>'settings','before'=>'Sentinel\Middleware\SentryAdminAccess'],function()
 	{
@@ -57,16 +58,16 @@ Route::group(['prefix'=>'settings','before'=>'Sentinel\Middleware\SentryAdminAcc
 | Student reports routes
 |--------------------------------------------------------------------------
 */
-Route::group(['prefix'=>'reports'],function()
+Route::group(['prefix'=>'reports','middleware'=>'sentry.auth'],function()
 {
 	Route::get('/','ReportController@index');
 
-	Route::get('/students/details', ['as'=>'reports.students.details','uses'=>'ReportStudentController@details']);
+	Route::get('/students/details', ['as'=>'reports.students.details','middleware'=>'reports.students.details','uses'=>'ReportStudentController@details']);
 
-	Route::get('/students/payments/progression',['as'=>'reports.students.payments.progression','uses'=>'ReportStudentController@paymentProgression'] );
+	Route::get('/students/payments/progression',['as'=>'reports.students.payments.progression','middleware'=>'reports.students.PaymentProgress','uses'=>'ReportStudentController@paymentProgression'] );
 
-	Route::get('/students/payments/full',['as'=>'reports.students.payments.paid','uses'=>'ReportStudentController@fullPaid'] );
-	Route::get('/students/payments/pending',['as'=>'reports.students.payments.pending','uses'=>'ReportStudentController@pendingPayment'] );
+	Route::get('/students/payments/full',['as'=>'reports.students.payments.paid','middleware'=>'reports.students.finance','uses'=>'ReportStudentController@fullPaid'] );
+	Route::get('/students/payments/pending',['as'=>'reports.students.payments.pending','middleware'=>'reports.students.finance','uses'=>'ReportStudentController@pendingPayment'] );
 
 });
 
@@ -75,7 +76,7 @@ Route::group(['prefix'=>'reports'],function()
 | Section of Menu
 |--------------------------------------------------------------------------
 */
-Route::group(['prefix'=>'api'], function()
+Route::group(['prefix'=>'api','middleware'=>'sentry.auth'], function()
 	{
 		Route::get('departments/{faculityId}','DepartmentController@apiDepartments');
 

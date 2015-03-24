@@ -12,7 +12,9 @@ class ReportStudentController extends Controller {
 	private $student;
 
 	function __construct(Student $student) {
-		$this->middleware('auth.finance');
+
+		$this->middleware('reports.students.PaymentProgress',['only'=>'paymentProgression']);
+		$this->middleware('reports.students.finance',['only'=>['fullPaid','pendingPayment']]);
 		$this->student = $student;
 	}
 

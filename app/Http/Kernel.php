@@ -24,12 +24,16 @@ class Kernel extends HttpKernel {
 	 * @var array
 	 */
 	protected $routeMiddleware = [
-	    'sentry.auth' => 'Sentinel\Middleware\SentryAuth',
-        'sentry.admin' => 'Sentinel\Middleware\SentryAdminAccess',
+	    'sentry.auth' 	=> 'Sentinel\Middleware\SentryAuth',
+        'sentry.admin' 	=> 'Sentinel\Middleware\SentryAdminAccess',
         
-        'auth.finance' =>'App\Http\Middleware\FinanceMiddleWare',
-		'auth.registrar' =>'App\Http\Middleware\RegistrarMiddleWare',
-		'auth.faculity' =>'App\Http\Middleware\FaculityMiddleWare',
+         /*----------------------
+          * Reports MiddleWare  |
+          * ---------------------
+          */
+        'reports.students.finance'	 				=>'App\Http\Middleware\FinanceReportMiddleWare',
+		'reports.students.PaymentProgress'			=>'App\Http\Middleware\PaymentProgressionMiddleWare',
+		'reports.students.details'					=>'App\Http\Middleware\StudentDetailsReportMiddleWare',
 	];
 
 }

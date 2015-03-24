@@ -22,6 +22,8 @@ class StudentController extends Controller {
 	protected $fees;
 	function __construct(Student $student,FeeTransaction $fees)
 	 {
+
+	 	$this->middleware('auth.students', ['only' => ['update','create']]);
 		$this->student = $student;
 		$this->fees    = $fees;
 	}
