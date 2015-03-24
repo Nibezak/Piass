@@ -12,7 +12,7 @@
 | Student routes
 |--------------------------------------------------------------------------
 */
-   Route::group(['prefix'=>'students','before'=>'Sentinel\hasAccess:user'],	function()
+   Route::group(['prefix'=>'students','before'=>'Sentinel\hasAccess:finance'],	function()
 	{
 		 Route::resource('educations', 'StudentEducationController');
 

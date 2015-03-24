@@ -8,14 +8,13 @@ Home
 
 {{-- Content --}}
 @section('content')
-<div class="row">
 
 	<?php
 	    // Determine the edit profile route
 	    if (($user->email == Sentry::getUser()->email)) {
 	        $editAction = route('sentinel.profile.edit');
 	    } else {
-	        $editAction =  action('Sentinel\UserController@edit', [$user->hash]);
+	        $editAction =  route('sentinel.users.edit', [$user->hash]);
 	    }
 	?>
 
@@ -53,7 +52,5 @@ Home
 		    </ul>
 
 		</div>
-</div>
-
 
 @stop

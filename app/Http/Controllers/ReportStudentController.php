@@ -12,6 +12,7 @@ class ReportStudentController extends Controller {
 	private $student;
 
 	function __construct(Student $student) {
+		$this->middleware('auth.finance');
 		$this->student = $student;
 	}
 
@@ -49,7 +50,6 @@ class ReportStudentController extends Controller {
 	 */
 	public function paymentProgression()
 	{
-		$this->middleware('auth.finance'); // works
 		
 		$faculity 		= Input::get('faculity');
 		$department 	= Input::get('department');

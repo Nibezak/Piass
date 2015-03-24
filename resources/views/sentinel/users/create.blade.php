@@ -10,12 +10,12 @@ Create New User
 @section('content')
 <div class="container">
 <form method="POST" action="{{ route('sentinel.users.store') }}" accept-charset="UTF-8">
-  <div class="row">
+  
         <div class="small-6 large-centered columns">
             
             <h2>Create New User</h2>
 
-            <div class="row">
+            
                 <div class="small-2 columns">
                     <label for="right-label" class="right inline">Username</label>
                 </div>
@@ -23,9 +23,9 @@ Create New User
                     <input placeholder="Username" name="username" type="text" value="{{ Input::old('username') }}">
                     {{ ($errors->has('username') ? $errors->first('username', '<small class="error">:message</small>') : '') }}
                 </div>
-            </div>
+            
 
-            <div class="row">
+            
                 <div class="small-2 columns">
                     <label for="right-label" class="right inline">E-mail</label>
                 </div>
@@ -33,9 +33,9 @@ Create New User
                     <input placeholder="E-mail" name="email" type="text" value="{{ Input::old('email') }}">
                     {{ ($errors->has('email') ? $errors->first('email', '<small class="error">:message</small>') : '') }}
                 </div>
-            </div>
+           
             
-            <div class="row">
+            
                 <div class="small-2 columns">
                     <label for="right-label" class="right inline">Password</label>
                 </div>
@@ -43,9 +43,9 @@ Create New User
                     <input class="form-control" placeholder="Password" name="password" value="" type="password">
                     {{ ($errors->has('password') ?  $errors->first('password', '<small class="error">:message</small>') : '') }}
                 </div>
-            </div>
+           
 
-            <div class="row">
+            
                 <div class="small-2 columns">
                     <label for="right-label" class="right inline">Confirm</label>
                 </div>
@@ -53,21 +53,20 @@ Create New User
                     <input class="form-control" placeholder="Confirm Password" name="password_confirmation" value="" type="password">
                     {{ ($errors->has('password_confirmation') ?  $errors->first('password_confirmation', '<small class="error">:message</small>') : '') }}
                 </div>
-            </div>
+          
 
-            <div class="row">
+            
                 <div class="small-10 small-offset-2 columns">
                     <input name="activate" value="activate" type="checkbox">
                     <label for="activate">Activate</label>
                 </div>
-            </div>
-
-             <div class="row">
+           
+             
                 <div class="small-10 small-offset-2 columns">
                     <input name="_token" value="{{ csrf_token() }}" type="hidden">
                     <input class="button" value="Create" type="submit">
                 </div>
-            </div>
+           
                        
         </div>
     </div>            
