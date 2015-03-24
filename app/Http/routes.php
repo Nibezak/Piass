@@ -43,7 +43,8 @@ Route::resource('files','FileController');
 Route::resource('modules','ModuleController');
 Route::get('modules/{id}/create/{level}',['as'=>'modules.department.create','uses'=>'ModuleController@create']);
 Route::get('departments/{departmentid}/level/{levelid}',['as' =>'departments.levels','uses' =>'ModuleController@levelModules']);
-Route::group(['prefix'=>'settings'],function()
+
+Route::group(['prefix'=>'settings','before'=>'Sentinel\Middleware\SentryAdminAccess'],function()
 	{
 		Route::resource('faculities','faculityController');
 

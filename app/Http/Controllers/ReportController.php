@@ -1,12 +1,18 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Models\FeeTransaction;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class ReportController extends Controller {
+class ReportController extends Controller
+ {
+ 	protected $feeTransaction ;
 
+ 	function __construct(FeeTransaction $feeTransaction) {
+ 		$this->feeTransaction = $feeTransaction;
+ 	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -14,71 +20,45 @@ class ReportController extends Controller {
 	 */
 	public function index()
 	{
-		return view('reports.index');
+		
+		$months 	=	json_encode($this->getMonths());
+		$credits 	=	json_encode($this->getCredits());
+		$debits 	=	json_encode($this->getDebits());
+
+		return view('reports.index',compact('months','credits','debits'));
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
+	private function getMonths()
 	{
-		//
+		$months =$this->feeTransaction->getChartData()->lists('month');
+
+		return array_map(function($month)
+			{
+				return  date('F-Y',strtotime($month));
+
+			}, $months);
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
+	private function getCredits()
 	{
-		//
+		$credits = $this->feeTransaction->getChartData()->lists('credit');
+
+		return array_map(function($credit)
+			{
+				return  (float) $credit;
+
+			}, $credits);
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
+
+	private function getDebits()
 	{
-		//
-	}
+		$debits = $this->feeTransaction->getChartData()->lists('debit');
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
+		return array_map(function($debit)
+			{
+				return  (float) $debit;
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
+			}, $debits);
 	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
 }

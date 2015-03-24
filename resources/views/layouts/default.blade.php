@@ -78,11 +78,13 @@
     <script src="{{Url()}}/assets/js/jquery.wallform.js"></script>
 
     <script src="{{ Url() }}/assets/js/app.js" type="text/javascript"></script>
-
+ 
     <script type="text/javascript">
             new datepickr('date', {
                 'dateFormat': 'Y-m-d'
             });
-        </script>  
+        </script>
+
+    @yield('footer')  
   </body>
 </html>

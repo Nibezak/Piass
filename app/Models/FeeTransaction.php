@@ -1,5 +1,6 @@
 <?php namespace App\Models;
 
+use DB;
 use App\Models\User;
 use App\Models\Student;
 
@@ -41,4 +42,10 @@ class FeeTransaction extends Model {
 		return $this->belongsTo('App\Models\User','done_by');
 	}
 
+	public function getChartData()
+	{
+	 return	DB::table($this->table)
+                 ->select(DB::raw('LEFT(date,7) as month, sum(credit) as credit,sum(debit) as debit'))
+                 ->groupBy(DB::raw('LEFT(date,7)'));
+	}
 }
