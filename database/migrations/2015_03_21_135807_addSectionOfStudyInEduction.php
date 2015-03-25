@@ -26,9 +26,10 @@ class AddSectionOfStudyInEduction extends Migration {
 	 */
 	public function down()
 	{
-		/** Because the table will be droped by the eduction migration so there is no need to 
-		to add any migration rollback from this level */
-		return true;
+		Schema::table('student_educations', function($table)
+		{
+		    $table->dropColumn(['section_of_study']);
+		});
 	}
 
 }

@@ -20,6 +20,8 @@ class AddMoreFieldsToStudentsTable extends Migration {
 			$table->string('registration_number');
 			$table->string('campus');
 			$table->integer('department_id');
+			$table->integer('created_by');
+			$tablle->integer('updated_by');
 		});
 	}
 
@@ -30,7 +32,10 @@ class AddMoreFieldsToStudentsTable extends Migration {
 	 */
 	public function down()
 	{
-		return true;
+		Schema::table('students', function($table)
+		{
+		    $table->dropColumn(['mode_of_study', 'session', 'registration_number','campus', 'department_id','created_by','updated_by']);
+		});
 	}
 
 }
