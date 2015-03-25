@@ -11,10 +11,10 @@ class ReportStudentController extends Controller {
 
 	private $student;
 
-	function __construct(Student $student) {
+	function __construct(Student $student) 
+	{
+		parent::__construct();
 
-		$this->middleware('reports.students.PaymentProgress',['only'=>'paymentProgression']);
-		$this->middleware('reports.students.finance',['only'=>['fullPaid','pendingPayment']]);
 		$this->student = $student;
 	}
 
@@ -25,6 +25,14 @@ class ReportStudentController extends Controller {
 	 */
 	public function details()
 	{	
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('report.student.details')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 		$faculity 		= Input::get('faculity');
 		$department 	= Input::get('department');
 		$level 			= Input::get('level');
@@ -52,6 +60,13 @@ class ReportStudentController extends Controller {
 	 */
 	public function paymentProgression()
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('report.student.payment.progress')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
 		
 		$faculity 		= Input::get('faculity');
 		$department 	= Input::get('department');
@@ -82,6 +97,13 @@ class ReportStudentController extends Controller {
 	 */
 	public function fullPaid()
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('report.student.payment.paid')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
 
 		$faculity 		= Input::get('faculity');
 		$department 	= Input::get('department');
@@ -111,6 +133,13 @@ class ReportStudentController extends Controller {
 	 */
 	public function pendingPayment()
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('report.student.payment.pending')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
 
 		$faculity 		= Input::get('faculity');
 		$department 	= Input::get('department');
