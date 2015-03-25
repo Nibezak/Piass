@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use Input,Excel;
+use Input,Excel,Flash;
 use App\Http\Requests;
 use App\Models\Student;
 use App\Http\Controllers\Controller;

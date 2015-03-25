@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use App\Http\Requests,Flash;
 use App\Http\Controllers\Controller;
 use App\Models\FeeTransaction;
 

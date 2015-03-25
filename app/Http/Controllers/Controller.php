@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use Sentry;
+use Sentry,Flash;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;

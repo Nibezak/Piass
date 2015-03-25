@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use Flash,Redirect;
+use Flash,Redirect,Flash;
 use App\Http\Requests\StudentModuleRegisterRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
