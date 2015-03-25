@@ -1,4 +1,9 @@
 <?php
+
+$router->get('/test', function()
+{
+	return ['admin','student'];
+});
 /*
 |--------------------------------------------------------------------------
 | Home routes
@@ -62,7 +67,7 @@ Route::group(['prefix'=>'reports','middleware'=>'sentry.auth'],function()
 {
 	Route::get('/','ReportController@index');
 
-	Route::get('/students/details', ['as'=>'reports.students.details','middleware'=>'reports.students.details','uses'=>'ReportStudentController@details']);
+	Route::get('/students/details','ReportStudentController@details');
 
 	Route::get('/students/payments/progression',['as'=>'reports.students.payments.progression','middleware'=>'reports.students.PaymentProgress','uses'=>'ReportStudentController@paymentProgression'] );
 

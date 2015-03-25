@@ -22,9 +22,9 @@ class StudentController extends Controller {
 	protected $fees;
 	function __construct(Student $student,FeeTransaction $fees)
 	 {
-
-	 	$this->middleware('auth.students', ['only' => ['update','create']]);
-		$this->student = $student;
+	 	parent::__construct();
+	 	
+	 	$this->student = $student;
 		$this->fees    = $fees;
 	}
 	/**
@@ -34,6 +34,14 @@ class StudentController extends Controller {
 	 */
 	public function index()
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('student.view')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 		$students 	= $this->student->paginate(10);
 
 		if ($keyword = Input::get('q'))
@@ -51,6 +59,13 @@ class StudentController extends Controller {
 	 */
 	public function create()
 	{
+	    // First check if the user has the permission to do this
+		if (!$this->user->hasAccess('student.create')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
 		$student = new $this->student;
 
 		return view('students.create',compact('student'));
@@ -63,6 +78,13 @@ class StudentController extends Controller {
 	 */
 	public function store(StudentRegisterRequest $request)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('student.create')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
 		$student = $this->dispatch(new StudentRegisterCommand($request))->student;
 
 		Flash::success('New student '.$student->names.' was registered successfully. ');
@@ -79,7 +101,13 @@ class StudentController extends Controller {
 	 */
 	public function edit($id)
 	{
-
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('student.update')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
 		$student = $this->student->findOrFail($id);
 
 
@@ -94,6 +122,13 @@ class StudentController extends Controller {
 	 */
 	public function update($id, StudentUpdateRequest $request)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('student.update')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
 		$student = Student::findOrFail($id);
 
 		// Prepare data 
@@ -110,6 +145,13 @@ class StudentController extends Controller {
 
 	public function fees($studentId)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('student.fees')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
 		$student = $this->student->findOrFail($studentId);
 
 		return view('students.fees',compact('student'));
@@ -122,7 +164,19 @@ class StudentController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		 
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('student.delete')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
+		$this->student->destroy($id);
+
+		Flash::success('You have deleted a student ');
+
+	   return redirect()->to('students');
 	}
 
 }

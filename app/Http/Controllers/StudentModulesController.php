@@ -15,6 +15,8 @@ class StudentModulesController extends Controller {
 
 	function __construct(Student $student) 
 	{
+		parent::__construct();
+		
 		$this->student = $student;
 	}
     /**
@@ -25,6 +27,14 @@ class StudentModulesController extends Controller {
 	 */
 	public function show($id)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('student.view')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+		$student = $this->student->findOrFail($id);
 		$student = $this->student->findOrFail($id);
 		
 		return view('studentModules.create',compact('student'));

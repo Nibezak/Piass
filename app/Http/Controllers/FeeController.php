@@ -22,6 +22,8 @@ class FeeController extends Controller {
 
 	function __construct(FeeTransaction $transaction,Student $student)
 	 {
+	 	parent::__construct();
+
 	 	$this->student = $student;
 
 		$this->transaction = $transaction;
@@ -33,6 +35,13 @@ class FeeController extends Controller {
 	 */
 	public function index()
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('fee.view')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
 		$students 	= $this->student->paginate(10);
 
 		if ($keyword = Input::get('q'))
@@ -52,6 +61,13 @@ class FeeController extends Controller {
 	 */
 	public function store(FeeRequest $request)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('fee.create')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
 		$this->dispatch(new FeeRegisterCommand($request));
 
 		Flash::success('Student Fees has been recorded succesffully');
@@ -67,6 +83,14 @@ class FeeController extends Controller {
 	 */
 	public function show($id)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('fee.view')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+		
 		$student = $this->student->findOrFail($id);
         
 		return view('fees.create',compact('student'));

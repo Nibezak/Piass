@@ -17,9 +17,11 @@ class DepartmentController extends Controller {
 
     private $department; 
     private $faculity;
-
+    
     function __construct(Department $department ,Faculity $faculity) 
     {
+    	parent::__construct();
+
     	$this->department = $department;
 
     	$this->faculity   = $faculity;
@@ -31,6 +33,13 @@ class DepartmentController extends Controller {
 	 */
 	public function index()
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('department.view')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
 		$departments = $this->department->paginate(20);
 
 		return view('departments.index',compact('departments'));
@@ -43,6 +52,14 @@ class DepartmentController extends Controller {
 	 */
 	public function create()
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('department.create')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 		$department = new $this->department;
 
 		return view('departments.create',compact('department'));
@@ -55,6 +72,14 @@ class DepartmentController extends Controller {
 	 */
 	public function store(DepartmentRegisterRequest $request)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('department.create')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 		$this->dispatch(
 			new DepartmentRegisterCommand($request)
 			);
@@ -73,6 +98,14 @@ class DepartmentController extends Controller {
 	 */
 	public function edit($id)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('department.update')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 		$department = $this->department->findOrFail($id);
 
 		return view('departments.edit',compact('department'));
@@ -86,6 +119,14 @@ class DepartmentController extends Controller {
 	 */
 	public function update(DepartmentUpdateRequest $request, $id)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('department.update')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 		$department = $this->department->findOrFail($id);
 
 		$data = (array) $request->all();
@@ -107,6 +148,14 @@ class DepartmentController extends Controller {
 	 */
 	public function destroy($id)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('department.delete')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 		$department = $this->department->findOrFail($id);
 
 		$department->delete();

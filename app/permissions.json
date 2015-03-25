@@ -1,0 +1,8 @@
+{
+	"student":{
+        "create" ,
+        "delete" ,
+        "view"   ,
+        "update" 
+    }
+}

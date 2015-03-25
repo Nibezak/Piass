@@ -18,10 +18,14 @@ class FaculityController extends Controller {
 	/**
 	 *  @var App\Models\Faculity
 	 */
-	private $faculity ; 
+	private $faculity ;
+	
 	function __construct(Faculity $faculity )
    {
+   		parent::__construct();
 		$this->faculity = $faculity;
+
+		
 	}
 
 	/**
@@ -31,6 +35,14 @@ class FaculityController extends Controller {
 	 */
 	public function index()
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('faculity.view')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 		$faculities = $this->faculity->paginate(20);
 
 		return view('faculities.index',compact('faculities'));
@@ -43,6 +55,14 @@ class FaculityController extends Controller {
 	 */
 	public function create()
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('faculity.create')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 		$faculity  = new $this->faculity; 
 
 		return view('faculities.create',compact('faculity'));
@@ -55,6 +75,13 @@ class FaculityController extends Controller {
 	 */
 	public function store(CreateNewFaculityRequest $request)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('faculity.create')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
 		$this->dispatch(
 			 new CreateFaculityCommand($request)
 			);
@@ -73,6 +100,14 @@ class FaculityController extends Controller {
 	 */
 	public function edit($id)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('faculity.update')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 		$faculity = $this->faculity->findOrFail($id);
 
 		return view('faculities.edit',compact('faculity'));
@@ -86,6 +121,14 @@ class FaculityController extends Controller {
 	 */
 	public function update(UpdateFaculityRequest $request,$id)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('faculity.update')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 		$faculity = $this->faculity->findOrFail($id);
 
 		$faculity->update((array) $request->all());
@@ -104,6 +147,14 @@ class FaculityController extends Controller {
 	 */
 	public function destroy($id)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('faculity.delete')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 		if($this->faculity->destroy($id))
 		{
 			Flash::success(' The faculity was deleted successfully !');

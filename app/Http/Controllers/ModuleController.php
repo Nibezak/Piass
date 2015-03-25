@@ -18,9 +18,13 @@ class ModuleController extends Controller {
 
 	function __construct(Module $module,Department $department) 
     {
+    	parent::__construct();
+    	
 		$this->module = $module;
 
 		$this->department = $department;
+
+		
 	}
 
 	/**
@@ -30,6 +34,14 @@ class ModuleController extends Controller {
 	 */
 	public function index()
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('module.view')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 		$modules = $this->module->paginate(20);
 
 		return view('modules.index',compact('modules'));
@@ -42,6 +54,14 @@ class ModuleController extends Controller {
 	 */
 	public function create($department=0,$level=0)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('module.create')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 		 if ($department)
 		 {
 		 	$department =  $this->department->findOrFail($department);
@@ -60,6 +80,14 @@ class ModuleController extends Controller {
 	 */
 	public function store(ModuleRegisterRequest $request)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('module.create')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 		$this->dispatch(
 			new ModuleRegisterCommand($request)
 			);
@@ -78,6 +106,14 @@ class ModuleController extends Controller {
 	 */
 	public function levelModules($departmentId,$level)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('module.view')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 		$department = $this->department->findOrFail($departmentId);
 		
 		$modules 	= $department->level($level)->paginate(10);			  
@@ -93,6 +129,14 @@ class ModuleController extends Controller {
 	 */
 	public function edit($id)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('module.update')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 		$module = $this->module->findOrFail($id);
 
 		$level = $module->department_level;
@@ -110,6 +154,14 @@ class ModuleController extends Controller {
 	 */
 	public function update(ModuleUpdateRequest $request,$id)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('module.update')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 		$module = $this->module->findOrFail($id);
 
 		$module->update((array) $request->all());
@@ -127,6 +179,14 @@ class ModuleController extends Controller {
 	 */
 	public function destroy($id)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('module.delete')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+
 	    $module = $this->module->findOrFail($id);
 
 		$module->update((array) $request->all());

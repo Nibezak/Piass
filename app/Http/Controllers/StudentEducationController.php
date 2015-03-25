@@ -14,6 +14,8 @@ class StudentEducationController extends Controller {
 
 	function __construct(StudentEducation $education) 
 	{
+		parent::__construct();
+
 		$this->education = $education;
 	}
 
@@ -26,6 +28,16 @@ class StudentEducationController extends Controller {
 	 */
 	public function update(EducationRegisterRequest $request)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('student.update')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
+		
+		$student = $this->student->findOrFail($id);
+
 		if(!$request->student_id)
 		{
 			Flash::error('You must register a student before adding education.');

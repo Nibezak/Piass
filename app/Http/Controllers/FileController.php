@@ -14,7 +14,10 @@ class FileController extends Controller {
     private $student ;
     private $file;
 
-    function __construct(Student $student,FileModel $file) {
+
+    function __construct(Student $student,FileModel $file) 
+    {
+    	
     	$this->student = $student;
     	$this->file    = $file;
     }
@@ -26,6 +29,13 @@ class FileController extends Controller {
 	 */
 	public function store()
 	{
+				// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('file.upload')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
 
 		$input = Input::all();
 
@@ -75,6 +85,13 @@ class FileController extends Controller {
 	 */
 	public function destroy($id)
 	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('file.delete')) 
+		{			
+			 Flash::error(trans('Sentinel::users.noaccess'));
+             
+             return redirect()->back();
+		}
 		$fileInfo = $this->file->findOrFail($id);
         
 		$file = 'uploads/student'.$fileInfo->student_id.'/'.$fileInfo->name;

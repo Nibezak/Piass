@@ -61,7 +61,15 @@ return [
     |
     */
 
-    'default_permissions' => ['admin', 'users'],
+    'default_permissions' => ['admin','users','file.upload','file.delete',
+                              'student.create' ,'student.delete','student.view','student.update',
+                              'module.create' ,'module.delete','module.view','module.update',
+                              'department.create' ,'department.delete','department.view','department.update',
+                              'faculity.create' ,'faculity.delete','faculity.view','faculity.update',
+                              'fee.create' ,'fee.delete','fee.view','fee.update',
+                              'transaction.create' ,'transaction.delete','transaction.view','transaction.update',
+                              'report.student.details' ,'report.student.payment.progress','report.student.payment.panding','report.student.payment.paid'
+                              ],
 
     /*
     |--------------------------------------------------------------------------
