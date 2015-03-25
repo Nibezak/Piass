@@ -27,13 +27,6 @@ class Kernel extends HttpKernel {
 	    'sentry.auth' 	=> 'Sentinel\Middleware\SentryAuth',
         'sentry.admin' 	=> 'Sentinel\Middleware\SentryAdminAccess',
         
-         /*----------------------
-          * Reports MiddleWare  |
-          * ---------------------
-          */
-        'reports.students.finance'	 				=>'App\Http\Middleware\FinanceReportMiddleWare',
-		'reports.students.PaymentProgress'			=>'App\Http\Middleware\PaymentProgressionMiddleWare',
-		'reports.students.details'					=>'App\Http\Middleware\StudentDetailsReportMiddleWare',
 	];
 
 }
