@@ -1,8 +1,9 @@
 <?php namespace App\Http\Composers;
 
+
 use App\Models\Faculity;
 use App\Models\Department;
-
+use anlutro\LaravelSettings\SettingStore as Settings;
 use Illuminate\Contracts\View\View;
 
 /**
@@ -10,6 +11,11 @@ use Illuminate\Contracts\View\View;
 */
 class ViewComposer 
 {
+	protected $settings;
+
+	function __construct(Settings $settings) {
+		$this->settings = $settings;
+	}
 	/** Left navigation View composer */
 	public function leftNav(View $view)
 	{
@@ -27,4 +33,9 @@ class ViewComposer
 		$view->with('departments',Department::lists('name','id'));
 	}
 
+
+	public function companyName(View $view)
+	{
+		$view->with('company',$this->settings->get('Company_name'));
+	}
 }

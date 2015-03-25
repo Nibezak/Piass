@@ -153,6 +153,7 @@ return [
 		'Laracasts\Flash\FlashServiceProvider',
 		'Sentinel\SentinelServiceProvider',   
 		'Maatwebsite\Excel\ExcelServiceProvider',
+		'anlutro\LaravelSettings\ServiceProvider',
 
 		/**
 		 * Custom service providers
@@ -214,6 +215,7 @@ return [
 		'Html'		=>	'Illuminate\Html\HtmlFacade',
 		'Flash'		=> 'Laracasts\Flash\Flash',
 		'Excel' => 'Maatwebsite\Excel\Facades\Excel',
+		'Setting' => 'anlutro\LaravelSettings\Facade',
 	],
 
 ];

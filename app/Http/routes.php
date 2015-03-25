@@ -50,6 +50,10 @@ Route::group(['prefix'=>'settings'],function()
 		Route::resource('faculities','faculityController');
 
 		Route::resource('departments','DepartmentController');
+
+		Route::get('/',['as'=>'settings.index','uses'=>'SettingController@index']);
+
+		Route::post('/store',['as'=>'settings.store','uses'=>'SettingController@store']);
 	});
 
 

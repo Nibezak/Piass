@@ -68,7 +68,8 @@ return [
                               'faculity.create' ,'faculity.delete','faculity.view','faculity.update',
                               'fee.create' ,'fee.delete','fee.view','fee.update',
                               'transaction.create' ,'transaction.delete','transaction.view','transaction.update',
-                              'report.student.details' ,'report.student.payment.progress','report.student.payment.panding','report.student.payment.paid'
+                              'report.student.details' ,'report.student.payment.progress','report.student.payment.panding','report.student.payment.paid',
+                              'settings.view','settings.change',
                               ],
 
     /*

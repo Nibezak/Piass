@@ -16,6 +16,8 @@ class ViewComposersProvider extends ServiceProvider {
 		$this->faculityFormComposer();
 
 		$this->departmentFormComposer();
+
+		$this->partialsComposer();
 	}
 
 	/**
@@ -55,5 +57,18 @@ class ViewComposersProvider extends ServiceProvider {
 		view()->composer('studentModules.form','App\Http\Composers\ViewComposer@departmentForm');
 		view()->composer('reports.students.filter','App\Http\Composers\ViewComposer@departmentForm');
 	}
+
+
+	/**
+	 * LEFT NAVITION COMPOSER
+	 * 
+	 * @return [type] [description]
+	 */
+	private function partialsComposer()
+	{
+		
+		view()->composer(['partials.header', 'layouts.default'],'App\Http\Composers\ViewComposer@companyName');
+	}
+
 
 }

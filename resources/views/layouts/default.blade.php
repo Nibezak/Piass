@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>PIASS| STUDENT MANAGEMENT SYSTEM</title>
+    <title>{!! $company !!}| STUDENT MANAGEMENT SYSTEM</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.2 -->
     <link href="{{Url()}}/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -13,9 +13,6 @@
     <!-- Theme style -->
     <link href="{{Url()}}/assets/dist/css/piassStudent.css" rel="stylesheet" type="text/css" />
   
-    <!-- Drop zone -->
-     <link href="{{Url()}}/assets/dropzone/dropzone.css" rel="stylesheet" type="text/css" />
-     <script src="{{Url()}}/assets/dropzone/dropzone.js"></script>
     <!-- PIASS Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
     <link href="{{Url()}}/assets/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />

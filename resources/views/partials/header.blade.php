@@ -1,5 +1,5 @@
 <header class="main-header">
-        <a href="{{Url()}}" class="logo"><b>PIASS</b>Student</a>
+        <a href="{{Url()}}" class="logo"><b>{!! $company !!} </b> </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
