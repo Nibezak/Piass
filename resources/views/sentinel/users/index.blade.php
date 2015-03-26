@@ -2,7 +2,10 @@
 
 {{-- Web site Title --}}
 @section('title')
-Current Users
+Current Users 
+@stop
+@section('description')
+Click here for <a href="{!! route('sentinel.groups.index') !!}" class="btn btn-success">User groups</a>
 @stop
 
 {{-- Content --}}

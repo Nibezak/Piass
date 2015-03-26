@@ -29,9 +29,10 @@ Edit Group
                 {!! Form::label('edit_memberships', 'Permissions') !!}  
                 <?php $defaultPermissions = config('sentinel.default_permissions', []); ?>
                 @foreach ($defaultPermissions as $permission)
+
                     <div class="small-10 small-offset-2 columns">
                        <input name="permissions[{!! $permission !!}]" value="1" type="checkbox" {!! (isset($permissions[$permission]) ? 'checked' : '') !!}>
-                       {!! ucwords($permission) !!}
+                       {!! ucwords(str_replace('.', ' ', $permission)) !!}
                     </div>
                 @endforeach
             

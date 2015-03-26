@@ -120,6 +120,13 @@
                 <i class="fa fa-cogs"></i> <span>Settings</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu" style="display: block;">
+              <li class="{{(Request::is('settings*') ? 'active' : '')}} treeview">
+              <a href="{{Url()}}/settings">
+                <i class="fa fa-exchange"></i>
+                <span>General</span>
+              </a>
+              
+            </li>
                 <li class="{{(Request::is('settings.faculities*') ? 'active' : '')}} ">
                   <a href="{!! route('settings.faculities.index') !!}"><i class="fa fa-caret-right"></i> Faculities</a>
                 </li>

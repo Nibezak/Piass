@@ -37,7 +37,7 @@
                     <!-- text input -->
 
                    <div class="box-footer" style="display:none" id="button">
-                    {!! Form::submit($button, ['class'=>'btn btn-success']) !!}
+                    {!! Form::submit($button, ['class'=>'btn btn-success','onclick'=>'Are you sure you want to register this modules to '.$student->name.' ? this action cannot be undone']) !!}
                   </div>
             
                 </div><!-- /.box-body -->

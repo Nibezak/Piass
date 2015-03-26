@@ -34,7 +34,7 @@ Create Group
                         @if (Input::old('permissions[' . $permission .']'))
                             checked
                         @endif        
-                        > {{ ucwords($permission) }}
+                        >   {!! ucwords(str_replace('.', ' ', $permission)) !!}
                    
                 @endforeach
             </div>
