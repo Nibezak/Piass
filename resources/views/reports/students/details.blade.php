@@ -13,7 +13,7 @@ Student details report
 			@include('reports.students.filter')
 	{!! Form::close() !!}
 	
-	 @include('reports.students.table')
+	 {!! $table !!}
 	</div>
 	
 	 <div class="col-md-3">

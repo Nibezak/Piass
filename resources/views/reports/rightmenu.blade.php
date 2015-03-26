@@ -7,7 +7,8 @@
                 </div><!-- /.box-header -->
                 <div class="box-body" style="display: block;">
                   <ul class="products-list product-list-in-box">
-                  <li><a href="{!! Request::url() !!}/{!! isset($_SERVER['HTTP_GET_VARS ']) ?'&':'?' !!}export=1" class="btn btn-sm btn-success"> <i class="fa fa-excel-o"> </i>Export </a></li>
+
+                  <li><a href="{!! URL::full() !!}/{!! strpos(URL::full(),'?') ?'&':'?' !!}export=1" class="btn btn-sm btn-success"> <i class="fa fa-excel-o"> </i> Export </a></li>
                     <li>
                      
                         <a href="{!! route('reports.students.details') !!}" class="product-title">Students details </a>

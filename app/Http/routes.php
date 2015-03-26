@@ -1,4 +1,13 @@
 <?php
+Route::get('/test', function()
+	{
+		$data = (new App\Models\Reports)->studentDetails()->lists('names','department');
+		$headers = is_array($data[0]) ? array_keys($data[0]) :array_keys($data);
+		$table = new App\Helpers\HtmlTable;
+		$table->set_heading($headers);
+
+		return $table->generate($data);
+	});
 /*
 |--------------------------------------------------------------------------
 | Home routes
