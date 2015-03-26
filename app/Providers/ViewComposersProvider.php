@@ -67,7 +67,7 @@ class ViewComposersProvider extends ServiceProvider {
 	private function partialsComposer()
 	{
 		
-		view()->composer(['partials.header', 'layouts.default'],'App\Http\Composers\ViewComposer@companyName');
+		view()->composer(['partials.header', 'layouts.default','sentinel.sessions.login'],'App\Http\Composers\ViewComposer@companyName');
 	}
 
 

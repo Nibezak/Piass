@@ -26,8 +26,8 @@
   <body class="login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="{{Url()}}" class="logo"><b>PIASS</b> Students</a>
-      </div><!-- /.login-logo -->
+{        <a href="{{Url()}}" class="logo"><b>{!! '' !!}</b> </a>
+      }      </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to continue</p>
 
