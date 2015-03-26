@@ -62,7 +62,7 @@ return [
     */
 
     'default_permissions' => ['admin','users','file.upload','file.delete',
-                              'student.create' ,'student.delete','student.view','student.update',
+                              'student.create' ,'student.delete','student.view','student.update','student.fees',
                               'module.create' ,'module.delete','module.view','module.update',
                               'department.create' ,'department.delete','department.view','department.update',
                               'faculity.create' ,'faculity.delete','faculity.view','faculity.update',

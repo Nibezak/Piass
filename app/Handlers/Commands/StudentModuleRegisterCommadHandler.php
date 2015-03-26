@@ -34,12 +34,18 @@ class StudentModuleRegisterCommadHandler {
 
 		$modules = (array) json_decode($command->modules);
 
+		// Check if the student is full time
+		$modeOfStudy	= 	($this->student->findOrFail($command->student_id)->mode_of_study == 'Full time');
+	
 		$debitAmount = 0;
 
 		foreach ($modules as $moduleId => $credits) 
     	{
 
 			$module = $this->module->findOrFail($moduleId)->toArray();
+
+			// if it's Full Time then use fixed price
+			$module['credit_cost'] = $modeOfStudy ? 3000 : $$module['credit_cost'];
 
 			$module['credits'] 		= 	(int) $credits; // Change the credits first
 
@@ -54,7 +60,7 @@ class StudentModuleRegisterCommadHandler {
 
 
 			// If a module added then increase student debit amount
-			$studentModule=$this->studentModule->findOrCreate($module);
+			$studentModule=$this->studentModule->create($module);
 
 			if($studentModule)
 			{
