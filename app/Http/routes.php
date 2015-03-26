@@ -47,7 +47,7 @@ Route::get('departments/{departmentid}/level/{levelid}',['as' =>'departments.lev
 
 Route::group(['prefix'=>'settings'],function()
 	{
-		Route::resource('faculities','faculityController');
+		Route::resource('faculities','FaculityController');
 
 		Route::resource('departments','DepartmentController');
 
