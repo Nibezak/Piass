@@ -210,7 +210,10 @@ class DepartmentController extends Controller {
 
 	public function apiModules(ApiRequest $request,$departmentId,$level)
 	{
-		$modules = $this->department->findOrFail((int) $departmentId)->modules->where('department_level',(int) $level);
+
+		$modules = $this->department->findOrFail($departmentId)->modules;
+	
+		$modules = $modules->where('department_level',$level);
 
 		return response()->json($modules);
 	}
