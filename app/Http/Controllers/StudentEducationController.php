@@ -2,21 +2,25 @@
 
 use Redirect,Flash;
 use App\Http\Requests;
+
 use App\Http\Requests\EducationRegisterRequest;
 use App\Http\Controllers\Controller;
 use App\Models\StudentEducation;
+use App\Models\Student;
 
 use Illuminate\Http\Request;
 
 class StudentEducationController extends Controller {
    	
    	private $education; 
+   	private $student;
 
-	function __construct(StudentEducation $education) 
+	function __construct(StudentEducation $education,Student $student) 
 	{
 		parent::__construct();
 
-		$this->education = $education;
+		$this->education 	= $education;
+		$this->student 		= $student;
 	}
 
 	
@@ -26,7 +30,7 @@ class StudentEducationController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update(EducationRegisterRequest $request)
+	public function update(EducationRegisterRequest $request,$id)
 	{
 		// First check if the user has the permission to do this
 		if (!$this->user->hasAccess('student.update')) 
