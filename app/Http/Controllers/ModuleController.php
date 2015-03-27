@@ -189,9 +189,19 @@ class ModuleController extends Controller {
 
 	    $module = $this->module->findOrFail($id);
 
-		$module->update((array) $request->all());
+	    // //Check if this module has students before removing it
+     //    //If it has students then tell user to remove those students firsts
+      
+     //    if(!$module->modules->isEmpty())
+     //    {
+     //    	Flash::error('The module you are trying to delete has students, Please remove those students firsts..');
+             
+     //        return redirect()->back();
+     //    }
 
-		Flash::success('Module '.$request->name. ' was updated successfully.');
+        $module->delete();
+        
+		Flash::success('Module was deleted successfully.');
 
 		return Redirect::route('modules.index');
 	}

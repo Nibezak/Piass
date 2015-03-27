@@ -8,14 +8,18 @@ Home
 
 {{-- Content --}}
 @section('content')
-
 	<?php
+
 	    // Determine the edit profile route
-	    if (($user->email == Sentry::getUser()->email)) {
+	    if (($user->email == Sentry::getUser()->email) ) 
+	    {
 	        $editAction = route('sentinel.profile.edit');
-	    } else {
+	    } 
+	    else 
+	    {
 	        $editAction =  route('sentinel.users.edit', [$user->hash]);
 	    }
+
 	?>
 
 	<h4>Account Profile</h4>

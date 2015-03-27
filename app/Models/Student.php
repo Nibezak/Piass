@@ -21,6 +21,8 @@ class Student extends Model {
 							'session',
 							'registration_number',
 							'campus',
+							'created_by',
+							'updated_by',
 							'department_id'
 	];
 

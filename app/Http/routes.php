@@ -1,10 +1,15 @@
 <?php
+Route::get('/test', function()
+	{
+		$Faculity 	= App\Models\Faculity::find(2);
+		dd($Faculity->departments->isEmpty());
+	});
 /*
 |--------------------------------------------------------------------------
 | Home routes
 |--------------------------------------------------------------------------
 */
-	Route::get('/', ['as'=>'home','before'=>'Sentinel\hasAccess:user','uses'=>'DashboardController@index']);
+	Route::get('/', ['as'=>'home','middleware'=>'sentry.auth','uses'=>'DashboardController@index']);
 	Route::get('/dashboard', ['as'=>'dashboard','uses'=>'DashboardController@index']);
 
 /*
@@ -47,7 +52,7 @@ Route::get('departments/{departmentid}/level/{levelid}',['as' =>'departments.lev
 
 Route::group(['prefix'=>'settings'],function()
 	{
-		Route::resource('faculities','faculityController');
+		Route::resource('faculities','FaculityController');
 
 		Route::resource('departments','DepartmentController');
 
@@ -62,7 +67,7 @@ Route::group(['prefix'=>'settings'],function()
 | Student reports routes
 |--------------------------------------------------------------------------
 */
-Route::group(['prefix'=>'reports'],function()
+Route::group(['prefix'=>'reports','middleware'=>'sentry.auth'],function()
 {
 	Route::get('/','ReportController@index');
 

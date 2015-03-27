@@ -18,9 +18,7 @@ class CreateFilesTable extends Migration {
 			
 			$table->string('name');
 			$table->integer('student_id');
-			$table->foreign('student_id')->references('id')->on('students')->onDelete('CASCADE');
-
-			$table->timestamps();
+		    $table->timestamps();
 		});
 	}
 

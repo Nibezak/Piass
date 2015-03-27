@@ -3,6 +3,11 @@
 use Input,Excel,Flash;
 use App\Http\Requests;
 use App\Models\Student;
+use App\Models\Faculity;
+use App\Models\Department;
+use App\Models\Module;
+use App\Models\Reports;
+
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -10,12 +15,20 @@ use Illuminate\Http\Request;
 class ReportStudentController extends Controller {
 
 	private $student;
+	private $faculity;
+	private $department;
+	private $module;
+	private $reports;
 
-	function __construct(Student $student) 
+	function __construct(Student $student,Faculity $faculity,Department $department,Module $module,Reports $reports) 
 	{
 		parent::__construct();
 
-		$this->student = $student;
+		$this->student 		= 	$student;
+		$this->faculity 	=	$faculity;
+		$this->department 	= 	$department;
+		$this->module 		= 	$module;
+		$this->reports 		= 	$reports;
 	}
 
 	/**
@@ -33,23 +46,18 @@ class ReportStudentController extends Controller {
              return redirect()->back();
 		}
 
-		$faculity 		= Input::get('faculity');
-		$department 	= Input::get('department');
-		$level 			= Input::get('level');
-		$module 		= Input::get('module');
+		// Get information
+		$students 	= $this->studentDetails();
 
-		$students = $this->student->studentList($faculity,$department,$level,$module);
-		
-		if(Input::get('export'))
-		{
-			$filename = 'students'.implode('_', Input::all());
+		// Do we have to export the results ?
+		Input::get('export')?$this->export('students_details',$students) : null ;
 
-			$this->export($filename,$this->transformStudentDetails($students,$level));
-		
-		}
+		//Get html table
+		$table 		= $this->htmlTable($students);
 
-		return view('reports.students.details',compact('students'));
+		$header 	= '<i class="fa fa-graduation-cap"></i> <span>Students detailed report</span>';
 
+		return view('reports.students.details',compact('table','header'));
 		
 	}
 
@@ -68,24 +76,21 @@ class ReportStudentController extends Controller {
              return redirect()->back();
 		}
 		
-		$faculity 		= Input::get('faculity');
-		$department 	= Input::get('department');
-		$level 			= Input::get('level');
-		$module 		= Input::get('module');
+		// Get information
+		$students 	= $this->studentDetails();
 
-		$students = $this->student->studentList($faculity,$department,$level,$module);
-		
-		$students = $this->transformPaymentProgress($students,$level);
+		// Do we have to export the results ?
+		Input::get('export')?$this->export('students_with_payment_details',$students) : null ;
 
-		if(Input::get('export'))
-		{
-			$filename = 'studentsPaymentProgress'.implode('_', Input::all());
+		//Swap the keys to match the report fields
+		$students 	= $this->getStudentPaymentsArray($students);
 
-			$this->export($filename,$students );
-		
-		}
+		$header 	= '<i class="fa fa-credit-card"></i> <span>Students payements progress </span>';
 
-		return view('reports.students.paymentprogression',compact('students'));
+		//Get html table
+		$table 		= $this->htmlTable($students);
+
+		return view('reports.students.details',compact('table','header'));
 		
 	}
 
@@ -105,25 +110,20 @@ class ReportStudentController extends Controller {
              return redirect()->back();
 		}
 
-		$faculity 		= Input::get('faculity');
-		$department 	= Input::get('department');
-		$level 			= Input::get('level');
-		$module 		= Input::get('module');
+		// Get information by passing true so that we get thos who paid
+		$students 	= $this->studentDetails(true);
 
-		$students = $this->student->studentList($faculity,$department,$level,$module);
+		// Do we have to export the results ?
+		Input::get('export')?$this->export('full_paid_students',$students) : null ;
 
-		$students = $this->transformPaidStudent($students,$level);
+		//Swap the keys to match the report fields
+		$students 	= $this->getStudentPaymentsArray($students);
 
-		if(Input::get('export'))
-		{
-			$filename = 'FullPaidStudents'.implode('_', Input::all());
+		$header 	= '<i class="fa fa-usd"></i><i class="fa fa-graduation-cap"></i> <span>Students who paid all fees </span>';
+		//Get html table
+		$table 		= $this->htmlTable($students);
 
-			$this->export($filename,$students);
-		
-		}
-
-		return view('reports.students.paymentfull',compact('students'));
-		
+		return view('reports.students.details',compact('table','header'));
 	}
 
 	/**
@@ -134,31 +134,29 @@ class ReportStudentController extends Controller {
 	public function pendingPayment()
 	{
 		// First check if the user has the permission to do this
-		if (!$this->user->hasAccess('report.student.payment.pending')) 
+		if (!$this->user->hasAccess('report.student.payment.panding')) 
 		{			
 			 Flash::error(trans('Sentinel::users.noaccess'));
              
              return redirect()->back();
 		}
 
-		$faculity 		= Input::get('faculity');
-		$department 	= Input::get('department');
-		$level 			= Input::get('level');
-		$module 		= Input::get('module');
-
-		$students = $this->student->studentList($faculity,$department,$level,$module);
-
-		$students = $this->transformNotPaidStudent($students,$level);
-
-		if(Input::get('export'))
-		{
-			$filename = 'PendingPaymentStudents'.implode('_', Input::all());
-
-			$this->export($filename,$students);
 		
-		}
+		// Get information by passing true so that we get thos who paid
+		$students 	= $this->studentDetails(false);
 
-		return view('reports.students.paymentpending',compact('students'));
+		// Do we have to export the results ?
+		Input::get('export')?$this->export('students_with_pending_fees',$students) : null ;
+
+		//Swap the keys to match the report fields
+		$students 	= $this->getStudentPaymentsArray($students);
+		
+		$header 	= '<i class="fa fa-usd"></i><i class="fa fa-graduation-cap"></i> <span>Students who has pending fees </span>';
+		
+		//Get html table
+		$table 		= $this->htmlTable($students);
+
+		return view('reports.students.details',compact('table','header'));;
 		
 	}
 	/**
@@ -184,218 +182,69 @@ class ReportStudentController extends Controller {
 	}
 
 	/**
-	 * Get the student details
-	 * 
-	 * @param  students
-	 * 
-	 * @return array
-	 */
-	private function transformStudentDetails($students,$level=0)
+	 * This method will help us to get all student related information from V_STUDENTS_REPORT VIEW
+	 */ 
+	private function studentDetails($status=null)
 	{
-		$studentModel = $this->student;
 
-		return array_map(function($student) use ($studentModel,$level)
-			{
-				// If the level matchin ? otherwise go to the next record
+		$faculity 		= !Input::get('faculity')? false :	$this->faculity->findOrFail(Input::get('faculity'))->name;	
+		$department 	= !Input::get('department')? false:	$this->department->findOrFail(Input::get('department'))->name;
+		$level 			= (int) Input::get('level');
+		$module 		= !Input::get('module')?	false :	$this->module->findOrFail(Input::get('module'))->name;
 
-				if($level!=0 && $studentModel->find($student['id'])):
-             		
-             		return [];
-           		
-           		endif;
-				
-				return [
-						'Names'           		=> $student['names'],
-						'Date of Birth'    		=> date('Y-m-d',strtotime($student['DOB'])),
-						'Gender'          		=> $student['gender'],
-						'Martial status'  		=> $student['martial_status'],
-						'NID'             		=> $student['NID'],
-						'Telephone'       		=> $student['telephone'],
-						'Email'           		=> $student['email'],
-						'Occupation'      		=> $student['occupation'],
-						'Residence'       		=> $student['residence'],
-						'Nationality'     		=> $student['nationality'],
-						'Father name'     		=> $student['father_name'],
-						'Mother name'     		=> $student['mother_name'],
-						'Mode of study'	 		=> $student['mode_of_study'],
-						'Session' 				=> $student['session'],
-						'Registration number'	=> $student['registration_number'],
-						'Campus' 				=> $student['campus'],
-						'Faculity'			    => $studentModel->find($student['id'])->department->faculity->name,
-						'Department'			=> $studentModel->find($student['id'])->department->name,
-						'Class / Level'			=> $studentModel->find($student['id'])->level(),
-						
-						];
-
-			}, $students->toArray());
+	  return	$students = $this->reports->studentDetails($faculity,$department,$level,$module,$status)->get()->toArray();
+		
 	}
 
 	/**
-	 * Get the student who paid
-	 * 
-	 * @param  students
-	 * 
-	 * @return array
+	 * Generate HTML table
 	 */
-	private function transformPaidStudent($students,$level = 0)
+	private function htmlTable($students)
 	{
-		$studentModel = $this->student;
+	    // Try to get arrays headers
+	    $headers = array_keys($students);
+	    
+	    //if it is multidimensions get sub array keys
+	    
+	    if (isset($students[0]))
+	    {
+	    	$headers = array_keys($students[0]) ;
+	    }
 
-		return array_map(function($student) use ($studentModel,$level)
-			{
-				// If the level matching ? otherwise go to the next record
+		$table = new \App\Helpers\HtmlTable;
 
-				if($level!=0 && $studentModel->find($student['id'])->level()!=$level):
-             		
-             		return [];
-           		
-           		endif;
-                // Check if there is pending amount that are not yet paid
+		$table->set_heading($headers);
 
-				if ($studentModel->find($student['id'])->balance() > 0)
-				 {
-					return [];
-				 }
-				return [
-						'Names'           		=> $student['names'],
-						'Date of Birth'    		=> date('Y-m-d',strtotime($student['DOB'])),
-						'Gender'          		=> $student['gender'],
-						'Martial status'  		=> $student['martial_status'],
-						'NID'             		=> $student['NID'],
-						'Telephone'       		=> $student['telephone'],
-						'Email'           		=> $student['email'],
-						'Occupation'      		=> $student['occupation'],
-						'Residence'       		=> $student['residence'],
-						'Nationality'     		=> $student['nationality'],
-						'Father name'     		=> $student['father_name'],
-						'Mother name'     		=> $student['mother_name'],
-						'Mode of study'	 		=> $student['mode_of_study'],
-						'Session' 				=> $student['session'],
-						'Registration number'	=> $student['registration_number'],
-						'Campus' 				=> $student['campus'],
-						'Amount to pay'			=> $studentModel->find($student['id'])->totalDebitAmount(),
-						'Amount Paid so far'	=> $studentModel->find($student['id'])->totalCreditAmount(),	
-						'balance'				=> $studentModel->find($student['id'])->balance(),
-						'Payment progresss'		=> round($severity=$studentModel->find($student['id'])->totalCreditAmount() * 100 / $studentModel->find($student['id'])->totalDebitAmount()).'%',
-						'severity'				=> $severity<50 ?'red':'green',
-						'Faculity'			    => $studentModel->find($student['id'])->department->faculity->name,
-						'Department'			=> $studentModel->find($student['id'])->department->name,
-						'Class / Level'			=> $studentModel->find($student['id'])->level(),
-						
-						];
-
-			}, $students->toArray());
+	   return	$table = $table->generate($students);
 	}
 
 	/**
-	 * Get the student who paid
-	 * 
-	 * @param  students
-	 * 
-	 * @return array
+	 * Get the array key 
 	 */
-	private function transformPaymentProgress($students,$level=0)
+	
+	private function getStudentPaymentsArray($students)
 	{
-		$studentModel = $this->student;
-
-		return array_map(function($student) use ($studentModel,$level)
+	return array_map(function($student)
 			{
-				//Check if the level is matching otherwise go to the next record
+			$progress = ($student['debit']>0) ? round(($student['credit']*100)/$student['debit']):0;
 
-				if($level!=0 && $studentModel->find($student['id'])->level()!=$level()):
-             		
-             		return [];
-           		
-           		endif;
-
-				return [
-						'Names'           		=> $student['names'],
-						'Date of Birth'    		=> date('Y-m-d',strtotime($student['DOB'])),
-						'Gender'          		=> $student['gender'],
-						'Martial status'  		=> $student['martial_status'],
-						'NID'             		=> $student['NID'],
-						'Telephone'       		=> $student['telephone'],
-						'Email'           		=> $student['email'],
-						'Occupation'      		=> $student['occupation'],
-						'Residence'       		=> $student['residence'],
-						'Nationality'     		=> $student['nationality'],
-						'Father name'     		=> $student['father_name'],
-						'Mother name'     		=> $student['mother_name'],
-						'Mode of study'	 		=> $student['mode_of_study'],
-						'Session' 				=> $student['session'],
-						'Registration number'	=> $student['registration_number'],
-						'Campus' 				=> $student['campus'],
-						'Amount to pay'			=> $studentModel->find($student['id'])->totalDebitAmount(),
-						'Amount Paid so far'	=> $studentModel->find($student['id'])->totalCreditAmount(),	
-						'balance'				=> $studentModel->find($student['id'])->balance(),
-						'Payment progresss'		=> round($severity=$studentModel->find($student['id'])->totalCreditAmount() * 100 / $studentModel->find($student['id'])->totalDebitAmount()).'%',
-						'severity'				=> $severity<50 ?'red':'green',
-						'Faculity'			    => $studentModel->find($student['id'])->department->faculity->name,
-						'Department'			=> $studentModel->find($student['id'])->department->name,
-						'Class / Level'			=> $studentModel->find($student['id'])->level(),
-						
-						];
-
-			}, $students->toArray());
-	}
-
-
-	/**
-	 * Get the student who paid
-	 * 
-	 * @param  students
-	 * 
-	 * @return array
-	 */
-	private function transformNotPaidStudent($students,$level=0)
-	{
-		$studentModel = $this->student;
-
-		return array_map(function($student) use ($studentModel,$level)
-			{
-				// if the level is different from what was provided then go to the next record
-
-				if($level!=0 && $studentModel->find($student['id'])->level()!=$level()):
-             		
-             		return [];
-           		
-           		endif;
-
-           		// Check if there is pending amount that are not yet paid
-
-				if ($studentModel->find($student['id'])->balance() <= 0)
-				 {
-					return [];
-				 }
+			$severity = ($progress < 50 ) ? 'red' : 'green';
 
 			return [
-						'Names'           		=> $student['names'],
-						'Date of Birth'    		=> date('Y-m-d',strtotime($student['DOB'])),
-						'Gender'          		=> $student['gender'],
-						'Martial status'  		=> $student['martial_status'],
-						'NID'             		=> $student['NID'],
-						'Telephone'       		=> $student['telephone'],
-						'Email'           		=> $student['email'],
-						'Occupation'      		=> $student['occupation'],
-						'Residence'       		=> $student['residence'],
-						'Nationality'     		=> $student['nationality'],
-						'Father name'     		=> $student['father_name'],
-						'Mother name'     		=> $student['mother_name'],
-						'Mode of study'	 		=> $student['mode_of_study'],
-						'Session' 				=> $student['session'],
-						'Registration number'	=> $student['registration_number'],
-						'Campus' 				=> $student['campus'],
-						'Amount to pay'			=> $studentModel->find($student['id'])->totalDebitAmount(),
-						'Amount Paid so far'	=> $studentModel->find($student['id'])->totalCreditAmount(),	
-						'balance'				=> $studentModel->find($student['id'])->balance(),
-						'Payment progresss'		=> round($severity=$studentModel->find($student['id'])->totalCreditAmount() * 100 / $studentModel->find($student['id'])->totalDebitAmount()).'%',
-						'severity'				=> $severity<50 ?'red':'green',
-						'Faculity'			    => $studentModel->find($student['id'])->department->faculity->name,
-						'Department'			=> $studentModel->find($student['id'])->department->name,
-						'Class / Level'			=> $studentModel->find($student['id'])->level(),
-						
-						];
-
-			}, $students->toArray());
+			    'Names'					=>	$student['names'], 
+			    'Gender'				=>	$student['gender'], 
+			    'telephone'				=>	$student['telephone'], 
+			    'email'					=>	$student['email'], 
+			    'occupation'			=>	$student['occupation'], 
+			    'Mode'					=>	$student['mode_of_study'], 
+			    'Session'				=>	$student['session'], 
+			    'Reg #'					=>	$student['registration_number'],
+			    'Debit'					=>	(float) $student['debit'],
+			    'Credit'				=>	(float) $student['credit'],
+			    'Balance'				=>	(float) $student['balance'],
+			    'Progression'			=>	'<div class="progress progress-xs progress-striped active"><div class="progress-bar progress-bar-'.$severity.' " style="width:'.$progress.'%">
+			    							</div></div><span class="badge bg-'.$severity.'">'.$progress.'%</span>' 
+	    		];
+		}, $students);
 	}
 }

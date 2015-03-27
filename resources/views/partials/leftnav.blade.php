@@ -109,17 +109,27 @@
                 <span>Reports</span> 
               </a>
             </li>   
-             <li class="{{(Request::is('users*') ? 'active' : '')}} treeview">
-              <a href="/users">
-                <i class="fa fa-users"></i> 
-                <span>users</span> 
-              </a>
-            </li>  
+           
+            @if (Sentry::check() && Sentry::getUser()->hasAccess('admin'))
+            <li {{ (Request::is('users*') ? 'class="active treeview"' : ' treeview') }}>
+              <a href="{{ route('sentinel.users.index') }}"> <i class="fa fa-user"></i>Users</a>
+            </li>
+            <li {{ (Request::is('groups*') ? 'class="active treeview"' : ' treeview') }}>
+              <a href="{{ route('sentinel.groups.index') }}"> <i class="fa fa-users"></i>User  Groups</a>
+            </li>
+           @endif 
             <li class="{{(Request::is('settings*') ? 'active' : '')}} treeview">
               <a href="#">
                 <i class="fa fa-cogs"></i> <span>Settings</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu" style="display: block;">
+              <li class="{{(Request::is('settings*') ? 'active' : '')}} treeview">
+              <a href="{{Url()}}/settings">
+                <i class="fa fa-exchange"></i>
+                <span>General</span>
+              </a>
+              
+            </li>
                 <li class="{{(Request::is('settings.faculities*') ? 'active' : '')}} ">
                   <a href="{!! route('settings.faculities.index') !!}"><i class="fa fa-caret-right"></i> Faculities</a>
                 </li>

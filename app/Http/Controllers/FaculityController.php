@@ -155,6 +155,17 @@ class FaculityController extends Controller {
              return redirect()->back();
 		}
 
+        //Check if this faculity has department before removing it
+        //If it has departments then tell user to remove those department firsts
+        $faculity = $this->faculity->findOrFail($id);
+
+        if(!$faculity->departments->isEmpty())
+        {
+        	Flash::error('The faculity you are trying to delete has departments, Please remove those departments first.');
+             
+            return redirect()->back();
+        }
+
 		if($this->faculity->destroy($id))
 		{
 			Flash::success(' The faculity was deleted successfully !');

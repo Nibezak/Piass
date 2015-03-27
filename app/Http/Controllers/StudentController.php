@@ -132,8 +132,9 @@ class StudentController extends Controller {
 		$student = Student::findOrFail($id);
 
 		// Prepare data 
-		$studentData 	= (array) $request->all();
-		$studentData['DOB']	= date('Y-m-d h:i:s',strtotime($request->DOB));
+		$studentData 				= (array) $request->all();
+		$studentData['DOB']			= date('Y-m-d h:i:s',strtotime($request->DOB));
+		$studentData['updated_by']	= \Sentry::getUser()->id;
 		
 		$student->update($studentData);
 

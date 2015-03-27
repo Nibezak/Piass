@@ -22,7 +22,7 @@
          @foreach ($settings as $key => $value)
          
                   <tr>
-                    <th>{!! $key !!} </th>
+                    <th>{!! ucfirst(str_replace('_', ' ', $key)) !!} </th>
                     <th> 
                   {!! Form::text($key, $value, ['class'=>'form-control']) !!}
                     </th>

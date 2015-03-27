@@ -5,6 +5,9 @@
 @parent
 Groups
 @stop
+@section('description')
+Click here for <a href="{!! route('sentinel.users.index') !!}" class="btn btn-success">Users</a>
+@stop
 
 {{-- Content --}}
 @section('content')
@@ -15,7 +18,7 @@ Groups
 		<h1>Available Groups</h1>
 	</div>
 	<div class="col-md-6 columns right">
-		<button class="button" onClick="location.href='{{ route('sentinel.groups.create') }}'">New Group</button>
+		<button class="btn btn-primary" onClick="location.href='{{ route('sentinel.groups.create') }}'">New Group</button>
 	</div>
 </div>
 
@@ -43,8 +46,8 @@ Groups
 					@endforeach
 				</td>
 				<td>
-					<button class="button small" onClick="location.href='{{ route('sentinel.groups.edit', array($group->hash)) }}'">Edit</button>
-				 	<button class="button small action_confirm {{ ($group->hash == 2) ? 'disabled' : '' }}" type="button" data-token="{{ Session::getToken() }}" data-method="delete" href="{{ route('sentinel.groups.destroy', [$group->hash]) }}">Delete</button>
+					<button class="btn btn-warning pull-left" onClick="location.href='{{ route('sentinel.groups.edit', array($group->hash)) }}'">Edit</button>
+				 	<button class="btn btn-danger action_confirm {{ ($group->hash == 2) ? 'disabled' : '' }}" type="button" data-token="{{ Session::getToken() }}" data-method="delete" href="{{ route('sentinel.groups.destroy', [$group->hash]) }}">Delete</button>
 				 </td>
 			</tr>	
 		@endforeach

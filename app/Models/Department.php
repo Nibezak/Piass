@@ -14,6 +14,16 @@ class Department extends Model {
 	{
 		return $this->belongsTo('App\Models\Faculity');
 	}
+    
+    /**
+	 * Student Department
+	 * 
+	 * @return mixed
+	 */
+	public function students()
+	{
+		return $this->hasMany('App\Models\Student');
+	}
 
 	/**
 	 * Relationship with module Model

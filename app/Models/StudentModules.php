@@ -31,14 +31,12 @@ class StudentModules extends Model {
 // Modelname::findOrCreate($id);
 public static function findOrCreate($data)
 {
-    $model = (bool) static::where(['student_id'    =>  $data['student_id'],
-                            'module_id'      => $data['module_id'],
-                            ])
-                    ->get()->count();
+    //Check if the existing 
+    $model = (bool) static::findOrFail($data['student_id']);
 
     $data['user_id']    = \Sentry::getUser()->id;
 
-    return $model ? false : static::create($data);
+    return $model ? : static::create($data);
 }
 
 }

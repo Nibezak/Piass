@@ -11,7 +11,7 @@ return array(
 	 * If the json store is used, give the full path to the .json file
 	 * that the store writes to.
 	 */
-	'path' => storage_path().'/app/settings.json',
+	'path' => base_path().'/config/settings.json',
 
 	/**
 	 * If the database store is used, give the name of the database

@@ -62,7 +62,7 @@ return [
     */
 
     'default_permissions' => ['admin','users','file.upload','file.delete',
-                              'student.create' ,'student.delete','student.view','student.update',
+                              'student.create' ,'student.delete','student.view','student.update','student.fees',
                               'module.create' ,'module.delete','module.view','module.update',
                               'department.create' ,'department.delete','department.view','department.update',
                               'faculity.create' ,'faculity.delete','faculity.view','faculity.update',
@@ -129,7 +129,7 @@ return [
 
     'routing' => [
         'session_store'                => ['route' => 'home'],
-        'session_destroy'              => ['action' => 'Sentinel\SessionController@create'],
+        'session_destroy'              => ['action' => '\Sentinel\Controllers\SessionController@create'],
         'registration_complete'        => ['route' => 'home'],
         'registration_activated'       => ['route' => 'home'],
         'registration_resend'          => ['route' => 'home'],

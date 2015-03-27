@@ -3,16 +3,7 @@
                   <h3 class="box-title"> {!! $student->names !!}'s fees transactions</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <div class="btn-group">
-                      <button class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i></button>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                      </ul>
-                    </div>
+               
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                   </div>
                 </div><!-- /.box-header -->
@@ -36,12 +27,13 @@
 				 
 				 <?php  $debit=0; $credit= 0;?>
 					@foreach($student->fees as $fee)
+					<?php $debit+=$fee->debit; $credit+=$fee->credit ?>
 					<tr>
 					  <td> {!! $fee->payslip_number !!}</td>
 					  <td> {!! date('Y-m-d',strtotime($fee->date)) !!}</td>
 					  <td> {!! $fee->description !!}</td>
-					  <td> {!! $debit+=$fee->debit !!}</td>
-					  <td> {!! $credit+=$fee->credit !!}</td>
+					  <td> {!! $fee->debit !!}</td>
+					  <td> {!! $fee->credit !!}</td>
 					  <td> {!! $fee->balance !!}</td>
 					</tr>
 					@endforeach

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -25,10 +24,17 @@
   </head>
   <body class="login-page">
     <div class="login-box">
-      <div class="login-logo">
-        <a href="{{Url()}}" class="logo"><b>PIASS</b> Students</a>
-      </div><!-- /.login-logo -->
+      
       <div class="login-box-body">
+      <div class="login-logo">
+        <a href="{{Url()}}" class="logo">
+          <img src="{!! Url() !!}/assets/dist/img/logo.gif" alt="">
+        </a>
+       </div><!-- /.login-logo -->
+       <!-- Notifications -->
+  @include('Sentinel::layouts/notifications')
+  <!-- ./ notifications -->
+
         <p class="login-box-msg">Sign in to continue</p>
 
        <form method="POST" action="{{ route('sentinel.session.store') }}" accept-charset="UTF-8">
@@ -47,15 +53,14 @@
                   <input name="rememberMe" value="rememberMe" type="checkbox">
                 Remember Me
                 </label>
-              </div>                        
+
+              </div>  
+                        <a href="{{ route('sentinel.forgot.form') }}">Forgot Password</a>                      
             </div><!-- /.col -->
             <div class="col-xs-4">
               <input class="btn btn-primary  btn-block btn-flat" value="Sign In" type="submit">
             </div><!-- /.col -->
-              <div class="small-10 small-offset-2 columns">
-                <input name="_token" value="{{ csrf_token() }}" type="hidden">
-                <a class="button secondary" href="{{ route('sentinel.forgot.form') }}">Forgot Password</a>
-            </div>
+    
           </div>
 
         </form>
