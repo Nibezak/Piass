@@ -29,3 +29,7 @@
   {!! Form::submit('Search', ['class' => 'form-control btn btn-success']) !!}
 
 </div>
+<div class="col-md-2 pull-left">
+{!! Form::label('search', ' ') !!}
+<a href="{!! URL::full() !!}{!! strpos(URL::full(),'?') ?'&':'/?' !!}export=1" class="form-control btn btn-success"> <i class="fa fa-file-excel-o"> </i> Export </a>
+</div>

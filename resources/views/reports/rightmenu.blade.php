@@ -1,14 +1,13 @@
-<div class="box box-primary">
+<div class="box box-primary collapsed-box">
                 <div class="box-header with-border">
                   <h3 class="box-title">Available reports</h3>
                   <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="collapse">
+                    <i class="fa fa-plus"></i></button>
                     </div>
                 </div><!-- /.box-header -->
-                <div class="box-body" style="display: block;">
+                <div class="box-body" style="display: none;">
                   <ul class="products-list product-list-in-box">
-
-                  <li><a href="{!! URL::full() !!}/{!! strpos(URL::full(),'?') ?'&':'?' !!}export=1" class="btn btn-sm btn-success"> <i class="fa fa-excel-o"> </i> Export </a></li>
                     <li>
                      
                         <a href="{!! route('reports.students.details') !!}" class="product-title">Students details </a>

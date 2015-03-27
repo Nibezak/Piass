@@ -311,7 +311,7 @@ class HtmlTable {
 		// Is there anything to display? No? Smite them!
 		if (empty($this->heading) && empty($this->rows))
 		{
-			return 'Undefined table data';
+			return 'Not data available';
 		}
 
 		// Compile and validate the template date
