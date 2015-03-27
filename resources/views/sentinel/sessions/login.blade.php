@@ -49,12 +49,14 @@
                   <input name="rememberMe" value="rememberMe" type="checkbox">
                 Remember Me
                 </label>
-              </div>                        
+
+              </div>  
+                        <a href="{{ route('sentinel.forgot.form') }}">Forgot Password</a>                      
             </div><!-- /.col -->
             <div class="col-xs-4">
               <input class="btn btn-primary  btn-block btn-flat" value="Sign In" type="submit">
             </div><!-- /.col -->
-             
+    
           </div>
 
         </form>
