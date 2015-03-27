@@ -157,6 +157,15 @@ class DepartmentController extends Controller {
 		}
 
 		$department = $this->department->findOrFail($id);
+	    //Check if this department has module before removing it
+        //If it has modules then tell user to remove those modules firsts
+      
+        if(!$department->modules->isEmpty() || !$department->students->isEmpty())
+        {
+        	Flash::error('The department you are trying to delete has some modules or Students under it, Please remove those modules before removing it.');
+             
+            return redirect()->back();
+        }
 
 		$department->delete();
 

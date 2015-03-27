@@ -2,7 +2,10 @@
               <!-- general form elements disabled -->
               <div class="box box-warning">
                 <div class="box-header">
-                  <h3 class="box-title" style="font-weight:600">Faculity of {!! $student->department->faculity->name !!}, department of  {!! $student->department->name !!} </h3>
+                  <h3 class="box-title" style="font-weight:600">Faculity of 
+                  {!! isset($student->department->faculity)?$student->department->faculity->name:'Not Available' !!}, 
+                  department of  {!! isset($student->department->faculity)?$student->department->name:'Not Available' !!} </h3>
+
                   <h4>Mode of study: <em>{!! $student->mode_of_study !!}</em> Session: <em>{!! $student->session !!}</em> </h4>
                   
                 </div><!-- /.box-header -->
