@@ -18,8 +18,8 @@ Student details report
 	</div>
 
 	
-	
+	<div class="box-body no-padding">
 	 {!! $table !!}
-	 
+	</div>
 	</div>
 @stop

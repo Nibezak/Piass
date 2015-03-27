@@ -52,7 +52,7 @@ class ReportStudentController extends Controller {
 		$table 		= $this->htmlTable($students);
 
 		// Do we have to export the results ?
-		Input::get('export')?$this->export('students_pending payments',$students) : null ;
+		Input::get('export')?$this->export('students_details',$students) : null ;
 
 		return view('reports.students.details',compact('table'));
 		
@@ -66,20 +66,24 @@ class ReportStudentController extends Controller {
 	public function paymentProgression()
 	{
 		// First check if the user has the permission to do this
-		if (!$this->user->hasAccess('report.student.details')) 
+		if (!$this->user->hasAccess('report.student.payment.progress')) 
 		{			
 			 Flash::error(trans('Sentinel::users.noaccess'));
              
              return redirect()->back();
 		}
-
 		
 		// Get information
 		$students 	= $this->studentDetails();
 
-		$table 		= $this->htmlTable($students);
 		// Do we have to export the results ?
-		Input::get('export')?$this->export('students_pending payments',$students) : null ;
+		Input::get('export')?$this->export('students_with_payment_details',$students) : null ;
+
+		//Swap the keys to match the report fields
+		$students 	= $this->getStudentPaymentsArray($students);
+
+		//Get html table
+		$table 		= $this->htmlTable($students);
 
 		return view('reports.students.details',compact('table'));
 		
@@ -101,15 +105,19 @@ class ReportStudentController extends Controller {
              return redirect()->back();
 		}
 
-		
-		// Get information
-		$students 	= $this->studentDetails();
+		// Get information by passing true so that we get thos who paid
+		$students 	= $this->studentDetails(true);
 
-		$table 		= $this->htmlTable($students);
 		// Do we have to export the results ?
-		Input::get('export')?$this->export('students_pending payments',$students) : null ;
+		Input::get('export')?$this->export('full_paid_students',$students) : null ;
 
-		return view('reports.students.details',compact('table'));	
+		//Swap the keys to match the report fields
+		$students 	= $this->getStudentPaymentsArray($students);
+		
+		//Get html table
+		$table 		= $this->htmlTable($students);
+
+		return view('reports.students.details',compact('table'));
 	}
 
 	/**
@@ -128,14 +136,19 @@ class ReportStudentController extends Controller {
 		}
 
 		
-		// Get information
-		$students 	= $this->studentDetails();
+		// Get information by passing true so that we get thos who paid
+		$students 	= $this->studentDetails(false);
 
-		$table 		= $this->htmlTable($students);
 		// Do we have to export the results ?
-		Input::get('export')?$this->export('students_pending payments',$students) : null ;
+		Input::get('export')?$this->export('students_with_pending_fees',$students) : null ;
+
+		//Swap the keys to match the report fields
+		$students 	= $this->getStudentPaymentsArray($students);
 		
-		return view('reports.students.details',compact('table'));
+		//Get html table
+		$table 		= $this->htmlTable($students);
+
+		return view('reports.students.details',compact('table'));;
 		
 	}
 	/**
@@ -163,7 +176,7 @@ class ReportStudentController extends Controller {
 	/**
 	 * This method will help us to get all student related information from V_STUDENTS_REPORT VIEW
 	 */ 
-	private function studentDetails()
+	private function studentDetails($status=null)
 	{
 
 		$faculity 		= !Input::get('faculity')? false :	$this->faculity->findOrFail(Input::get('faculity'))->name;	
@@ -171,10 +184,13 @@ class ReportStudentController extends Controller {
 		$level 			= (int) Input::get('level');
 		$module 		= !Input::get('module')?	false :	$this->module->findOrFail(Input::get('module'))->name;
 
-	  return	$students = $this->reports->studentDetails($faculity,$department,$level,$module)->get()->toArray();
+	  return	$students = $this->reports->studentDetails($faculity,$department,$level,$module,$status)->get()->toArray();
 		
 	}
 
+	/**
+	 * Generate HTML table
+	 */
 	private function htmlTable($students)
 	{
 	    // Try to get arrays headers
@@ -189,7 +205,36 @@ class ReportStudentController extends Controller {
 
 		$table = new \App\Helpers\HtmlTable;
 
-		// $table->set_heading($headers);
+		$table->set_heading($headers);
+
 	   return	$table = $table->generate($students);
+	}
+
+	/**
+	 * Get the array key 
+	 */
+	
+	private function getStudentPaymentsArray($students)
+	{
+	return array_map(function($student)
+			{
+			return [
+			    'Names'					=>	$student['names'], 
+			    'Gender'				=>	$student['gender'], 
+			    'telephone'				=>	$student['telephone'], 
+			    'email'					=>	$student['email'], 
+			    'occupation'			=>	$student['occupation'], 
+			    'residence'				=>	$student['residence'], 
+			    'nationality'			=>	$student['nationality'], 
+			    'Father name '			=>	$student['father_name'], 
+			    'Mother name'			=>	$student['mother_name'], 
+			    'Mode of Study'			=>	$student['mode_of_study'], 
+			    'Session'				=>	$student['session'], 
+			    'Reg #'					=>	$student['registration_number'],
+			    'Debit'					=>	(float) $student['debit'],
+			    'Credit'				=>	(float) $student['credit'],
+			    'Balance'				=>	(float) $student['balance'] 
+	    		];
+		}, $students);
 	}
 }
