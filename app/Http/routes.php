@@ -13,7 +13,7 @@ Route::get('/test', function()
 | Home routes
 |--------------------------------------------------------------------------
 */
-	Route::get('/', ['as'=>'home','before'=>'Sentinel\hasAccess:user','uses'=>'DashboardController@index']);
+	Route::get('/', ['as'=>'home','middleware'=>'sentry.auth','uses'=>'DashboardController@index']);
 	Route::get('/dashboard', ['as'=>'dashboard','uses'=>'DashboardController@index']);
 
 /*
@@ -71,7 +71,7 @@ Route::group(['prefix'=>'settings'],function()
 | Student reports routes
 |--------------------------------------------------------------------------
 */
-Route::group(['prefix'=>'reports'],function()
+Route::group(['prefix'=>'reports','middleware'=>'sentry.auth'],function()
 {
 	Route::get('/','ReportController@index');
 

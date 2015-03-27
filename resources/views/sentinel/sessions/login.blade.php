@@ -52,10 +52,7 @@
             <div class="col-xs-4">
               <input class="btn btn-primary  btn-block btn-flat" value="Sign In" type="submit">
             </div><!-- /.col -->
-              <div class="small-10 small-offset-2 columns">
-                <input name="_token" value="{{ csrf_token() }}" type="hidden">
-                <a class="button secondary" href="{{ route('sentinel.forgot.form') }}">Forgot Password</a>
-            </div>
+             
           </div>
 
         </form>
