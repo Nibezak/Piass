@@ -1,5 +1,7 @@
 <header class="main-header">
-        <a href="{{Url()}}" class="logo"><b>{!! $company !!} </b> </a>
+        <a href="{{Url()}}" class="logo"> 
+        <img src="{!! Url() !!}/assets/dist/img/logo.gif" width="22%" >
+        <b>{!! $company !!} </b> </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->

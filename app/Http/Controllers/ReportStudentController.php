@@ -155,7 +155,7 @@ class ReportStudentController extends Controller {
 	public function pendingPayment()
 	{
 		// First check if the user has the permission to do this
-		if (!$this->user->hasAccess('report.student.payment.pending')) 
+		if (!$this->user->hasAccess('report.student.payment.panding')) 
 		{			
 			 Flash::error(trans('Sentinel::users.noaccess'));
              

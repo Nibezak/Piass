@@ -25,10 +25,13 @@
   </head>
   <body class="login-page">
     <div class="login-box">
-      <div class="login-logo">
-{        <a href="{{Url()}}" class="logo"><b>{!! '' !!}</b> </a>
-      }      </div><!-- /.login-logo -->
+      
       <div class="login-box-body">
+      <div class="login-logo">
+        <a href="{{Url()}}" class="logo">
+          <img src="{!! Url() !!}/assets/dist/img/logo.gif" alt="">
+        </a>
+       </div><!-- /.login-logo -->
         <p class="login-box-msg">Sign in to continue</p>
 
        <form method="POST" action="{{ route('sentinel.session.store') }}" accept-charset="UTF-8">
