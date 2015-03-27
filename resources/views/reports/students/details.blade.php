@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('title')
-Student details report  
+{!! $header !!}  
 @stop
 @section('description')
 @include('reports.rightmenu')

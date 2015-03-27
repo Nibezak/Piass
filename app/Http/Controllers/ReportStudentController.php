@@ -48,13 +48,16 @@ class ReportStudentController extends Controller {
 
 		// Get information
 		$students 	= $this->studentDetails();
-		//Get html table
-		$table 		= $this->htmlTable($students);
 
 		// Do we have to export the results ?
 		Input::get('export')?$this->export('students_details',$students) : null ;
 
-		return view('reports.students.details',compact('table'));
+		//Get html table
+		$table 		= $this->htmlTable($students);
+
+		$header 	= '<i class="fa fa-graduation-cap"></i> <span>Students detailed report</span>';
+
+		return view('reports.students.details',compact('table','header'));
 		
 	}
 
@@ -82,10 +85,12 @@ class ReportStudentController extends Controller {
 		//Swap the keys to match the report fields
 		$students 	= $this->getStudentPaymentsArray($students);
 
+		$header 	= '<i class="fa fa-credit-card"></i> <span>Students payements progress </span>';
+
 		//Get html table
 		$table 		= $this->htmlTable($students);
 
-		return view('reports.students.details',compact('table'));
+		return view('reports.students.details',compact('table','header'));
 		
 	}
 
@@ -113,11 +118,12 @@ class ReportStudentController extends Controller {
 
 		//Swap the keys to match the report fields
 		$students 	= $this->getStudentPaymentsArray($students);
-		
+
+		$header 	= '<i class="fa fa-usd"></i><i class="fa fa-graduation-cap"></i> <span>Students who paid all fees </span>';
 		//Get html table
 		$table 		= $this->htmlTable($students);
 
-		return view('reports.students.details',compact('table'));
+		return view('reports.students.details',compact('table','header'));
 	}
 
 	/**
@@ -145,10 +151,12 @@ class ReportStudentController extends Controller {
 		//Swap the keys to match the report fields
 		$students 	= $this->getStudentPaymentsArray($students);
 		
+		$header 	= '<i class="fa fa-usd"></i><i class="fa fa-graduation-cap"></i> <span>Students who has pending fees </span>';
+		
 		//Get html table
 		$table 		= $this->htmlTable($students);
 
-		return view('reports.students.details',compact('table'));;
+		return view('reports.students.details',compact('table','header'));;
 		
 	}
 	/**
@@ -218,22 +226,24 @@ class ReportStudentController extends Controller {
 	{
 	return array_map(function($student)
 			{
+			$progress = ($student['debit']>0) ? round(($student['credit']*100)/$student['debit']):0;
+
+			$severity = ($progress < 50 ) ? 'red' : 'green';
+
 			return [
 			    'Names'					=>	$student['names'], 
 			    'Gender'				=>	$student['gender'], 
 			    'telephone'				=>	$student['telephone'], 
 			    'email'					=>	$student['email'], 
 			    'occupation'			=>	$student['occupation'], 
-			    'residence'				=>	$student['residence'], 
-			    'nationality'			=>	$student['nationality'], 
-			    'Father name '			=>	$student['father_name'], 
-			    'Mother name'			=>	$student['mother_name'], 
-			    'Mode of Study'			=>	$student['mode_of_study'], 
+			    'Mode'					=>	$student['mode_of_study'], 
 			    'Session'				=>	$student['session'], 
 			    'Reg #'					=>	$student['registration_number'],
 			    'Debit'					=>	(float) $student['debit'],
 			    'Credit'				=>	(float) $student['credit'],
-			    'Balance'				=>	(float) $student['balance'] 
+			    'Balance'				=>	(float) $student['balance'],
+			    'Progression'			=>	'<div class="progress progress-xs progress-striped active"><div class="progress-bar progress-bar-'.$severity.' " style="width:'.$progress.'%">
+			    							</div></div><span class="badge bg-'.$severity.'">'.$progress.'%</span>' 
 	    		];
 		}, $students);
 	}
