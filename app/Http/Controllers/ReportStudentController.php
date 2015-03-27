@@ -55,7 +55,7 @@ class ReportStudentController extends Controller {
 		$students = $this->reports->studentDetails($faculity,$department,$level,$module)->get()->toArray();
 
 		// Prepare HTML TABLE
-		$headers = is_array($students[0]) ? array_keys($students[0]) :array_keys($students);
+		$headers = is_array(isset($students[0]) && $students[0]) ? array_keys($students[0]) :array_keys($students);
 
 		$table = new \App\Helpers\HtmlTable;
 		$table->set_heading($headers);

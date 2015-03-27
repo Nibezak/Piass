@@ -15,19 +15,14 @@
   
  </div>
   
-<div  id="department_level" class="col-md-1 pull-left">
+<div  id="department_level" class="col-md-2 pull-left">
    {!! Form::label('level', 'Level') !!}
 
    {!! Form::select('level',['Select department first'],null ,
                    ['class'=>'form-control','id'=>'departmentlevel']) !!}
 </div>
 
-<div  class="col-md-3 pull-left">
-   {!! Form::label('Module', 'Module') !!}
 
-   {!! Form::select('module',['Select level first'],null ,
-                   ['class'=>'form-control','id'=>'moduleslist']) !!}
-</div>
 
 <div class="col-md-2 pull-left">
 {!! Form::label('search', ' ') !!}
