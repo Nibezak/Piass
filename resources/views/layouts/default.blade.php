@@ -47,7 +47,12 @@
         <!-- Content Header (Page header) -->
           @include('partials.contentHeader')
 
+          <!-- Notifications -->
+          @include('Sentinel::layouts.notifications')
+          <!-- ./ notifications -->
+
           @include('partials.notification')
+
         <!-- Main content -->
         <section class="content">
           

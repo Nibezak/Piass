@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>PIASS Student</title>
+    <title> Forgot your Password? </title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
        <!-- Bootstrap 3.3.2 -->
     <link href="{{Url()}}/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -26,6 +26,10 @@
     <div class="login-box">
       
       <div class="login-box-body">
+      <!-- Notifications -->
+  @include('Sentinel::layouts/notifications')
+  <!-- ./ notifications -->
+
 <form method="POST" action="{{ route('sentinel.reset.request') }}" accept-charset="UTF-8">
     <input name="_token" value="{{ csrf_token() }}" type="hidden">
     

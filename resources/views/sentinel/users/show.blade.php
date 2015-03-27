@@ -8,7 +8,6 @@ Home
 
 {{-- Content --}}
 @section('content')
-
 	<?php
 
 	    // Determine the edit profile route

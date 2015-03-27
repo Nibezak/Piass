@@ -31,6 +31,10 @@
           <img src="{!! Url() !!}/assets/dist/img/logo.gif" alt="">
         </a>
        </div><!-- /.login-logo -->
+       <!-- Notifications -->
+  @include('Sentinel::layouts/notifications')
+  <!-- ./ notifications -->
+
         <p class="login-box-msg">Sign in to continue</p>
 
        <form method="POST" action="{{ route('sentinel.session.store') }}" accept-charset="UTF-8">
