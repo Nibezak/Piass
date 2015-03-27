@@ -21,7 +21,7 @@ class AddMoreFieldsToStudentsTable extends Migration {
 			$table->string('campus');
 			$table->integer('department_id');
 			$table->integer('created_by');
-			$tablle->integer('updated_by');
+			$table->integer('updated_by');
 		});
 	}
 
