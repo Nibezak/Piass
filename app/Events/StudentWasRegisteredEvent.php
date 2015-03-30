@@ -2,6 +2,7 @@
 
 use App\Events\Event;
 use App\Models\Student;
+use App\Repositories\FeeTransactionRepository;
 use Illuminate\Queue\SerializesModels;
 
 class StudentWasRegisteredEvent extends Event {
@@ -10,6 +11,7 @@ class StudentWasRegisteredEvent extends Event {
 
 	public $student;
 	public $id;
+	protected $feetransaction;
 	/**
 	 * Create a new event instance.
 	 *
@@ -20,5 +22,7 @@ class StudentWasRegisteredEvent extends Event {
 		$this->student = $student;
 
 		$this->id = $student->id;
+
+		$this->feetransaction = FeeTransactionRepository::registerTransaction($student);
 	}
 }
