@@ -58,6 +58,8 @@ class StudentModuleRegisterCommadHandler {
 
 			$module['module_id']	=	(int) $module['id'];
 
+			$module['academic_year']=	$module['academic_year'];
+
 			//Remove unecessary indixes so that we may remove the confusion
 			unset($module['id'],$module['created_at'],$module['updated_at']);
 			//Who did this transaction ?

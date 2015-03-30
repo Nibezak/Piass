@@ -6,7 +6,7 @@ class StudentModules extends Model {
 
 	// Defining Mass asignment
 	
-  protected $fillable = ['student_id','module_id','user_id','name','code','credits','credit_cost','amount','department_level'];
+  protected $fillable = ['student_id','academic_year','module_id','user_id','name','code','credits','credit_cost','amount','department_level'];
 
   /**
    * Defining relations with the Student model
@@ -38,5 +38,23 @@ public static function findOrCreate($data)
 
     return $model ? : static::create($data);
 }
+  
+  /**
+   * Get academic years
+   */
+  public static function getAcademicYears()
+  {
+    $current_year = (int) date('Y');
 
+    $academicYears  = [];
+
+    for ($year=2008; $year <= $current_year+1 ; $year++) 
+    { 
+      $index = ((string)  $year-1).'-'.((string) $year); 
+
+      $academicYears[ $index] =  $index;
+    }
+
+    return $academicYears;
+  }
 }

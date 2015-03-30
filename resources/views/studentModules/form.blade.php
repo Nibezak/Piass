@@ -18,15 +18,19 @@
                        {!! $errors->first('faculity','<label class="has-error">:message</label>') !!} 
                     </div>
  --}}
-                     <div id="department_section" >
+                      <div id="department_section" >
                        {!! Form::label('Departments', 'Department') !!}
                         
                        {!! Form::select('department',$departments,$student->department_id, 
                                        ['class'=>'form-control','id'=>'departments','disabled'=>true]) !!}
                       </select>
-                      
-                     </div>
-                      
+                      </div>
+                      <div  >
+                       {!! Form::label('academic_year', 'Academic year') !!}
+                        
+                       {!! Form::select('academic_year',$academicYears,((string)date('Y')).'-'.((string)date('Y')+1),['class'=>'form-control','id'=>'academic_year']) !!}
+                      </select>
+                      </div>
                     <div  id="department_level" style="display:none;">
                        {!! Form::label('level', 'Choose level') !!}
                         
