@@ -72,6 +72,7 @@ class DepartmentController extends Controller {
 	 */
 	public function store(DepartmentRegisterRequest $request)
 	{
+		dd($request->all());
 		// First check if the user has the permission to do this
 		if (!$this->user->hasAccess('department.create')) 
 		{			

@@ -14,7 +14,7 @@ class AddAcademicYearToStudentModule extends Migration {
 	{
 		Schema::table('student_modules', function(Blueprint $table)
 		{
-			$table->string('academic_year',7);			
+			$table->string('academic_year',9);			
 		});
 	}
 

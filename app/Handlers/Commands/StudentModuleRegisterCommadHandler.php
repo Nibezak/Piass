@@ -31,7 +31,6 @@ class StudentModuleRegisterCommadHandler {
 	public function handle(StudentModuleRegisterCommad $command)
 	{
 		/** Ensure that the module injected is an array  */
-
 		$modules = (array) json_decode($command->modules);
 
 		// Check if the student is full time
@@ -58,7 +57,7 @@ class StudentModuleRegisterCommadHandler {
 
 			$module['module_id']	=	(int) $module['id'];
 
-			$module['academic_year']=	$module['academic_year'];
+			$module['academic_year']=	$command->academic_year;
 
 			//Remove unecessary indixes so that we may remove the confusion
 			unset($module['id'],$module['created_at'],$module['updated_at']);
