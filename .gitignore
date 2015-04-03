@@ -2,3 +2,4 @@
 .phpintel
 /vendor
 /node_modules
+.env

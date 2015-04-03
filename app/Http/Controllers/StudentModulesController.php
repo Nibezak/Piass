@@ -47,6 +47,7 @@ class StudentModulesController extends Controller {
 	 */
 	public function store(StudentModuleRegisterRequest $request)
 	{
+	
 		$StudentModules 	     	= (array) $request->all();
 		$StudentModules['modules'] 	=  $this->arraysMatchIndexes($request->get('ids'),$request->get('credits'));
 

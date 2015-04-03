@@ -3,6 +3,7 @@
 
 use App\Models\Faculity;
 use App\Models\Department;
+use App\Models\StudentModules;
 use anlutro\LaravelSettings\SettingStore as Settings;
 use Illuminate\Contracts\View\View;
 
@@ -37,5 +38,10 @@ class ViewComposer
 	public function companyName(View $view)
 	{
 		$view->with('company',$this->settings->get('Company_name'));
+	}
+
+	public function academicYears(View $view)
+	{
+		$view->with('academicYears',StudentModules::getAcademicYears());
 	}
 }
