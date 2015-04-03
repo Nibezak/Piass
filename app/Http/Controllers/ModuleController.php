@@ -163,8 +163,12 @@ class ModuleController extends Controller {
 		}
 
 		$module = $this->module->findOrFail($id);
+		
+		$modules = (array) $request->all();
+	
+		$modules['amount'] =	$request->credits*$request->credit_cost;
 
-		$module->update((array) $request->all());
+		$module->update($modules);
 
 		Flash::success('Module '.$request->name. ' was updated successfully.');
 
