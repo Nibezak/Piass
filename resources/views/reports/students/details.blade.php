@@ -18,7 +18,7 @@
 	</div>
 
 	
-	<div class="box-body no-padding">
+	<div class="box-body">
 	 {!! $table !!}
 	</div>
 	</div>

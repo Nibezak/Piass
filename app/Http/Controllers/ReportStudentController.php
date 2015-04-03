@@ -54,7 +54,7 @@ class ReportStudentController extends Controller {
 
 		//Get html table
 		$table 		= $this->htmlTable($students);
-
+	
 		$header 	= '<i class="fa fa-graduation-cap"></i> <span>Students detailed report</span>';
 
 		return view('reports.students.details',compact('table','header'));
