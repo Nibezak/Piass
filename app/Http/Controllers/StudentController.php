@@ -85,6 +85,7 @@ class StudentController extends Controller {
              
              return redirect()->back();
 		}
+		
 		$student = $this->dispatch(new StudentRegisterCommand($request))->student;
 
 		Flash::success('New student '.$student->names.' was registered successfully. ');

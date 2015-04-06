@@ -34,7 +34,7 @@ class StudentModulesController extends Controller {
              
              return redirect()->back();
 		}
-		$student = $this->student->findOrFail($id);
+
 		$student = $this->student->findOrFail($id);
 		
 		return view('studentModules.create',compact('student'));
