@@ -25,12 +25,18 @@
                                        ['class'=>'form-control','id'=>'departments','disabled'=>true]) !!}
                       </select>
                       </div>
-                      <div  >
+                      <div>
                        {!! Form::label('academic_year', 'Academic year') !!}
                         
                        {!! Form::select('academic_year',$academicYears,((string)date('Y')).'-'.((string)date('Y')+1),['class'=>'form-control','id'=>'academic_year']) !!}
                       </select>
                       </div>
+                      <div>
+                       {!! Form::label('intake', 'InTake') !!}
+                        
+                       {!! Form::select('intake',['June'=>'June','December'=>'December'],null,['class'=>'form-control','id'=>'intake']) !!}
+                      </select>
+                    </div>
                     <div  id="department_level" style="display:none;">
                        {!! Form::label('level', 'Choose level') !!}
                         
@@ -44,7 +50,7 @@
                     <!-- text input -->
 
                    <div class="box-footer" style="display:none" id="button">
-                    {!! Form::submit($button, ['class'=>'btn btn-success','onclick'=>'Are you sure you want to register this modules to '.$student->name.' ? this action cannot be undone']) !!}
+                    {!! Form::submit($button, ['class'=>'btn btn-success','onclick'=>'return confirm("Are you sure you want to register this modules to '.$student->name.'? this action cannot be undone")']) !!}
                   </div>
             
                 </div><!-- /.box-body -->

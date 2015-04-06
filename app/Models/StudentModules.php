@@ -6,7 +6,7 @@ class StudentModules extends Model {
 
 	// Defining Mass asignment
 	
-  protected $fillable = ['student_id','academic_year','module_id','user_id','name','code','credits','credit_cost','amount','department_level'];
+  protected $fillable = ['student_id','academic_year','intake','module_id','user_id','name','code','credits','credit_cost','amount','department_level'];
 
   /**
    * Defining relations with the Student model

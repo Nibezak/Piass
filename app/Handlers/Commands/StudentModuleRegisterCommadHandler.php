@@ -59,6 +59,8 @@ class StudentModuleRegisterCommadHandler {
 
 			$module['academic_year']=	$command->academic_year;
 
+			$module['intake']		=	$command->intake;
+			
 			//Remove unecessary indixes so that we may remove the confusion
 			unset($module['id'],$module['created_at'],$module['updated_at']);
 			//Who did this transaction ?
