@@ -20,7 +20,7 @@ class StudentRegisterCommandHandler {
 		// Prepare data before registering new student
 		$studentInfo 							= (array) $studentData;
 		$studentInfo['DOB']						= date('Y-m-d h:i:s',strtotime($studentData->DOB));
-		$studentInfo['registration_number'] 	= (!$studentInfo['registration_number'])?:$this->getRegistrationNumber();
+		$studentInfo['registration_number'] 	= $studentInfo['registration_number']?:$this->getRegistrationNumber();
 		$studentInfo['created_by'] 				= \Sentry::getUser()->id;
 		$student =  Student::create($studentInfo);
 		
