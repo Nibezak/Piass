@@ -22,8 +22,8 @@ class ModuleRegisterRequest extends Request {
 	public function rules()
 	{
 		return [
-			'name' =>'required|unique:modules',
-			'code' =>'required|unique:modules',
+			'name' =>'required',
+			'code' =>'required',
 			'credits' =>'required|numeric',
 			'credit_cost' => 'required|numeric'
 		];

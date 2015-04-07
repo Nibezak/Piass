@@ -1,9 +1,4 @@
 <?php
-Route::get('/test', function()
-	{
-		$Faculity 	= App\Models\Faculity::find(2);
-		dd($Faculity->departments->isEmpty());
-	});
 /*
 |--------------------------------------------------------------------------
 | Home routes
