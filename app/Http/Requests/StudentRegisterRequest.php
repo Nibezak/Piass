@@ -34,6 +34,7 @@ class StudentRegisterRequest extends Request {
 			'nationality'    =>'required',        
 			'father_name'    =>'alpha_spaces',        
 			'mother_name'    =>'alpha_spaces',
+			'registration_number' =>'unique:students',
 			'department_id'	 =>'required',        
 		];
 	}

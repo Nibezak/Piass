@@ -12,6 +12,12 @@
                   </div>
       <div class="col-xs-10 col-sm-10 "> <br>
                   <dl>
+                    <dt>Registration number <em style="font-size:12px;font-weight:100"></em>
+                      {!! $errors->first('registration_number','<em class="has-error">(:message)</em>') !!} 
+                    </dt>
+                    <dd class=" {{ ($errors->has('registration_number')) ? 'has-error' : '' }}">
+                     {!! Form::text('registration_number', $student->registration_number, ['class'=>'form-control','placeholder'=>'registration number ']) !!}
+                  </dd>
                     <dt>Residence <em style="font-size:12px;font-weight:100">(Sector, District...)</em>
                       {!! $errors->first('residence','<em class="has-error">(:message)</em>') !!} 
                     </dt>

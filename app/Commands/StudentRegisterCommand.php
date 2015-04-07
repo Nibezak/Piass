@@ -22,6 +22,7 @@ class StudentRegisterCommand extends Command {
    public $mode_of_study;
    public $session;
    public $campus;
+   public $registration_number;
 
 	public function __construct($student)
 	{
@@ -42,6 +43,7 @@ class StudentRegisterCommand extends Command {
         $this->session 			= $student->session;
         $this->campus			= $student->campus;
 		$this->department_id	= $student->department_id;
+		$this->registration_number 	= ($student->registration_number)?:false;
 	}
 
 
