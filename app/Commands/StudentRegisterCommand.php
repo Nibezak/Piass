@@ -26,7 +26,7 @@ class StudentRegisterCommand extends Command {
 
 	public function __construct($student)
 	{
-		
+		dd($student);
 		$this->names 			= $student->names;
 		$this->DOB 				= $student->DOB;
 		$this->gender 			= $student->gender;

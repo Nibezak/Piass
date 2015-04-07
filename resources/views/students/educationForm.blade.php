@@ -43,7 +43,7 @@
               </div>
               <div class="pull-right">
                       {!! Form::label('name', 'Grade',['style'=>'font-weight:200']) !!}
-                      {!! Form::select('grade[]', ['A'=>'A','B'=>'B','C'=>'C'],NULL,['class'=>'form-control']) !!}
+                      {!! Form::select('grade[]', ['A'=>'A','B'=>'B','C'=>'C','D'=>'D','E'=>'E'],NULL,['class'=>'form-control']) !!}
               </div>
 		   </td>
           </tr>
@@ -58,7 +58,7 @@
               </div>
               <div class="pull-right">
                       {!! Form::label('name', 'Grade',['style'=>'font-weight:200']) !!}
-                      {!! Form::select('grade[]', ['A'=>'A','B'=>'B','C'=>'C'], ($student->educations)?$student->educations->subjectsGrades()->grade1:NULL,['class'=>'form-control']) !!}
+                      {!! Form::select('grade[]', ['A'=>'A','B'=>'B','C'=>'C','D'=>'D','E'=>'E'], ($student->educations)?$student->educations->subjectsGrades()->grade1:NULL,['class'=>'form-control']) !!}
               </div>
 		   </td>
           </tr>
@@ -73,7 +73,7 @@
               </div>
               <div class="pull-right">
                       {!! Form::label('name', 'Grade',['style'=>'font-weight:200']) !!}
-                      {!! Form::select('grade[]', ['A'=>'A','B'=>'B','C'=>'C'], ($student->educations)?$student->educations->subjectsGrades()->grade3:NULL,['class'=>'form-control']) !!}
+                      {!! Form::select('grade[]', ['A'=>'A','B'=>'B','C'=>'C','D'=>'D','E'=>'E'], ($student->educations)?$student->educations->subjectsGrades()->grade3:NULL,['class'=>'form-control']) !!}
               </div>
 		   </td>
           </tr>
@@ -88,7 +88,7 @@
               </div>
               <div class="pull-right">
                       {!! Form::label('name', 'Grade',['style'=>'font-weight:200']) !!}
-                      {!! Form::select('grade[]', ['A'=>'A','B'=>'B','C'=>'C'], ($student->educations)?$student->educations->subjectsGrades()->grade4:NULL,['class'=>'form-control']) !!}
+                      {!! Form::select('grade[]', ['A'=>'A','B'=>'B','C'=>'C','D'=>'D','E'=>'E'], ($student->educations)?$student->educations->subjectsGrades()->grade4:NULL,['class'=>'form-control']) !!}
               </div>
 		   </td>
           </tr>
