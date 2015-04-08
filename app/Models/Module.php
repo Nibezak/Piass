@@ -14,5 +14,12 @@ class Module extends Model {
 	{
 		return $this->belongsToMany('App\Models\Department');
 	}
-
+	/**
+	 * Find or create a new 
+	 */ 
+	public static function findOrCreate($module)
+	{
+	    $obj = static::where(['name'=>$module['name'],'code'=>$module['code']])->first();
+	    return $obj->count() ?$obj: static::create($module);
+	}
 }

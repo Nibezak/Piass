@@ -22,10 +22,10 @@ class ModuleRegisterCommandHandler {
     private function save($command)
     {
     	$data = (array) $command;
-    	dd($data);
+
     	$data['amount'] = $command->credits * $command->credit_cost;
 
-    	$module = Module::create($data);
+    	$module = Module::findOrCreate($data);
 
   		$module->departments()->sync((array) $command->department_id);
 
