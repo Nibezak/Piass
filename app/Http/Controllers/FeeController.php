@@ -72,7 +72,7 @@ class FeeController extends Controller {
 
 		Flash::success('Student Fees has been recorded succesffully');
 
-		return Redirect::route('fees.index');
+		return Redirect::route('student.fees',$request->student_id);
 	}
 
 	/**
