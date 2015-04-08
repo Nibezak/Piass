@@ -44,7 +44,7 @@ class StudentModuleRegisterCommadHandler {
 			$module = $this->module->findOrFail($moduleId)->toArray();
 
 			// If the level is not configured for full time then choose default module cost
-			$level_fees =  \Setting::get('full_time_fees_level_'.$module['department_level']) ;
+			$level_fees =  \Setting::get('full_time_cost_per_credit_level_'.$module['department_level']) ;
 
 			// if it's Full Time then use fixed price
 			$module['credit_cost'] = $modeOfStudy ? $level_fees : $module['credit_cost'];
