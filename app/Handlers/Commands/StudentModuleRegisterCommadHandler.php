@@ -75,30 +75,45 @@ class StudentModuleRegisterCommadHandler {
 			}
 			
 		}
-		$this->saveFees($debitAmount,count($modules),$command->student_id,$academic_year,$intake,$fine_fees);
 		//Register Fee transactions if there is a module
 		if((bool) count($modules))
-		{
-			$this->saveFees($debitAmount,count($modules),$command->student_id,$academic_year,$intake,$fine_fees);
+		{		
+			$this->saveFees($debitAmount,count($modules),$command->student_id,$command->academic_year,$command->intake,$command->fine_fees);
 		}
 	}
 
     /** Debit the account of the student */
 	public function saveFees($debitAmount,$countModule,$student_id,$academic_year,$intake,$fine_fees=0)
 	{
-		$fine = ((float) $fine_fees >0) ? ' fine:'.$fine_fees.'.':'';
-
 		$studentFee['date'] 			= 	date('Y-m-d h:i:s');
 		$studentFee['credit'] 			= 	0;
-		$studentFee['description']		= 	'Registerd for '.$countModule. ' modules, Academic year :'.$academic_year.', intake:'.$intake.$fine;
+		$studentFee['description']		= 	'Registerd for '.$countModule. ' modules, Academic year :'.$academic_year.'.';
 		$studentFee['debit']  			= 	(float) $debitAmount;
 		$studentFee['done_by'] 			=	 \Sentry::getUser()->id;
 		$studentFee['student_id'] 		=	$student_id;
 		$studentFee['balance'] 			=	$this->newBalance($student_id,$debitAmount);
 
+		// If we have to charge fine, first record fine before continuing	
+		if((float) $fine_fees >0)
+		{
+			$this->registerFine($fine_fees,$student_id,$academic_year,$intake);
+		}
+
 		return $this->feeTransaction->create($studentFee);
 	}
 	
+	private function registerFine($fine_fees=0,$student_id,$academic_year,$intake)
+	{
+		$studentFee['date'] 			= 	date('Y-m-d h:i:s');
+		$studentFee['credit'] 			= 	0;
+		$studentFee['description']		= 	'Charged fine of :'.$fine_fees.' in Academic year:'.$academic_year.', intake:'.$intake.'.';
+		$studentFee['debit']  			= 	(float) $fine_fees;
+		$studentFee['done_by'] 			=	 \Sentry::getUser()->id;
+		$studentFee['student_id'] 		=	$student_id;
+		$studentFee['balance'] 			=	$this->newBalance($student_id,$fine_fees);
+
+		return $this->feeTransaction->create($studentFee);
+	}
 	/**
 	 * Determine new balance to be added in the fees table 
 	 * @param  integer $studentID ID of the student we are recording

@@ -60,7 +60,7 @@ class StudentModulesController extends Controller {
 
 		Flash::success("New modules added to the student ");
 
-		return Redirect::route('students.index');
+		return $this->registeredmodules($request->student_id);
 	}
 
 	public function registeredModules($studentId)

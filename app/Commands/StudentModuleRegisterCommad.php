@@ -17,7 +17,7 @@ class StudentModuleRegisterCommad extends Command  {
 	 	$this->modules 	  		= $request->modules;
 	 	$this->academic_year 	= $request->academic_year;
 	 	$this->intake			= $request->intake;
-	 	$this->fine_fees		= $request->fine_fees;
+	 	$this->fine_fees		= isset($request->fine_fees)?$request->fine_fees:0;
 	}
 
 
