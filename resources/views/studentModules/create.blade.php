@@ -16,7 +16,7 @@ Fill below fields details about the programme you want to register for  {!! $stu
 
 		    {!! Form::hidden('student_id', $student->id) !!}
 
-			@include('studentModules.form',['button'=>'Register Level'])
+			@include('studentModules.form',['button'=>'Register modules'])
 		
 		{!! Form::close() !!}
 @stop

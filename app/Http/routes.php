@@ -4,7 +4,7 @@
 | Home routes
 |--------------------------------------------------------------------------
 */
-	Route::get('/', ['as'=>'home','middleware'=>'sentry.auth','uses'=>'DashboardController@index']);
+	Route::get('/', ['as'=>'home','uses'=>'DashboardController@index']);
 	Route::get('/dashboard', ['as'=>'dashboard','uses'=>'DashboardController@index']);
 
 /*
@@ -42,7 +42,7 @@ Route::resource('files','FileController');
 |--------------------------------------------------------------------------
 */
 Route::resource('modules','ModuleController');
-Route::get('modules/{id}/create/{level}',['as'=>'modules.department.create','middleware'=>'sentry.auth','uses'=>'ModuleController@create']);
+Route::get('modules/{id}/create/{level}',['as'=>'modules.department.create','uses'=>'ModuleController@create']);
 Route::get('departments/{departmentid}/level/{levelid}',['as' =>'departments.levels','middleware'=>'sentry.auth','uses' =>'ModuleController@levelModules']);
 
 Route::group(['prefix'=>'settings'],function()
@@ -62,7 +62,7 @@ Route::group(['prefix'=>'settings'],function()
 | Student reports routes
 |--------------------------------------------------------------------------
 */
-Route::group(['prefix'=>'reports','middleware'=>'sentry.auth'],function()
+Route::group(['prefix'=>'reports'],function()
 {
 	Route::get('/','ReportController@index');
 

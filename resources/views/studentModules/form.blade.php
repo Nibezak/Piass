@@ -37,6 +37,7 @@
                        {!! Form::select('intake',['March'=>'March','September'=>'September'],null,['class'=>'form-control','id'=>'intake']) !!}
                       </select>
                     </div>
+                     
                     <div  id="department_level" style="display:none;">
                        {!! Form::label('level', 'Choose level') !!}
                         
@@ -50,7 +51,13 @@
                     <!-- text input -->
 
                    <div class="box-footer" style="display:none" id="button">
-                    {!! Form::submit($button, ['class'=>'btn btn-success','onclick'=>'return confirm("Are you sure you want to register this modules to '.$student->name.'? this action cannot be undone")']) !!}
+                     <div class="alert " style="border:1px solid #f39c12">
+                       {!! Form::checkbox('fine_fees', Setting::get('fine_fees'), null) !!}
+                      Charge fine of {!! Setting::get('fine_fees') !!} Rwf
+                     </div>
+                    {!! Form::submit($button, ['class'=>'btn btn-lg btn-success','onclick'=>'return confirm("Are you sure you want to register this modules to '.$student->name.'? this action cannot be undone")','style'=>'width:100%']) !!}
+
+                  
                   </div>
             
                 </div><!-- /.box-body -->
