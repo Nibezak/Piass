@@ -7,6 +7,10 @@
         						<th>Department </th>
         						<th>Level </th>
         						<th>InTake </th>
+                    <th>Mode of Study</th>
+                    <th>Debit</th>
+                    <th>Credit</th>
+                    <th>Balance</th>
         						<th><i class="fa fa-gear"></i> </th>
                     </tr>
 					@foreach($students as $student)
@@ -18,6 +22,10 @@
                       <td>{{ $student->department->name }}</td>
                       <td>{{ $student->level() }}</td>
                       <td>{{ $student->inTake() }}</td>
+                      <td>{{ $student->mode_of_study }}</td>
+                      <td>{{ number_format($student->totalDebitAmount()) }}</td>
+                      <td>{{ number_format($student->totalCreditAmount()) }}</td>
+                      <td>{{ number_format($student->balance()) }}</td>
                       <td>
                       <a href="{{route('student.fees',$student->id)}}" class="btn btn-sm btn-info"><i class="fa fa-exchange">Transactions</i>
                       </a>
