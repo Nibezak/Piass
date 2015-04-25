@@ -173,10 +173,12 @@ class Student extends Model {
 	{
 
     return $query->where("names","like","%$keyword%")
-  				 ->orWhere('father_name','like',"$keyword%")
-  				 ->orWhere('mother_name','like',"%keyword%");
+  				 ->orWhere('registration_number','=',$keyword);
 	}
 
+	/**
+	 * Get student lists
+	 */
 	public static function studentList($faculityId=false,$departmentId=false,$level=false,$moduleId=false)
 	{
 		return static::whereHas('department', function($query) use ($faculityId,$departmentId)
