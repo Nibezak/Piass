@@ -26,6 +26,7 @@ class Student extends Model {
 							'department_id'
 	];
 
+	protected	$dates = ['DOB'];
 	/**
 	 * Student Department
 	 * 
@@ -46,19 +47,49 @@ class Student extends Model {
 		return $this->hasMany('App\Models\StudentModules');
 	}
 
-	/** 
-	 * RelattionShip with the registered Module
-	 * 
-	 * @return [type]
+	/**
+	 *	Get current level of the student
+	 * 	@return mixed
 	 */
 	public function level()
 	{
-		return $this->registeredModules()->max('department_level');
+		// return 0 if we can't find level
+
+		if(! $level = $this->registeredModules()->max('department_level') )
+		{
+			return 'N/A' ;
+		}
+
+		return $level;
 	}
-	
-	/** 
-	 * Relationship with the edication history model 
-	 * 
+
+	/**
+	 * Get current inTake of the student
+	 * @return [type]
+	 */
+	public function inTake()
+	{
+		// Get latest registered module
+
+		$latestModule = $this->registeredModules()
+					 		 ->orderBy('created_at','DESC')
+					   		 ->take(1)
+					   		 ->get();
+
+		// Do we have any registered module ?
+		$inTake = isset($latestModule[0]) ? $latestModule[0]->intake : false;
+
+		if(!$inTake)
+		{
+			return 'N/A' ;
+		}
+
+		return $inTake;
+	}
+
+	/**
+	 * Relationship with the edication history model
+	 *
 	 * @return mixed
 	 */
 	public function educations()

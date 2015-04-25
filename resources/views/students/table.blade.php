@@ -2,25 +2,26 @@
                   <table class="table table-striped">
                     <tbody><tr>
         						<th>names </th>
-        						<th>Date of Birth </th>
-        						<th>Gender </th>
+        						<th>Reg #</th>
+        						<th>Campus </th>
         						<th>Department </th>
-        						<th>Phone </th>
-        						<th>E-Mail </th>
+        						<th>Level </th>
+        						<th>InTake </th>
         						<th><i class="fa fa-gear"></i> </th>
                     </tr>
 					@foreach($students as $student)
+      
                     <tr>
                       <td>{{ $student->names }}</td>
-                      <td>{{ date('d-M-Y',strtotime($student->DOB ))}}</td>
-                      <td>{{ $student->gender }}</td>
+                      <td>{{ $student->registration_number }}</td>
+                      <td>{{ $student->campus }}</td>
                       <td>{{ $student->department->name }}</td>
-                      <td>{{ $student->telephone }}</td>
-                      <td>{{ $student->email }}</td>
+                      <td>{{ $student->level() }}</td>
+                      <td>{{ $student->inTake() }}</td>
                       <td>
-                      <a href="{{route('student.fees',$student->id)}}" class="btn btn-sm btn-info"><i class="fa fa-exchange">Transactions</i>      
+                      <a href="{{route('student.fees',$student->id)}}" class="btn btn-sm btn-info"><i class="fa fa-exchange">Transactions</i>
                       </a>
-                      <a href="{{route('students.modules.show',$student->id)}}" class="btn btn-sm btn-success"><i class="fa fa-book">Modules</i>      
+                      <a href="{{route('students.modules.show',$student->id)}}" class="btn btn-sm btn-success"><i class="fa fa-book">Modules</i>
                       </a>
                         <a href="{{route('fees.show',$student->id)}}" class="btn btn-sm btn-warning"><i class="fa fa-money"></i>
                           Payment
