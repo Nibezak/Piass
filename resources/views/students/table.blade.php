@@ -4,6 +4,7 @@
         						<th>names </th>
         						<th>Reg #</th>
         						<th>Campus </th>
+                    <th>Faculity </th>
         						<th>Department </th>
         						<th>Level </th>
         						<th>InTake </th>
@@ -19,6 +20,7 @@
                       <td>{{ $student->names }}</td>
                       <td>{{ $student->registration_number }}</td>
                       <td>{{ $student->campus }}</td>
+                      <td>{{ $student->department->faculity->name }}</td>
                       <td>{{ $student->department->name }}</td>
                       <td>{{ $student->level() }}</td>
                       <td>{{ $student->inTake() }}</td>
