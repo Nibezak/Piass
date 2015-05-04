@@ -78,16 +78,16 @@ class StudentModuleRegisterCommadHandler {
 		//Register Fee transactions if there is a module
 		if((bool) count($modules))
 		{		
-			$this->saveFees($debitAmount,count($modules),$command->student_id,$command->academic_year,$command->intake,$command->fine_fees);
+			$this->saveFees($debitAmount,count($modules),$command->student_id,$command->academic_year,$command->intake,$command->fine_fees,$module['department_level']);
 		}
 	}
 
     /** Debit the account of the student */
-	public function saveFees($debitAmount,$countModule,$student_id,$academic_year,$intake,$fine_fees=0)
+	public function saveFees($debitAmount,$countModule,$student_id,$academic_year,$intake,$fine_fees=0,$level)
 	{
 		$studentFee['date'] 			= 	date('Y-m-d h:i:s');
 		$studentFee['credit'] 			= 	0;
-		$studentFee['description']		= 	'Registerd for '.$countModule. ' modules, Academic year :'.$academic_year.'.';
+		$studentFee['description']		= 	'Registerd for '.$countModule. ' modules, Academic year :'.$academic_year.' in level:'.$level;
 		$studentFee['debit']  			= 	(float) $debitAmount;
 		$studentFee['done_by'] 			=	 \Sentry::getUser()->id;
 		$studentFee['student_id'] 		=	$student_id;
