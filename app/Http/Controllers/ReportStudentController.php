@@ -36,6 +36,7 @@ class ReportStudentController extends Controller {
 	 * 
 	 * @return mixed
 	 */
+	
 	public function details()
 	{	
 		// First check if the user has the permission to do this
