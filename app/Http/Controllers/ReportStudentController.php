@@ -49,6 +49,8 @@ class ReportStudentController extends Controller {
 		// Get information
 		$students 	= $this->studentDetails();
 
+	    $students = $this->getStudentPaymentsArray($students);
+		
 		// Do we have to export the results ?
 		Input::get('export')?$this->export('students_details',$students) : null ;
 
@@ -202,8 +204,7 @@ class ReportStudentController extends Controller {
 	private function htmlTable($students)
 	{
 	    // Try to get arrays headers
-	    $headers = array_keys($students);
-	    
+     	 $headers = array_keys($students);
 	    //if it is multidimensions get sub array keys
 	    
 	    if (isset($students[0]))
@@ -224,6 +225,7 @@ class ReportStudentController extends Controller {
 	
 	private function getStudentPaymentsArray($students)
 	{
+
 	return array_map(function($student)
 			{
 			$progress = ($student['debit']>0) ? round(($student['credit']*100)/$student['debit']):0;
@@ -232,13 +234,13 @@ class ReportStudentController extends Controller {
 
 			return [
 			    'Names'					=>	$student['names'], 
-			    'Gender'				=>	$student['gender'], 
-			    'telephone'				=>	$student['telephone'], 
-			    'email'					=>	$student['email'], 
-			    'occupation'			=>	$student['occupation'], 
+			    'Reg #'					=>	$student['registration_number'], 
+			    'Campus'				=>	$student['campus'], 
+			    'Faculity'				=>	$student['Faculity'], 
+			    'Department'			=>	$student['Department'], 
+		        'Level'					=>	$student['level'], 
+		        'InTake'				=>	$this->student->where('registration_number',$student['registration_number'])->first()->inTake(), 
 			    'Mode'					=>	$student['mode_of_study'], 
-			    'Session'				=>	$student['session'], 
-			    'Reg #'					=>	$student['registration_number'],
 			    'Debit'					=>	(float) $student['debit'],
 			    'Credit'				=>	(float) $student['credit'],
 			    'Balance'				=>	(float) $student['balance'],
