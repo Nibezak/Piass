@@ -131,7 +131,7 @@ class StudentController extends Controller {
 
 		$student->update($studentData);
 
-		Log::info($this->user->email . ' changed student informations from ' . json_encode($studentData) . ' to ' . json_encode($studnet));
+		Log::info($this->user->email . ' changed student informations from ' . json_encode($studentData) . ' to ' . json_encode($student));
 
 		Flash::success($request->names . ' has been updated successfully');
 
