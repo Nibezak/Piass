@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('title')
-Current Modules {!! isset( $department )? ' under' .$department->name.' department': '' !!}
+Current Modules {!! isset( $department )? ' under ' .$department->name.'\'s department': '' !!}
 @stop
 
 @section('description')
@@ -19,11 +19,11 @@ List of PIASS modules that are currently registered  {!! isset( $department )? '
                    <div class="col-md-6">
                     {!! $modules->render() !!}
                   </div>
-                 
+
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
-                    
+
                     @include('modules.table')
 
                 </div><!-- /.box-body -->

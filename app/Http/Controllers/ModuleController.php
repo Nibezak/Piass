@@ -1,30 +1,27 @@
 <?php namespace App\Http\Controllers;
 
-use Flash,Redirect;
-use App\Http\Requests;
+use App\Commands\ModuleRegisterCommand;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ModuleRegisterRequest;
 use App\Http\Requests\ModuleUpdateRequest;
-use App\Models\Module;
 use App\Models\Department;
-use App\Http\Controllers\Controller;
-use App\Commands\ModuleRegisterCommand;
-
-use Illuminate\Http\Request;
+use App\Models\Module;
+use Flash;
+use Log;
+use Redirect;
 
 class ModuleController extends Controller {
 
 	private $module;
 	private $department;
 
-	function __construct(Module $module,Department $department) 
-    {
-    	parent::__construct();
-    	
+	function __construct(Module $module, Department $department) {
+		parent::__construct();
+
 		$this->module = $module;
 
 		$this->department = $department;
 
-		
 	}
 
 	/**
@@ -32,19 +29,17 @@ class ModuleController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
+	public function index() {
 		// First check if the user has the permission to do this
-		if (!$this->user->hasAccess('module.view')) 
-		{			
-			 Flash::error(trans('Sentinel::users.noaccess'));
-             
-             return redirect()->back();
+		if (!$this->user->hasAccess('module.view')) {
+			Flash::error(trans('Sentinel::users.noaccess'));
+
+			return redirect()->back();
 		}
 
 		$modules = $this->module->paginate(20);
 
-		return view('modules.index',compact('modules'));
+		return view('modules.index', compact('modules'));
 	}
 
 	/**
@@ -52,25 +47,23 @@ class ModuleController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create($department=0,$level=0)
-	{
+	public function create($department = 0, $level = 0) {
 		// First check if the user has the permission to do this
-		if (!$this->user->hasAccess('module.create')) 
-		{			
-			 Flash::error(trans('Sentinel::users.noaccess'));
-             
-             return redirect()->back();
+		if (!$this->user->hasAccess('module.create')) {
+			Flash::error(trans('Sentinel::users.noaccess'));
+
+			return redirect()->back();
 		}
 
-		 if ($department)
-		 {
-		 	$department =  $this->department->findOrFail($department);
-		 }
-		 
+		if ($department) {
+			$department = $this->department->findOrFail($department);
+		}
 
-		 $module =  new $this->module;
+		Log::info($this->user->email . ' viewed module form ');
 
-		 return view('modules.create',compact('module','department','level'));
+		$module = new $this->module;
+
+		return view('modules.create', compact('module', 'department', 'level'));
 	}
 
 	/**
@@ -78,23 +71,23 @@ class ModuleController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(ModuleRegisterRequest $request)
-	{
+	public function store(ModuleRegisterRequest $request) {
 		// First check if the user has the permission to do this
-		if (!$this->user->hasAccess('module.create')) 
-		{			
-			 Flash::error(trans('Sentinel::users.noaccess'));
-             
-             return redirect()->back();
+		if (!$this->user->hasAccess('module.create')) {
+			Flash::error(trans('Sentinel::users.noaccess'));
+
+			return redirect()->back();
 		}
 
 		$this->dispatch(
 			new ModuleRegisterCommand($request)
-			);
+		);
 
-		Flash::success($request->name.' module added to this department');
+		Log::info($this->user->email . ' added module with following information :' . json_encode($request->all()));
 
-		return Redirect::route('departments.levels',[$request->department_id,$request->department_level]);
+		Flash::success($request->name . ' module added to this department');
+
+		return Redirect::route('departments.levels', [$request->department_id, $request->department_level]);
 
 	}
 
@@ -104,21 +97,21 @@ class ModuleController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function levelModules($departmentId,$level)
-	{
+	public function levelModules($departmentId, $level) {
 		// First check if the user has the permission to do this
-		if (!$this->user->hasAccess('module.view')) 
-		{			
-			 Flash::error(trans('Sentinel::users.noaccess'));
-             
-             return redirect()->back();
+		if (!$this->user->hasAccess('module.view')) {
+			Flash::error(trans('Sentinel::users.noaccess'));
+
+			return redirect()->back();
 		}
 
 		$department = $this->department->findOrFail($departmentId);
-		
-		$modules 	= $department->level($level)->paginate(10);			  
 
-		return view('modules.index',compact('modules','department','level'));
+		$modules = $department->level($level)->paginate(10);
+
+		Log::info($this->user->email . ' retrieved module levels with information:' . json_encode($modules));
+
+		return view('modules.index', compact('modules', 'department', 'level'));
 	}
 
 	/**
@@ -127,14 +120,12 @@ class ModuleController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
-	{
+	public function edit($id) {
 		// First check if the user has the permission to do this
-		if (!$this->user->hasAccess('module.update')) 
-		{			
-			 Flash::error(trans('Sentinel::users.noaccess'));
-             
-             return redirect()->back();
+		if (!$this->user->hasAccess('module.update')) {
+			Flash::error(trans('Sentinel::users.noaccess'));
+
+			return redirect()->back();
 		}
 
 		$module = $this->module->findOrFail($id);
@@ -143,7 +134,9 @@ class ModuleController extends Controller {
 
 		$department = $module->departments->first();
 
-		return view('modules.edit',compact('module','department','level'));
+		Log::info($this->user->email . ' viewed module with information:' . json_encode($module));
+
+		return view('modules.edit', compact('module', 'department', 'level'));
 	}
 
 	/**
@@ -152,25 +145,25 @@ class ModuleController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update(ModuleUpdateRequest $request,$id)
-	{
+	public function update(ModuleUpdateRequest $request, $id) {
 		// First check if the user has the permission to do this
-		if (!$this->user->hasAccess('module.update')) 
-		{			
-			 Flash::error(trans('Sentinel::users.noaccess'));
-             
-             return redirect()->back();
+		if (!$this->user->hasAccess('module.update')) {
+			Flash::error(trans('Sentinel::users.noaccess'));
+
+			return redirect()->back();
 		}
 
 		$module = $this->module->findOrFail($id);
-		
+		$oldData = $module;
 		$modules = (array) $request->all();
-	
-		$modules['amount'] =	$request->credits*$request->credit_cost;
+
+		$modules['amount'] = $request->credits * $request->credit_cost;
 
 		$module->update($modules);
 
-		Flash::success('Module '.$request->name. ' was updated successfully.');
+		Log::info($this->user->email . ' changed module information from ' . json_encode($oldData) . ' to ' . json_encode($module));
+
+		Flash::success('Module ' . $request->name . ' was updated successfully.');
 
 		return Redirect::route('modules.index');
 	}
@@ -181,30 +174,31 @@ class ModuleController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
+	public function destroy($id) {
 		// First check if the user has the permission to do this
-		if (!$this->user->hasAccess('module.delete')) 
-		{			
-			 Flash::error(trans('Sentinel::users.noaccess'));
-             
-             return redirect()->back();
+		if (!$this->user->hasAccess('module.delete')) {
+			Flash::error(trans('Sentinel::users.noaccess'));
+
+			return redirect()->back();
 		}
 
-	    $module = $this->module->findOrFail($id);
+		$module = $this->module->findOrFail($id);
 
-	    // //Check if this module has students before removing it
-     //    //If it has students then tell user to remove those students firsts
-      
-     //    if(!$module->modules->isEmpty())
-     //    {
-     //    	Flash::error('The module you are trying to delete has students, Please remove those students firsts..');
-             
-     //        return redirect()->back();
-     //    }
+		$oldData = $module;
 
-        $module->delete();
-        
+		// //Check if this module has students before removing it
+		//    //If it has students then tell user to remove those students firsts
+
+		//    if(!$module->modules->isEmpty())
+		//    {
+		//    	Flash::error('The module you are trying to delete has students, Please remove those students firsts..');
+
+		//        return redirect()->back();
+		//    }
+
+		$module->delete();
+		Log::info($this->user->email . ' deleted module with information' . json_encode($oldData));
+
 		Flash::success('Module was deleted successfully.');
 
 		return Redirect::route('modules.index');
