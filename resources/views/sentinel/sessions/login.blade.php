@@ -24,7 +24,7 @@
   </head>
   <body class="login-page">
     <div class="login-box">
-      
+
       <div class="login-box-body">
       <div class="login-logo">
         <a href="{{Url()}}" class="logo">
@@ -40,33 +40,33 @@
        <form method="POST" action="{{ route('sentinel.session.store') }}" accept-charset="UTF-8">
           <div class="form-group has-feedback">
                <input placeholder="Email" autofocus="autofocus" class="form-control" name="email" type="text"  value="{{ Input::old('email') }}">
-                {{ ($errors->has('email') ? $errors->first('email', '<small class="error">:message</small>') : '') }}
+                {!! ($errors->has('email') ? $errors->first('email', '<small class="alert alert-error radius">:message</small>') : '') !!}
           </div>
           <div class="form-group has-feedback">
              <input class="form-control" placeholder="Password" name="password" value="" type="password">
-                {{ ($errors->has('password') ?  $errors->first('password', '<small class="error">:message</small>') : '') }}
+                {!! ($errors->has('password') ?  $errors->first('password', '<small class="alert alert-error radius">:message</small>') : '') !!}
           </div>
           <div class="row">
-            <div class="col-xs-8">    
+            <div class="col-xs-8">
               <div class="checkbox icheck">
                 <label>
                   <input name="rememberMe" value="rememberMe" type="checkbox">
                 Remember Me
                 </label>
 
-              </div>  
-                        <a href="{{ route('sentinel.forgot.form') }}">Forgot Password</a>                      
+              </div>
+                        <a href="{{ route('sentinel.forgot.form') }}">Forgot Password</a>
             </div><!-- /.col -->
             <div class="col-xs-4">
               <input class="btn btn-primary  btn-block btn-flat" value="Sign In" type="submit">
             </div><!-- /.col -->
-    
+
           </div>
 
         </form>
 
-        
-       
+
+
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->

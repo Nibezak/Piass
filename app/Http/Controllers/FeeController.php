@@ -1,12 +1,14 @@
 <?php namespace App\Http\Controllers;
 
-use Input,Redirect,Flash;
-use App\Http\Requests\FeeRequest;
+use App\Commands\FeeRegisterCommand;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FeeRequest;
 use App\Models\FeeTransaction;
 use App\Models\Student;
-use App\Commands\FeeRegisterCommand;
-use Illuminate\Http\Request;
+use Flash;
+use Input;
+use Log;
+use Redirect;
 
 class FeeController extends Controller {
 
@@ -15,16 +17,15 @@ class FeeController extends Controller {
 	 */
 	protected $student;
 
-	/** 
+	/**
 	 * @var App\Models\FeeTransaction
 	 */
 	protected $transaction;
 
-	function __construct(FeeTransaction $transaction,Student $student)
-	 {
-	 	parent::__construct();
+	function __construct(FeeTransaction $transaction, Student $student) {
+		parent::__construct();
 
-	 	$this->student = $student;
+		$this->student = $student;
 
 		$this->transaction = $transaction;
 	}
@@ -33,46 +34,42 @@ class FeeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
+	public function index() {
 		// First check if the user has the permission to do this
-		if (!$this->user->hasAccess('fee.view')) 
-		{			
-			 Flash::error(trans('Sentinel::users.noaccess'));
-             
-             return redirect()->back();
-		}
-		$students 	= $this->student->paginate(10);
+		if (!$this->user->hasAccess('fee.view')) {
+			Flash::error(trans('Sentinel::users.noaccess'));
 
-		if ($keyword = Input::get('q'))
-	    {
-		  $students = $this->student->search($keyword)->paginate(50);
+			return redirect()->back();
+		}
+		$students = $this->student->paginate(10);
+
+		if ($keyword = Input::get('q')) {
+			$students = $this->student->search($keyword)->paginate(50);
 		}
 
-		return view('fees.index',compact('students'));
+		return view('fees.index', compact('students'));
 	}
-
-	
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
 	 */
-	public function store(FeeRequest $request)
-	{
+	public function store(FeeRequest $request) {
 		// First check if the user has the permission to do this
-		if (!$this->user->hasAccess('fee.create')) 
-		{			
-			 Flash::error(trans('Sentinel::users.noaccess'));
-             
-             return redirect()->back();
+		if (!$this->user->hasAccess('fee.create')) {
+			Flash::error(trans('Sentinel::users.noaccess'));
+
+			return redirect()->back();
 		}
 		$this->dispatch(new FeeRegisterCommand($request));
 
+		// First log
+		Log::info($this->user->email . ' added fees with following information :' . json_encode($request->all()));
+
 		Flash::success('Student Fees has been recorded succesffully');
 
-		return Redirect::route('student.fees',$request->student_id);
+		return Redirect::route('student.fees', $request->student_id);
 	}
 
 	/**
@@ -81,19 +78,20 @@ class FeeController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
-	{
+	public function show($id) {
 		// First check if the user has the permission to do this
-		if (!$this->user->hasAccess('fee.view')) 
-		{			
-			 Flash::error(trans('Sentinel::users.noaccess'));
-             
-             return redirect()->back();
+		if (!$this->user->hasAccess('fee.view')) {
+			Flash::error(trans('Sentinel::users.noaccess'));
+
+			return redirect()->back();
 		}
-		
+
 		$student = $this->student->findOrFail($id);
-        
-		return view('fees.create',compact('student'));
+
+		// First log
+		Log::info($this->user->email . ' views student fees with following information :' . json_encode($student));
+
+		return view('fees.create', compact('student'));
 	}
 
 }
