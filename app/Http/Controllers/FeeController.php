@@ -94,4 +94,20 @@ class FeeController extends Controller {
 		return view('fees.create', compact('student'));
 	}
 
+	public function destroy($id) {
+
+		if ($this->transaction->destroy($id)) {
+			// First log
+			Log::info($this->user->email . ' deleted student fees information with ID :' . $id);
+			Flash::success('You have succesffully deleted fee information');
+
+			return Redirect::back();
+		}
+		Log::info($this->user->email . ' tried to delete student fees information with ID :' . $id . ' but it failed');
+
+		Flash::error('Error occured while deleting fees information');
+
+		return Redirect::back();
+
+	}
 }

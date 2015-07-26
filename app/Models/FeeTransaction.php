@@ -4,9 +4,16 @@ use App\Models\Student;
 use App\Models\User;
 use DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FeeTransaction extends Model {
-
+	use SoftDeletes;
+	/**
+	 * The attributes that should be mutated to dates.
+	 *
+	 * @var array
+	 */
+	protected $dates = ['deleted_at'];
 	/** @var string Table that is associated to this model */
 	public $table = 'fee_transactions';
 
