@@ -48,7 +48,7 @@ class ReportStudentController extends Controller {
 		Log::info($this->user->email . ' viewed students detailed report');
 		// Do we have to export the results ?
 		if (Input::has('export') && Input::get('export') == 1) {
-
+			$students = $this->getStudentPaymentsArray($students, true);
 			$this->export('students_details', $students);
 		}
 
@@ -222,8 +222,20 @@ class ReportStudentController extends Controller {
 			$progress = ($student['debit'] > 0) ? round(($student['credit'] * 100) / $student['debit']) : 0;
 
 			$severity = ($progress < 50) ? 'red' : 'green';
+			if ($report != false) {
 
-			$data = [
+				$data = [
+					'InTake' => $this->student->where('registration_number', $student['registration_number'])->first()->inTake(),
+					'Mode' => $student['mode_of_study'],
+					'Debit' => (float) $student['debit'],
+					'Credit' => (float) $student['credit'],
+					'Balance' => (float) $student['balance'],
+				];
+
+				return $student + $data;
+			}
+
+			return [
 				'Names' => $student['names'],
 				'Reg #' => $student['registration_number'],
 				'Campus' => $student['campus'],
@@ -235,14 +247,10 @@ class ReportStudentController extends Controller {
 				'Debit' => (float) $student['debit'],
 				'Credit' => (float) $student['credit'],
 				'Balance' => (float) $student['balance'],
+				'Progression' => '<div class="progress progress-xs progress-striped active"><div class="progress-bar progress-bar-' . $severity . ' " style="width:' . $progress . '%">
+			    							</div></div><span class="badge bg-' . $severity . '">' . $progress . '%</span>',
 			];
 
-			if (!$report) {
-
-				$data['Progression'] = '<div class="progress progress-xs progress-striped active"><div class="progress-bar progress-bar-' . $severity . ' " style="width:' . $progress . '%">
-			    							</div></div><span class="badge bg-' . $severity . '">' . $progress . '%</span>';
-			}
-			return $data;
 		}, $students);
 	}
 }
