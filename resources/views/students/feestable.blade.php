@@ -39,7 +39,8 @@ $credit += $fee->credit?>
 					  <td> {!! $fee->balance !!}</td>
 					  <td>
 					  {!! Form::open(['method'=>'delete','route'=>['fees.destroy',$fee->id]]) !!}
-					  	<button class="btn btn-danger">
+					  	<button class="btn btn-danger" onclick="return confirm('Are you sure you want to remove this fee from this student? this action cannot be reverted');">
+
 						  	<i class="fa fa-times"></i>
 					  	</button>
 					  {!! Form::close() !!}

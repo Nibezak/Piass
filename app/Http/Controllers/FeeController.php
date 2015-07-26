@@ -93,7 +93,11 @@ class FeeController extends Controller {
 
 		return view('fees.create', compact('student'));
 	}
-
+	/**
+	 * Destroy fee transaction
+	 * @param  transactionId $id
+	 * @return
+	 */
 	public function destroy($id) {
 
 		if ($this->transaction->destroy($id)) {
