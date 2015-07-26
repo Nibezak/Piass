@@ -15,7 +15,7 @@
         						<th><i class="fa fa-gear"></i> </th>
                     </tr>
 					@foreach($students as $student)
-      
+
                     <tr>
                       <td>{{ $student->names }}</td>
                       <td>{{ $student->registration_number }}</td>
