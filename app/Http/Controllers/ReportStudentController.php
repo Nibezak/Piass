@@ -45,13 +45,14 @@ class ReportStudentController extends Controller {
 
 		// Get information
 		$students = $this->studentDetails();
+		Log::info($this->user->email . ' viewed students detailed report');
+		// Do we have to export the results ?
+		if (Input::has('export') && Input::get('export') == 1) {
+			$students = $this->getStudentPaymentsArray($students, true);
+			$this->export('students_details', $students);
+		}
 
 		$students = $this->getStudentPaymentsArray($students);
-
-		Log::info($this->user->email . ' viewed students detailed report');
-
-		// Do we have to export the results ?
-		Input::get('export') ? $this->export('students_details', $students) : null;
 
 		//Get html table
 		$table = $this->htmlTable($students);
@@ -147,7 +148,7 @@ class ReportStudentController extends Controller {
 		//Swap the keys to match the report fields
 		$students = $this->getStudentPaymentsArray($students);
 
-		Log::info($this->user->email . ' viewed students pending payment report');
+		Log::info($this->user->email . ' viewed students pending payment report ');
 
 		$header = '<i class="fa fa-usd"></i><i class="fa fa-graduation-cap"></i> <span>Students who has pending fees </span>';
 
@@ -215,12 +216,24 @@ class ReportStudentController extends Controller {
 	 * Get the array key
 	 */
 
-	private function getStudentPaymentsArray($students) {
+	private function getStudentPaymentsArray($students, $report = false) {
 
-		return array_map(function ($student) {
+		return array_map(function ($student) use ($report) {
 			$progress = ($student['debit'] > 0) ? round(($student['credit'] * 100) / $student['debit']) : 0;
 
 			$severity = ($progress < 50) ? 'red' : 'green';
+			if ($report != false) {
+
+				$data = [
+					'InTake' => $this->student->where('registration_number', $student['registration_number'])->first()->inTake(),
+					'Mode' => $student['mode_of_study'],
+					'Debit' => (float) $student['debit'],
+					'Credit' => (float) $student['credit'],
+					'Balance' => (float) $student['balance'],
+				];
+
+				return $student + $data;
+			}
 
 			return [
 				'Names' => $student['names'],
@@ -237,6 +250,7 @@ class ReportStudentController extends Controller {
 				'Progression' => '<div class="progress progress-xs progress-striped active"><div class="progress-bar progress-bar-' . $severity . ' " style="width:' . $progress . '%">
 			    							</div></div><span class="badge bg-' . $severity . '">' . $progress . '%</span>',
 			];
+
 		}, $students);
 	}
 }

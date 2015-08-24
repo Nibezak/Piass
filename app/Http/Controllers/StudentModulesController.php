@@ -4,6 +4,7 @@ use App\Commands\StudentModuleRegisterCommad;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StudentModuleRegisterRequest;
 use App\Models\Student;
+use App\Models\StudentModules;
 use Flash;
 use Log;
 use Redirect;
@@ -68,6 +69,28 @@ class StudentModulesController extends Controller {
 		Log::info($this->user->email . ' viewed student registered modules : ' . json_encode($student));
 
 		return view('studentModules.registeredmodules', compact('student'));
+	}
+
+	/**
+	 * Destroy student moduls
+	 * @param  moduleId $id
+	 * @return
+	 */
+	public function destroy($id, StudentModules $studentModule) {
+
+		if ($studentModule->destroy($id)) {
+			// First log
+			Log::info($this->user->email . ' deleted student module information with ID :' . $id);
+			Flash::success('You have succesffully deleted module information');
+
+			return Redirect::back();
+		}
+		Log::info($this->user->email . ' tried to delete student module information with ID :' . $id . ' but it failed');
+
+		Flash::error('Error occured while deleting module information');
+
+		return Redirect::back();
+
 	}
 
 }
