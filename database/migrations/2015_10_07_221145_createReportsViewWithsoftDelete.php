@@ -12,18 +12,17 @@ class CreateReportsViewWithsoftDelete extends Migration {
 	 */
 	public function up()
 	{
-		$this->down();
     	// CREATE STUDENT LEVELS VIEW 
-    	DB::statement('CREATE VIEW V_STUDENT_LEVELS AS 
+    	DB::statement('CREATE OR REPLACE VIEW V_STUDENT_LEVELS AS 
     				     SELECT student_id, 
     				     MAX( department_level ) AS Level
-						FROM student_modules WHERE 
+						FROM student_modules  
 						WHERE deleted_at IS NULL
 						GROUP BY student_id'
 						);
 
     	 // CREATE STUDENT STUDENT FEES VIEW
-    	DB::statement('CREATE VIEW V_STUDENT_FEES AS 
+    	DB::statement('CREATE OR REPLACE VIEW V_STUDENT_FEES AS 
 			    		SELECT 
 			    		student_id,
 			    		sum(debit) as debit,
@@ -34,7 +33,7 @@ class CreateReportsViewWithsoftDelete extends Migration {
 		    		    GROUP BY student_id');
 
     	// CREATE FINAL STUDENT TABLE 
-        DB::statement( 'CREATE VIEW V_STUDENT_REPORTS AS SELECT
+        DB::statement( 'CREATE OR REPLACE VIEW V_STUDENT_REPORTS AS SELECT
 					 /** Selecting Student columns */
 						names,
 						DOB,
