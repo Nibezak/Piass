@@ -20,8 +20,8 @@
                       <td>{{ isset($student->names)?$student->names:null }}</td>
                       <td>{{ isset($student->registration_number)?$student->registration_number:null }}</td>
                       <td>{{ isset($student->campus)?$student->campus:null }}</td>
-                      <td>{{ isset($student->department)?$student->department->faculity->name:null }}</td>
-                      <td>{{ isset($student->department)?$student->department->name:null }}</td>
+                      <td>{{ $student->department->faculity->name}}</td>
+                      <td>{{ $student->department->name}}</td>
                       <td>{{ $student->level() }}</td>
                       <td>{{ $student->inTake() }}</td>
                       <td>{{ isset($student->mode_of_study)?$student->mode_of_study:null }}</td>
