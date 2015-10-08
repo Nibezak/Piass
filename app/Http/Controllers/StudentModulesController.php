@@ -3,9 +3,11 @@
 use App\Commands\StudentModuleRegisterCommad;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StudentModuleRegisterRequest;
+use App\Models\FeeTransaction;
 use App\Models\Student;
 use App\Models\StudentModules;
 use Flash;
+use Illuminate\Support\Facades\DB;
 use Log;
 use Redirect;
 
@@ -76,18 +78,40 @@ class StudentModulesController extends Controller {
 	 * @param  moduleId $id
 	 * @return
 	 */
-	public function destroy($id, StudentModules $studentModule) {
+	public function destroy($id, StudentModules $studentModule,FeeTransaction $feeTransaction) {
 
-		if ($studentModule->destroy($id)) {
+		// 1. Find the module to be deleted
+		// 2. Delete its transaction fees
+		// 3. Delete module
+		$module = $studentModule->findOrFail($id);
+
+		$transaction = $feeTransaction->where('student_id',$module->student_id)
+									  ->where('done_by',$module->user_id)
+									  ->where(DB::raw('LEFT(created_at,16)'),substr($module->created_at, 0,16))
+									  ->first();
+	    DB::beginTransaction();
+
+	    $removeFees = $transaction->delete();
+
+	    $removeStudentModule = $module->delete();
+        
+		if ($removeFees && $removeStudentModule) {
+			// All wend well
+			DB::commit();
 			// First log
 			Log::info($this->user->email . ' deleted student module information with ID :' . $id);
-			Flash::success('You have succesffully deleted module information');
+
+			Flash::success('You have succesffully deleted module:'.$module->name.'.');
 
 			return Redirect::back();
 		}
+		
+		// If we reach here, it means something went wrong rollback and build the error	
+		DB::rollBack();
+
 		Log::info($this->user->email . ' tried to delete student module information with ID :' . $id . ' but it failed');
 
-		Flash::error('Error occured while deleting module information');
+		Flash::error('Error occured while deleting module:'.$module->name.'.');
 
 		return Redirect::back();
 

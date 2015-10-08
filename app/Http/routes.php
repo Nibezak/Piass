@@ -89,3 +89,9 @@ Route::group(['prefix'=>'api','middleware'=>'sentry.auth'], function()
 		Route::get('department/{departmentId}/level/{level}', 'DepartmentController@apiModules');
       
 });
+
+
+Route::get('test', function()
+	{
+		dd(strlen('2015-10-08 07:37'));
+	});
