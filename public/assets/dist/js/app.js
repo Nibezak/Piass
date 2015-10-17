@@ -430,15 +430,6 @@ $.AdminLTE.boxWidget = {
 
 })(jQuery);
 
-/** SECTION OF THE MARKS MODULE THAT HELPS TO SELECT DEPARTMENTS */
-jQuery(document).ready(function($) {
-  
-  $('.select-faculity').change(function(event) {
-    event.preventDefault();
-
-    alert(' You have selected faculities');
-  });
-});
 
 /*
  * TODO LIST CUSTOM PLUGIN

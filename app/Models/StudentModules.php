@@ -17,6 +17,7 @@ class StudentModules extends Model {
 
 	protected $fillable = ['student_id', 'academic_year', 'intake', 'module_id', 'user_id', 'name', 'code', 'credits', 'credit_cost', 'amount', 'department_level'];
 
+	
 	/**
 	 * Defining relations with the Student model
 	 *

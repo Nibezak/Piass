@@ -54,15 +54,23 @@ class Student extends Model {
 	public function level()
 	{
 		// return 0 if we can't find level
-
 		if(! $level = $this->registeredModules()->max('department_level') )
 		{
-			return 'N/A' ;
+			return 0 ;
 		}
-
 		return $level;
 	}
 
+	/**
+	 * Determine if this student is at level
+	 * 
+	 * @param  numeric  $level level to determine
+	 * @return boolean        [description]
+	 */
+	public function isLevel($level)
+	{
+		return $this->registeredModules()->max('department_level') == $level;
+	}
 	/**
 	 * Get current inTake of the student
 	 * @return [type]

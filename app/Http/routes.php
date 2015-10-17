@@ -86,11 +86,13 @@ Route::group(['prefix'=>'api','middleware'=>'sentry.auth'], function()
 		Route::get('departments/{faculityId}','ApiController@apiDepartments');
 		Route::get('department/level/{departmentId}', 'ApiController@apiLevel');
 		Route::get('department/{departmentId}/level/{level}', 'ApiController@apiModules');
-      
+		Route::get('department/{departmentId}/level/{level}/modules','ApiController@departmentLevelModules');
+		Route::get('level/{level}/modules/{moduleId}/academicyears','ApiController@moduleAcademicYears');
+      //http://piassms.app/level/1/modules/1/academicyears
 });
 
 
 Route::get('test', function()
 	{
-		dd(strlen('2015-10-08 07:37'));
+		// dd();
 	});

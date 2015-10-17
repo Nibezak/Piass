@@ -5,6 +5,7 @@ use App\Http\Requests;
 use App\Http\Requests\ApiRequest;
 use App\Models\Department;
 use App\Models\Faculity;
+use App\Models\StudentModules;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller {
@@ -29,8 +30,8 @@ class ApiController extends Controller {
 
 		$departments = $this->faculity->findOrFail($faculity_id)
 		                    ->departments->lists('name', 'id');
-        
-		return response()->json((array) $departments);
+        $departments[0] = 'Select a department';
+		return response()->json($departments);
 	}
 	/**
 	 * Get the level of a given api
@@ -40,6 +41,7 @@ class ApiController extends Controller {
 	 * @return id @example {1}
 	 */
 	public function apiLevel(ApiRequest $request, $department) {
+
 		$level = $this->department->findOrFail($department)->levels;
 
 		return response()->json($level);
@@ -58,8 +60,46 @@ class ApiController extends Controller {
 		$modules = $this->department->findOrFail((int) $departmentId)->modules;
        
 		$modules = $modules->where('department_level',(int) $level);
- 
+ 	
 		return response()->json($modules);
+	}
+
+	/**
+	 * Select module lists based on the departments and level
+	 * @param  ApiRequest $request      
+	 * @param  numeric     $departmentId department id as set in the model
+	 * @param  numeric     $level        level of the department
+	 * @return json                 
+	 */
+	public function departmentLevelModules(ApiRequest $request, $departmentId, $level) {
+
+		$modules = $this->department->findOrFail((int) $departmentId)->modules;
+       
+		$modules = $modules->where('department_level',(int) $level)->lists('name','id');
+
+ 		$modules[0] = 'select a module';
+
+		return response()->json($modules);
+	}
+
+	/**
+	 * Get academic year of a given module
+	 * 
+	 * @param  ApiRequest     $request        
+	 * @param  numeric         $level          
+	 * @param  numeric         $module         
+	 * @param  StudentModules $studentModules 
+	 * @return json                         
+	 */
+	public function moduleAcademicYears(ApiRequest $request,$level,$module,StudentModules $studentModules)
+	{
+		$academicYears = $studentModules->where('department_level',$level)
+									    ->where('module_id',$module)
+									    ->lists('academic_year','academic_year');
+
+	    $academicYears[0] = 'Select academic year';
+	    
+		return response()->json($academicYears);									    
 	}
 
 }
