@@ -284,7 +284,11 @@ var datepickr = (function() {
 		
 		var inputLeft = inputTop = 0,
 		obj = this.element;
-		
+	
+	   if (obj == null) { // we don't have any thing to set to calendar. then return
+	    	return false;
+	   };
+
 		if(obj.offsetParent) {
 			do {
 				inputLeft += obj.offsetLeft;
@@ -355,6 +359,10 @@ var datepickr = (function() {
 		this.calendar = buildCalendar.call(this);
 		
 		datepickrs.push(this);
+		
+		if (this.element == null) {
+			return false;
+		};
 		
 		if(this.element.nodeName == 'INPUT') {
 			addEvent(this.element, 'focus', this.open);

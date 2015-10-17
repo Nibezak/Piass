@@ -37,25 +37,34 @@ class ViewComposersProvider extends ServiceProvider {
 	 */
 	private function leftNavComposer()
 	{
-		
-		view()->composer('partials.leftnav','App\Http\Composers\ViewComposer@leftnav');
+		$views =[
+			'partials.leftnav',
+		];
+
+		view()->composer($views,'App\Http\Composers\ViewComposer@leftnav');
 	}
 
 	public function faculityFormComposer()
 	{
-		view()->composer('departments.form','App\Http\Composers\ViewComposer@faculityForm');
+		$views =[
+			'departments.form',
+			'studentModules.form',
+			'studentModules.form',
+			'marks.module_filter',
+		];
 
-		view()->composer('studentModules.form','App\Http\Composers\ViewComposer@faculityForm');
-
-		view()->composer('reports.students.filter','App\Http\Composers\ViewComposer@faculityForm');
+		view()->composer($views,'App\Http\Composers\ViewComposer@faculityForm');
 
 	}
 
 	public function departmentFormComposer()
 	{
-		view()->composer('students.form','App\Http\Composers\ViewComposer@departmentForm');
-		view()->composer('studentModules.form','App\Http\Composers\ViewComposer@departmentForm');
-		view()->composer('reports.students.filter','App\Http\Composers\ViewComposer@departmentForm');
+		$views = [
+			'students.form',
+			'studentModules.form',
+			'reports.students.filter',	
+			];
+		view()->composer($views,'App\Http\Composers\ViewComposer@departmentForm');
 	}
 
 
@@ -66,8 +75,16 @@ class ViewComposersProvider extends ServiceProvider {
 	 */
 	private function partialsComposer()
 	{
-		view()->composer('studentModules.form','App\Http\Composers\ViewComposer@academicYears');
-		view()->composer(['partials.header', 'layouts.default','sentinel.sessions.login'],'App\Http\Composers\ViewComposer@companyName');
+		$viewsAcademicYeaers = [
+		'studentModules.form',
+		];
+		$viewsCompanyname = [
+							 'partials.header',
+					         'layouts.default',
+		 			         'sentinel.sessions.login'
+		 			       ];
+		view()->composer($viewsAcademicYeaers,'App\Http\Composers\ViewComposer@academicYears');
+		view()->composer($viewsCompanyname,'App\Http\Composers\ViewComposer@companyName');
 	}
 
 

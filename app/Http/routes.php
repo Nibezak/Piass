@@ -14,19 +14,20 @@
 */
    Route::group(['prefix'=>'students'],	function()
 	{
-
-		 Route::resource('educations', 'StudentEducationController');
-
+		 Route::resource('educations', 'StudentEducationController');		 
 		 Route::resource('modules','StudentModulesController');
-
 		 Route::get('fees/{studentId}',['as'=>'student.fees','uses'=>'StudentController@fees']);
-
 		 Route::get('/file/{id}/delete',['as'=>'student.file.delete','uses'=>'FileController@destroy']);
-
 		 Route::get('{studentId}/modules/registered/',['as'=>'student.registered.modules','uses'=>'StudentModulesController@registeredModules']);
 	});
 
-	Route::resource('students', 'StudentController');
+  Route::resource('students', 'StudentController');
+/*
+|--------------------------------------------------------------------------
+| Student routes
+|--------------------------------------------------------------------------
+*/
+  Route::resource('marks', 'MarkController');
 /*
 |--------------------------------------------------------------------------
 | Fees, Transactions and files routes
@@ -82,11 +83,9 @@ Route::group(['prefix'=>'reports'],function()
 */
 Route::group(['prefix'=>'api','middleware'=>'sentry.auth'], function()
 	{
-		Route::get('departments/{faculityId}','DepartmentController@apiDepartments');
-
-		Route::get('department/level/{departmentId}', 'DepartmentController@apiLevel');
-
-		Route::get('department/{departmentId}/level/{level}', 'DepartmentController@apiModules');
+		Route::get('departments/{faculityId}','ApiController@apiDepartments');
+		Route::get('department/level/{departmentId}', 'ApiController@apiLevel');
+		Route::get('department/{departmentId}/level/{level}', 'ApiController@apiModules');
       
 });
 

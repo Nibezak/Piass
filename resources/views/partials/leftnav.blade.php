@@ -29,14 +29,6 @@
               </a>
             </li>
 {{-- 
-            <li class="{{(Request::is('fees*') ? 'active' : '')}} treeview">
-              <a href="{{Url()}}/fees">
-                <i class="fa fa-money"></i>
-                <span>Fees</span>
-              </a>
-              
-            </li>
-
             <li class="{{(Request::is('transactions*') ? 'active' : '')}} treeview">
               <a href="{{Url()}}/transactions">
                 <i class="fa fa-exchange"></i>
@@ -51,6 +43,13 @@
               </a>
             </li> 
             
+            <li class="{{(Request::is('marks*') ? 'active' : '')}} treeview">
+              <a href="{{ route('marks.index') }}">
+                <i class="fa fa-money"></i>
+                <span>Marks</span>
+              </a>
+              
+            </li>
             <li class="{{(Request::is('faculities*') ? 'active' : '')}} treeview">
               <a href="#">
                 <i class="fa fa-university"></i> <span>Faculities</span>

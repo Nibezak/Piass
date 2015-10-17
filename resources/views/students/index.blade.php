@@ -3,11 +3,9 @@
 @section('title')
 Current students
 @stop
-
 @section('description')
 List of PIASS students that are currently registered
 @stop
-
 
 @section('content')
 <div class="box">
