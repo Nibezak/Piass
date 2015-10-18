@@ -10,7 +10,9 @@ In this section you will be able to mark students
 @section('content')
  <div class="box">
     @include('marks.module_filter')
-    you are welcome to marks module
+   
+    {{-- Students table  --}}
+    @include('marks.student_list')
  </div>
 @stop
 
@@ -47,7 +49,7 @@ In this section you will be able to mark students
          $('.select-department').html(departmentOptions);
       })
       .fail(function(error) {
-        alert(error.responseText);
+        alert('Error occured while trying to retrive departments');
       });
     });
 
@@ -60,12 +62,12 @@ In this section you will be able to mark students
         dataType: 'json'
       })
       .done(function(level) {
-        var levelOptions = '<option>Please select a level </option>';
+        var levelOptions = '<option>Select a level </option>';
         for (var i = 1; i <= level; i++) {        
            levelOptions += '<option value="'+i+'">'+i+'</option>';
         };
         // If level options has nothing then display the error
-        if(levelOptions == '<option>Please select a level </option>')
+        if(levelOptions == '<option>Select a level </option>')
         {
           levelOptions ='<option>We could not find any level for selected department</option>';
           alert('We could not find any level for the selected department. Go to settings module and verify if this department has level then try again');
@@ -73,7 +75,8 @@ In this section you will be able to mark students
         $('.select-level').html(levelOptions);
       })
       .fail(function(error) {
-        alert(error.responseText);
+        console.log(error);
+        alert('Error occured while trying to retrieve levels');
       });
     });
 
@@ -105,7 +108,8 @@ In this section you will be able to mark students
         $('.select-module').html(moduleOptions);
       })
       .fail(function(error) {
-        alert(error.responseText);
+        console.log(error);        
+        alert('Error occured while trying to retrieve modules');
       });
     });
 
@@ -117,7 +121,7 @@ In this section you will be able to mark students
       var module = $('.select-module').val();
 
       $.ajax({
-        url: 'api/level/'+level+'/modules/'+module+'/academicyears',
+        url: '/api/level/'+level+'/modules/'+module+'/academicyears',
         type: 'GET',
         dataType: 'json'
       })
@@ -140,9 +144,19 @@ In this section you will be able to mark students
         $('.select-academic-year').html(academicyearsOptions);
       })
       .fail(function(error) {
-        alert(error.responseText);
+        alert('Error occured while trying to retrieve academic years');
       });
     });
+
+     /** IF ACADEMIC YEAR IS SELECTED THEN REFRESH WITH PARAMETERS */
+     $('.select-academic-year').on('change',function(event){
+      event.preventDefault();
+      var academicYear = $(this).val();
+      var module       = $('.select-module').val();
+
+      // Refresh the page with the selected option
+      window.location.href = window.location.protocol+'//'+window.location.host+'/marks/?module='+module+'&academicyear='+academicYear;
+     });
   });
 
 </script>

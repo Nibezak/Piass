@@ -2,24 +2,24 @@
 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
  <label>Choose Faculity</label>
  <?php $faculities[0] ='Select faculity'; ?>
-  {!! Form::select('faculity', $faculities, null,['class'=>'form-control select-faculity']) !!}
+  {!! Form::select('faculity', $faculities, 0,['class'=>'form-control select-faculity']) !!}
 </div>
-<div class="col-xs-1 col-sm-2 col-md-1 col-lg-2">
+<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 <label>Choose Department</label>
       <select name="department" class="form-control select-department">
-			<option>Please Choose faculity first.</option>
+			<option>Choose faculity first.</option>
       </select>
 </div>
-<div class="col-xs-1 col-sm-2 col-md-1 col-lg-2">
-<label>Choose level</label>
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+<label>Level</label>
 	<select name="level" class="form-control select-level">
-			<option>Please Choose department first.</option>
+			<option>Choose department first.</option>
     </select>
 </div>
-<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 <label>Choose module</label> 
 	<select name="level" class="form-control select-module">
-			<option>Please Choose level first.</option>
+			<option>Choose level first.</option>
     </select>
 </div>
 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">

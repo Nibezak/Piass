@@ -27,6 +27,11 @@
 | Student routes
 |--------------------------------------------------------------------------
 */
+   Route::group(['prefix'=>'marks'],	function(){
+   	 Route::get('/complete', ['as'=>'marks.complete','uses'=>'MarkController@complete']);
+	 Route::get('/cancel', ['as'=>'marks.cancel','uses'=>'MarkController@cancel']);
+	});
+
   Route::resource('marks', 'MarkController');
 /*
 |--------------------------------------------------------------------------
@@ -94,5 +99,5 @@ Route::group(['prefix'=>'api','middleware'=>'sentry.auth'], function()
 
 Route::get('test', function()
 	{
-		// dd();
+		return App\Models\Student::find(1)->marks;
 	});

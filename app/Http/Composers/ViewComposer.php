@@ -26,7 +26,8 @@ class ViewComposer
 	/** Faculities to the department form */
 	public function faculityForm(View $view)
 	{
-		$view->with('faculities',Faculity::lists('name','id'));
+		$faculities = Faculity::lists('name','id');
+		$view->with('faculities',$faculities);
 	}
 
 	public function departmentForm(View $view)

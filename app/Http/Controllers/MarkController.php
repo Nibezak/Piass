@@ -25,6 +25,40 @@ class MarkController extends Controller {
 	}
 
 	/**
+	 * Update student mark
+	 * 
+	 * @param  int $studentId 
+	 * @return mixed
+	 */
+	public function update($studentId)
+	{
+		$this->markFactory->updateMarks(Request::get('student_id'),Request::get('marks'));
+
+		return $this->reload();
+	}
+
+	/**
+	 * Completing marking process
+	 * 
+	 * @return mixed
+	 */
+	public function complete()
+	{
+		$this->markFactory->complete();
+		return $this->reload();
+	}
+
+	/**
+	 * Cancel Marking process
+	 * 
+	 * @return @mixed
+	 */
+	public function cancel()
+	{
+		$this->markFactory->cancel();
+		return $this->reload();
+	}
+	/**
 	 * Reload the content of the marking
 	 * 
 	 * @return view
@@ -34,20 +68,31 @@ class MarkController extends Controller {
 		/** Set student if needed */
 		$this->setStudentsToBeMarked();
 
-		/** Get student to be marked */
-	 	$students = $this->markFactory->getStudents();
 
-		return view('marks.index');
+		/** Get student to be marked and the marking details*/
+	 	$students = $this->markFactory->getStudents();
+	 	$markingDetails  = $this->markFactory->getFilterDetails();
+
+		return view('marks.index',compact('students','markingDetails'));
 	}
 
 	/**
 	 * Set students to be marked
 	 */
 	private function setStudentsToBeMarked()
+	{	
+		$this->setAcademicYear();
+		$this->markFactory->addStudentByCurrentSession();
+	}
+
+	/**
+	 * set academic year
+	 * 
+	 */
+	private function setAcademicYear()
 	{
-		$this->markFactory->setStudents(70);
-		if (Request::has('module_id')) {
-			$this->markFactory->setStudents(Request::get('module_id'));
+		if (Request::has('academicyear')) {
+			$this->markFactory->setAcademicYear(Request::get('academicyear'));
 		}
 	}
 }

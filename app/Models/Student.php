@@ -60,6 +60,15 @@ class Student extends Model {
 		}
 		return $level;
 	}
+	/**
+	 * Scoping level for this 
+	 * 
+	 * @return int 
+	 */
+	public function scopeLevel()
+	{
+		return $this->level();
+	}
 
 	/**
 	 * Determine if this student is at level
@@ -77,24 +86,43 @@ class Student extends Model {
 	 */
 	public function inTake()
 	{
-		// Get latest registered module
-
-		$latestModule = $this->registeredModules()
-					 		 ->orderBy('created_at','DESC')
-					   		 ->take(1)
-					   		 ->get();
-
-		// Do we have any registered module ?
-		$inTake = isset($latestModule[0]) ? $latestModule[0]->intake : false;
-
-		if(!$inTake)
-		{
-			return 'N/A' ;
-		}
-
-		return $inTake;
+		$latestModule = $this->getLastModule();
+		return !is_null($latestModule)?$latestModule->intake:'N/A';
 	}
 
+	/**
+	 * Scoping academic year for this student
+	 * 
+	 * @return string
+	 */
+	public function academicYear()
+	{
+		$latestModule = $this->getLastModule();
+		return !is_null($latestModule)?$latestModule->academic_year:'n/a';
+	}
+     
+    /**
+     * Get latest registered module for this student
+     * 
+     * @return obj
+     */
+    private function getLastModule()
+    {
+      return $this->registeredModules()
+    						 ->orderBy('created_at','DESC')
+					   		 ->take(1)
+					   		 ->first();
+    }
+    
+    /**
+     * Student marks
+     * 
+     * @return object
+     */
+    public function marks()
+    {
+    	return $this->hasMany('\App\Models\StudentMark');
+    }
 	/**
 	 * Relationship with the edication history model
 	 *

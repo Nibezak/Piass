@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Factories\MarkFactory;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Http\Requests\ApiRequest;
@@ -12,9 +13,10 @@ class ApiController extends Controller {
 	private $department;
 	private $faculity;
 
-	function __construct(Department $department, Faculity $faculity) {
+	function __construct(Department $department, Faculity $faculity,MarkFactory $markFactory) {
 		$this->department = $department;
 		$this->faculity = $faculity;
+		$this->markFactory = $markFactory;
 		parent::__construct();
 	}
 
@@ -28,9 +30,13 @@ class ApiController extends Controller {
 	 */
 	public function apiDepartments(ApiRequest $request, $faculity_id) {
 
+
 		$departments = $this->faculity->findOrFail($faculity_id)
 		                    ->departments->lists('name', 'id');
         $departments[0] = 'Select a department';
+
+        $this->markFactory->setFaculity($faculity_id);
+
 		return response()->json($departments);
 	}
 	/**
@@ -43,7 +49,7 @@ class ApiController extends Controller {
 	public function apiLevel(ApiRequest $request, $department) {
 
 		$level = $this->department->findOrFail($department)->levels;
-
+		$this->markFactory->setDepartment($department);
 		return response()->json($level);
 	}
 
@@ -60,7 +66,9 @@ class ApiController extends Controller {
 		$modules = $this->department->findOrFail((int) $departmentId)->modules;
        
 		$modules = $modules->where('department_level',(int) $level);
- 	
+ 		
+ 		$this->markFactory->setLevel($level);
+
 		return response()->json($modules);
 	}
 
@@ -78,7 +86,7 @@ class ApiController extends Controller {
 		$modules = $modules->where('department_level',(int) $level)->lists('name','id');
 
  		$modules[0] = 'select a module';
-
+        $this->markFactory->setLevel($level);
 		return response()->json($modules);
 	}
 
@@ -99,6 +107,8 @@ class ApiController extends Controller {
 
 	    $academicYears[0] = 'Select academic year';
 	    
+	    $this->markFactory->setModule($module);
+
 		return response()->json($academicYears);									    
 	}
 
