@@ -17,6 +17,7 @@
 		 Route::resource('educations', 'StudentEducationController');		 
 		 Route::resource('modules','StudentModulesController');
 		 Route::get('fees/{studentId}',['as'=>'student.fees','uses'=>'StudentController@fees']);
+		 Route::get('{studentId}/marks',['as'=>'student.marks','uses'=>'StudentController@marks']);
 		 Route::get('/file/{id}/delete',['as'=>'student.file.delete','uses'=>'FileController@destroy']);
 		 Route::get('{studentId}/modules/registered/',['as'=>'student.registered.modules','uses'=>'StudentModulesController@registeredModules']);
 	});

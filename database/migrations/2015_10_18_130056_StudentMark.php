@@ -23,6 +23,7 @@ class StudentMark extends Migration {
 			$table->integer('module_id');
 			$table->string('module_name');
 			$table->string('module_code');
+			$table->string('module_credits');
 			$table->string('academicYear');
 			$table->decimal('marks',10,2);
 			$table->integer('user_id');

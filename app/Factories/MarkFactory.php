@@ -116,19 +116,20 @@ class MarkFactory
 		$count = 0;
 		foreach ($students as  $student) 
 		{
-		 	$newStudent = new StudentMark;
-			$newStudent->student_id = $student->id;
-			$newStudent->student_registration_number = $student->registration_number;
-			$newStudent->faculity_id= $this->getFaculity();
-			$newStudent->department_id = $this->getDepartment();
-			$newStudent->level = $this->getLevel();
-			$newStudent->academicYear = $this->getAcademicYear();
-			$newStudent->marks = $student->marks;
-			$newStudent->module_id = $this->getModule();
-			$newStudent->module_name = $this->getFilterDetails()->module;
-			$newStudent->module_code = $this->getFilterDetails()->module_code;
-			$newStudent->user_id = Sentry::getUser()->id;
-			$newStudent->save();
+		 	$newStudentMark = new StudentMark;
+			$newStudentMark->student_id = $student->id;
+			$newStudentMark->student_registration_number = $student->registration_number;
+			$newStudentMark->faculity_id= $this->getFaculity();
+			$newStudentMark->department_id = $this->getDepartment();
+			$newStudentMark->level = $this->getLevel();
+			$newStudentMark->academicYear = $this->getAcademicYear();
+			$newStudentMark->marks = $student->marks;
+			$newStudentMark->module_id = $this->getModule();
+			$newStudentMark->module_name = $this->getFilterDetails()->module;
+			$newStudentMark->module_code = $this->getFilterDetails()->module_code;
+			$newStudentMark->module_credits = $this->getFilterDetails()->module_credits;
+			$newStudentMark->user_id = Sentry::getUser()->id;
+			$newStudentMark->save();
 			$count++;
 		 }
 
@@ -280,6 +281,7 @@ class MarkFactory
 		$module     			= $this->module->find($this->getModule());
 		$details->module 	 	= !is_null($module)? $module->name:null;
         $details->module_code   = !is_null($module)? $module->code:null;
+        $details->module_credits= !is_null($module)? $module->credits:null;
 
 		$details->academicYear 	= $this->getAcademicYear();
 

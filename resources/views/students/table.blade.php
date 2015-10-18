@@ -33,6 +33,8 @@
                       </a>
                       <a href="{{route('students.modules.show',$student->id)}}" class="btn btn-sm btn-success"><i class="fa fa-book">Modules</i>
                       </a>
+                      <a href="{{route('student.marks',$student->id)}}" class="btn btn-sm btn-success"><i class="fa fa-book">Marks</i>
+                      </a>
                         <a href="{{route('fees.show',$student->id)}}" class="btn btn-sm btn-warning"><i class="fa fa-money"></i>
                           Payment
                         </a>

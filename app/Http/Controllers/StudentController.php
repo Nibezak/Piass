@@ -152,6 +152,23 @@ class StudentController extends Controller {
 
 		return view('students.fees', compact('student'));
 	}
+
+
+	public function marks($studentId)
+	{
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('student.marks')) {
+			Flash::error(trans('Sentinel::users.noaccess'));
+
+			return redirect()->back();
+		}
+
+		$student = $this->student->findOrFail($studentId);
+
+		Log::info($this->user->email . ' viewed student marks information of ' . json_encode($student));
+
+		return view('students.marks', compact('student'));
+	}
 	/**
 	 * Remove the specified student from storage.
 	 *
