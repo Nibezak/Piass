@@ -1,7 +1,8 @@
 <?php $modules      = $student->marks->sortBy('academicYear'); ?>
-<?php $academicYear = $modules->first()->academicYear; ?>
-<?php $level        = $modules->first()->level; ?>
+<?php $academicYear = $modules->count() > 0 ? $modules->first()->academicYear : 'N/A'; ?>
+<?php $level        = $modules->count() > 0 ?$modules->first()->level: 'N/A'; ?>
 
+@if ($modules->count() > 0)
 <table class="table">
 @include('students.marks_header',compact('academicYear','level'))
 @forelse ($modules as $module)
@@ -22,3 +23,6 @@
   @endforelse
   </tbody>
 </table>
+@else
+  <h3 class="progress-bar-warning" style="text-align:center">Sorry, {!! $student->names !!} does not seem to have any mark to report as of now.</h3>
+@endif

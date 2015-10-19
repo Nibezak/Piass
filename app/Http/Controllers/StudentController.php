@@ -7,6 +7,7 @@ use App\Http\Requests\StudentUpdateRequest;
 use App\Models\FeeTransaction;
 use App\Models\Student;
 use Flash;
+use Illuminate\Support\Facades\Request;
 use Input;
 use Log;
 use Redirect;
@@ -166,8 +167,20 @@ class StudentController extends Controller {
 		$student = $this->student->findOrFail($studentId);
 
 		Log::info($this->user->email . ' viewed student marks information of ' . json_encode($student));
+		$report = view('students.marks', compact('student'))->render();
+		if (Request::get('export') == 'printer') {
+			 return view('layouts.print',compact('report'));
+		}
+		if (Request::get('export') == 'excel') {
+			
+			 $filename = $student->names .'-marks.xls';
 
-		return view('students.marks', compact('student'));
+			header('Content-type: application/vnd.ms-excel');
+			header('Content-Disposition: attachment; filename='.$filename);
+
+			 return $report;
+		}
+		return view('students.transcripts',compact('student','report'));
 	}
 	/**
 	 * Remove the specified student from storage.
