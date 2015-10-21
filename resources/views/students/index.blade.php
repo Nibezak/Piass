@@ -10,16 +10,24 @@ List of PIASS students that are currently registered
 @section('content')
 <div class="box">
                 <div class="box-header">
-                  
-                  <a href="{{route('students.create')}}" class="btn btn-success">Register student <i class="fa fa-plus"></i></a>
-                  <div class="box-tools row">
+                  <div class="row">
+                     <div class="col-md-3">
+                      <a href="{{route('students.create')}}" class="btn btn-success">Register student <i class="fa fa-plus"></i></a>
+                     </div>
+                    <div class="col-md-8">
+                       @include('partials.batch_upload')
+                    </div>
+                  </div>
+                  <br/>
+                  <div class="row">
                    <div class="col-md-6">
                     {!! $students->render() !!}
                   </div>
                   <div class="col-md-6">
                     {!! Form::open(['route' => 'students.index', 'method' => 'get']) !!}
                      @include('partials.search') 
-                  {!! Form::close() !!}
+                    {!! Form::close() !!}
+
                   </div>
                   </div>
                 </div><!-- /.box-header -->

@@ -35,7 +35,7 @@ td {
     @media print {
       body, html, .invoice,wrapper {
           width: 100%;
-          font-size: 10px;
+          font-size: 8px;
       }
       .no-print, .no-print *
     {

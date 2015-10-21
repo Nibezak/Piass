@@ -13,17 +13,20 @@ Route::get('/dashboard', ['as'=>'dashboard','uses'=>'DashboardController@index']
 | Student routes
 |--------------------------------------------------------------------------
 */
-   Route::group(['prefix'=>'students'],	function()
-	{
-		 Route::resource('educations', 'StudentEducationController');		 
-		 Route::resource('modules','StudentModulesController');
-		 Route::get('fees/{studentId}',['as'=>'student.fees','uses'=>'StudentController@fees']);
-		 Route::get('{studentId}/marks',['as'=>'student.marks','uses'=>'StudentController@marks']);
-		 Route::get('/file/{id}/delete',['as'=>'student.file.delete','uses'=>'FileController@destroy']);
-		 Route::get('{studentId}/modules/registered/',['as'=>'student.registered.modules','uses'=>'StudentModulesController@registeredModules']);
-	});
+Route::group(['prefix'=>'students'],	function()
+{
+	 Route::resource('educations', 'StudentEducationController');		 
+	 Route::resource('modules','StudentModulesController');
+	 Route::get('fees/{studentId}',['as'=>'student.fees','uses'=>'StudentController@fees']);
+	 Route::get('{studentId}/marks',['as'=>'student.marks','uses'=>'StudentController@marks']);
+	 Route::get('/file/{id}/delete',['as'=>'student.file.delete','uses'=>'FileController@destroy']);
+	 Route::get('/upload', ['as'=>'students.upload','uses'=>'StudentController@upload']);
+	 Route::post('/upload', ['as'=>'students.upload','uses'=>'StudentController@upload']);
+	 Route::get('{studentId}/modules/registered/',['as'=>'student.registered.modules','uses'=>'StudentModulesController@registeredModules']);
+});
 
-  Route::resource('students', 'StudentController');
+Route::resource('students', 'StudentController');
+
 /*
 |--------------------------------------------------------------------------
 | Student routes
@@ -77,11 +80,8 @@ Route::group(['prefix'=>'settings'],function()
 Route::group(['prefix'=>'reports'],function()
 {
 	Route::get('/','ReportController@index');
-
 	Route::get('/students/details', ['as'=>'reports.students.details','uses'=>'ReportStudentController@details']);
-
 	Route::get('/students/payments/progression',['as'=>'reports.students.payments.progression','uses'=>'ReportStudentController@paymentProgression'] );
-
 	Route::get('/students/payments/full',['as'=>'reports.students.payments.paid','uses'=>'ReportStudentController@fullPaid'] );
 	Route::get('/students/payments/pending',['as'=>'reports.students.payments.pending','uses'=>'ReportStudentController@pendingPayment'] );
 

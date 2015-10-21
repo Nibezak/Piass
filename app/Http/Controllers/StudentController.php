@@ -8,7 +8,9 @@ use App\Models\FeeTransaction;
 use App\Models\Student;
 use Flash;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Validator;
 use Input;
+use League\Csv\Reader;
 use Log;
 use Redirect;
 
@@ -204,5 +206,91 @@ class StudentController extends Controller {
 
 		return redirect()->to('students');
 	}
+
+	/**
+	 * Uploading students
+	 * @return [type] [description]
+	 */
+	public function upload() {
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess('student.online.registrationi.upload')) {
+			Flash::error(trans('Sentinel::users.noaccess'));
+
+			return redirect()->back();
+		}
+		
+		if (Input::hasFile('studentsfile')== false) {
+			  	return $this->index();
+		  }
+
+		  if (Input::file('studentsfile')->getClientOriginalExtension() != 'csv') {
+		    Flash::error($validator->messages()->first());
+		    return $this->index();
+		  }
+
+	    // checking file is valid.
+	    if (Input::file('studentsfile')->isValid()) {
+	       
+	       $csv = Reader::createFromPath(Input::file('studentsfile'));
+	       $rules = (new \App\Http\Requests\StudentRegisterRequest)->rules();
+
+	       $message = '';
+
+		   $csv->setOffset(1); //because we don't want to insert the header
+	       $students = $csv->fetchAll();
+	       $count = 0;
+	       foreach ($students as $row) {
+				//Do not forget to validate your data before inserting it in your database		
+				$student = new \stdClass();
+
+				$student->names             	= $row[0];
+				$student->DOB               	= $row[1];
+				$student->gender            	= $row[2];
+				$student->martial_status    	= $row[3];
+				$student->NID               	= $row[4];
+				$student->telephone         	= $row[5];
+				$student->email             	= $row[6];
+				$student->occupation        	= $row[7];
+				$student->residence         	= $row[8];
+				$student->nationality       	= $row[9];
+				$student->father_name       	= $row[10];
+				$student->mother_name       	= $row[11];
+				$student->mode_of_study     	= $row[14];
+				$student->session           	= $row[15];
+				$student->campus            	= $row[16];
+				$student->department_id     	= $row[17];
+				$student->registration_number   = false;
+				$student->online_registered     = "0";
+
+				 // doing the validation, passing post data, rules and the messages
+				$validator = Validator::make((array) $student, $rules); 
+				if ($validator->fails()) {
+					foreach ($validator->messages()->toArray() as $key => $value) {
+						    foreach ($value as $key => $error) {
+						    	$message .= $error;
+						    }
+				   }
+				   Flash::error($message);
+				   break;
+				}
+
+				++$count;
+				//if the function return false then the iteration will stop
+			    $this->dispatch(new StudentRegisterCommand($student))->student;
+			}
+		      // sending back with successfully message.
+		      if ($count > 0) {
+		      	Log::info($this->user->email . ' uploaded students '+$count);
+			    Flash::success('You have successfully uploaded students '.$count);
+		      }
+		      
+		      return $this->index();
+	    }
+	    else {
+	      // sending back with error message.
+	     Flash::error('uploaded file is not valid');
+	     return $this->index();
+	    }
+  }
 
 }

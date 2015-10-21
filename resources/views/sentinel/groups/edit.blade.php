@@ -37,7 +37,17 @@ Edit Group
             @endif
             <li>
             <input name="permissions[{!! $permission !!}]" value="1" type="checkbox" {!! (isset($permissions[$permission]) ? 'checked' : '') !!}>
-               {!! isset(explode('.', $permission)[1])?explode('.', $permission)[1]:null !!}
+            <?php $permissionLabel =  explode('.', $permission); ?>
+            @if (count($permissionLabel) > 0)
+              @foreach ($permissionLabel as $key => $value)
+              {{-- if the permission doesn't have sub keys then display the key and contineu --}}
+              @if ($key == 0  && count($permissionLabel) > 1)
+                <?php continue; ?>
+              @endif
+               {!! $value !!}
+              @endforeach 
+            @endif
+              
             </li>
         @endforeach 
         </div>
