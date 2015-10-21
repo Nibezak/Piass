@@ -14,6 +14,7 @@ class Module extends Model {
 	protected $dates = ['deleted_at'];
 
 	protected $fillable = ['name', 'code', 'credits', 'credit_cost', 'department_level', 'amount'];
+
 	/**
 	 * Relationship with Department Model
 	 *
@@ -22,6 +23,7 @@ class Module extends Model {
 	public function departments() {
 		return $this->belongsToMany('App\Models\Department');
 	}
+
 	/**
 	 * Find or create a new
 	 */
@@ -30,4 +32,5 @@ class Module extends Model {
 
 		return $obj ?: static::create($module);
 	}
+
 }

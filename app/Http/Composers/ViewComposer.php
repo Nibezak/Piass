@@ -35,7 +35,6 @@ class ViewComposer
 		$view->with('departments',Department::lists('name','id'));
 	}
 
-
 	public function companyName(View $view)
 	{
 		$view->with('company',$this->settings->get('Company_name'));

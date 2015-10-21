@@ -41,14 +41,12 @@
               <a href="/students">
                 <i class="fa fa-graduation-cap"></i> <span>Students</span>
               </a>
-            </li> 
-            
+            </li>        
             <li class="{{(Request::is('marks*') ? 'active' : '')}} treeview">
               <a href="{{ route('marks.index') }}">
                 <i class="fa fa-money"></i>
                 <span>Marks</span>
-              </a>
-              
+              </a>             
             </li>
             <li class="{{(Request::is('faculities*') ? 'active' : '')}} treeview">
               <a href="#">

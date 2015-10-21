@@ -20,6 +20,7 @@ class ViewComposersProvider extends ServiceProvider {
 		$this->partialsComposer();
 
 		$this->academicYearsComposer();
+
 	}
 
 	/**
@@ -84,7 +85,6 @@ class ViewComposersProvider extends ServiceProvider {
 			];
 		view()->composer($views,'App\Http\Composers\ViewComposer@departmentForm');
 	}
-
 
 	/**
 	 * LEFT NAVITION COMPOSER

@@ -34,6 +34,13 @@
 	});
 
   Route::resource('marks', 'MarkController');
+
+/*
+|--------------------------------------------------------------------------
+| TEACHER  routes
+|--------------------------------------------------------------------------
+*/
+Route::resource('/teachers', 'TeacherController');
 /*
 |--------------------------------------------------------------------------
 | Fees, Transactions and files routes
@@ -55,11 +62,8 @@ Route::get('departments/{departmentid}/level/{levelid}',['as' =>'departments.lev
 Route::group(['prefix'=>'settings'],function()
 	{
 		Route::resource('faculities','FaculityController');
-
 		Route::resource('departments','DepartmentController');
-
 		Route::get('/',['as'=>'settings.index','uses'=>'SettingController@index']);
-
 		Route::post('/store',['as'=>'settings.store','uses'=>'SettingController@store']);
 	});
 
@@ -100,5 +104,5 @@ Route::group(['prefix'=>'api','middleware'=>'sentry.auth'], function()
 
 Route::get('test', function()
 	{
-		return App\Models\Student::find(1)->marks;
+	 dd(App\Models\Module::first()->permissions());
 	});

@@ -44,7 +44,20 @@ class MarkController extends Controller {
 	 */
 	public function complete()
 	{
+
+	 	$markingDetails  = $this->markFactory->getFilterDetails();
+	 	$permission      = $markingDetails->department.'.'.$markingDetails->module;
+
+		// First check if the user has the permission to do this
+		if (!$this->user->hasAccess($permission)) {
+			Flash::error(trans('Sentinel::users.noaccess'));
+
+			return redirect()->back();
+		}
 		$this->markFactory->complete();
+
+		Log::info($this->user->email . ' has completed to mark'.implode(',', $markingDetails));
+		
 		return $this->reload();
 	}
 
