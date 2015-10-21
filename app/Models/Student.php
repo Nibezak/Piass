@@ -23,7 +23,8 @@ class Student extends Model {
 							'campus',
 							'created_by',
 							'updated_by',
-							'department_id'
+							'department_id',
+							'online_registered'
 	];
 
 	protected	$dates = ['DOB'];

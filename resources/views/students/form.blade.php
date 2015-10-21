@@ -5,20 +5,24 @@
               <div class="row">
                 <div class="col-md-5 col-lg-5 ">
 
+                  @if (Request::is('registration')==false)
                   <div class="img-circle" alt="Student Image" align="center">
-                      
                       <i class="fa fa fa-graduation-cap" style="font-size:100px;"></i>
-
                   </div>
-      <div class="col-xs-10 col-sm-10 "> <br>
+                  @endif
+                <div class="col-xs-10 col-sm-10 "> <br>
                   <dl>
+                  @if (Request::is('registration')==false)
+                    {{-- expr --}}
+                  
                     <dt>Registration number <em style="font-size:12px;font-weight:100"></em>
                       {!! $errors->first('registration_number','<em class="has-error">(:message)</em>') !!} 
                     </dt>
                     <dd class=" {{ ($errors->has('registration_number')) ? 'has-error' : '' }}">
                      {!! Form::text('registration_number', $student->registration_number, ['class'=>'form-control','placeholder'=>'registration number ']) !!}
                   </dd>
-                    <dt>Residence <em style="font-size:12px;font-weight:100">(Sector, District...)</em>
+                @endif  
+                  <dt>Residence <em style="font-size:12px;font-weight:100">(Sector, District...)</em>
                       {!! $errors->first('residence','<em class="has-error">(:message)</em>') !!} 
                     </dt>
                     <dd class=" {{ ($errors->has('residence')) ? 'has-error' : '' }}">

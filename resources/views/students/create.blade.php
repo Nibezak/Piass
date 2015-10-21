@@ -13,13 +13,11 @@ Please fill below fields in order to register new student
 <div class="box">
       
 {!! Form::open(['route' => 'students.store']) !!}       
-
+    {!! Form::hidden('online_registered', '0') !!}
 	@include('students.form',['button'=>'Register'])
-
 {!!  Form::close() !!}     
 
 	@include('students.files')
-
 {!! Form::open(['route' => ['students.educations.create',$student->id],'method'=>'PUT','onsubmit'=>'myButton.disabled = true; return true;']) !!}       
 	
 	@include('students.educations',['button'=>'Register education'])

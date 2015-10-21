@@ -1,24 +1,5 @@
 <section class="sidebar">
-          <!-- Sidebar user panel -->
-        {{--   <div class="user-panel">
-            <div class="pull-left image"> --}}
-              {{-- <img src="{{Url()}}/assets/dist/img/avatar.png" class="img-circle" alt="User Image" /> --}}
-            {{-- </div>
-            <div class="pull-left info"> --}}
-              {{-- <p> {{ Sentry::getUser()->first_name }}  {{ Sentry::getUser()->last_name }} </p> --}}
 
-           {{--    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-            </div>
-          </div> --}}
-          <!-- search form -->
-          {{-- <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="Search..."/>
-              <span class="input-group-btn">
-                <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-              </span>
-            </div>
-          </form> --}}
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
@@ -28,14 +9,7 @@
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
             </li>
-{{-- 
-            <li class="{{(Request::is('transactions*') ? 'active' : '')}} treeview">
-              <a href="{{Url()}}/transactions">
-                <i class="fa fa-exchange"></i>
-                <span>Transactions</span>
-              </a>
-              
-            </li> --}}
+
 
             <li class="{{(Request::is('students*') ? 'active' : '')}} treeview">
               <a href="/students">
@@ -44,7 +18,7 @@
             </li>        
             <li class="{{(Request::is('marks*') ? 'active' : '')}} treeview">
               <a href="{{ route('marks.index') }}">
-                <i class="fa fa-money"></i>
+                <i class="fa fa-th"></i>
                 <span>Marks</span>
               </a>             
             </li>

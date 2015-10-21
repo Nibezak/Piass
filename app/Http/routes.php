@@ -1,11 +1,16 @@
 <?php
+
+
+Route::get('registration/',['as'=>'student.online.registration.index','uses'=>'OnlineRegistrationController@index']);
+Route::post('registration/store',['as'=>'student.online.registration','uses'=>'OnlineRegistrationController@register']);
+
 /*
 |--------------------------------------------------------------------------
 | Home routes
 |--------------------------------------------------------------------------
 */
-	Route::get('/', ['as'=>'home','uses'=>'DashboardController@index']);
-	Route::get('/dashboard', ['as'=>'dashboard','uses'=>'DashboardController@index']);
+Route::get('/', ['as'=>'home','uses'=>'DashboardController@index']);
+Route::get('/dashboard', ['as'=>'dashboard','uses'=>'DashboardController@index']);
 
 /*
 |--------------------------------------------------------------------------
@@ -100,9 +105,3 @@ Route::group(['prefix'=>'api','middleware'=>'sentry.auth'], function()
 		Route::get('level/{level}/modules/{moduleId}/academicyears','ApiController@moduleAcademicYears');
       //http://piassms.app/level/1/modules/1/academicyears
 });
-
-
-Route::get('test', function()
-	{
-	 dd(App\Models\Module::first()->permissions());
-	});

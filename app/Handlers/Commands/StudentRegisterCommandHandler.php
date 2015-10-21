@@ -24,6 +24,7 @@ class StudentRegisterCommandHandler {
 		$studentInfo['DOB']						= date('Y-m-d h:i:s',strtotime($studentData->DOB));
 		$studentInfo['registration_number'] 	= $studentInfo['registration_number']?:$this->getRegistrationNumber($studentData->department_id);
 		$studentInfo['created_by'] 				= \Sentry::getUser()->id;
+
 		$student =  Student::create($studentInfo);
 		
 		$event 	 = new StudentWasRegisteredEvent($student);
