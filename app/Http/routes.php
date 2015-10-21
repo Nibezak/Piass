@@ -1,9 +1,5 @@
 <?php
 
-
-Route::get('registration/',['as'=>'student.online.registration.index','uses'=>'OnlineRegistrationController@index']);
-Route::post('registration/store',['as'=>'student.online.registration','uses'=>'OnlineRegistrationController@register']);
-
 /*
 |--------------------------------------------------------------------------
 | Home routes
@@ -105,3 +101,8 @@ Route::group(['prefix'=>'api','middleware'=>'sentry.auth'], function()
 		Route::get('level/{level}/modules/{moduleId}/academicyears','ApiController@moduleAcademicYears');
       //http://piassms.app/level/1/modules/1/academicyears
 });
+
+
+Route::get('registration/',['as'=>'student.online.registration.index','uses'=>'OnlineRegistrationController@index']);
+Route::post('registration/store',['as'=>'student.online.registration','uses'=>'OnlineRegistrationController@register']);
+Route::get('registration/export',['as'=>'student.online.registration.export','uses'=>'OnlineRegistrationController@export']);

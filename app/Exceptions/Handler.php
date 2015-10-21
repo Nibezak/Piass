@@ -1,11 +1,8 @@
 <?php namespace App\Exceptions;
-
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Database\Eloquent\ModelNotFoundException as ModelNotFoundException;
-
 class Handler extends ExceptionHandler {
-
 	/**
 	 * A list of the exception types that should not be reported.
 	 *
@@ -14,7 +11,6 @@ class Handler extends ExceptionHandler {
 	protected $dontReport = [
 		'Symfony\Component\HttpKernel\Exception\HttpException'
 	];
-
 	/**
 	 * Report or log an exception.
 	 *
@@ -27,7 +23,6 @@ class Handler extends ExceptionHandler {
 	{
 		return parent::report($e);
 	}
-
 	/**
 	 * Render an exception into an HTTP response.
 	 *
@@ -38,6 +33,22 @@ class Handler extends ExceptionHandler {
 	public function render($request, Exception $e)
 	{
 		if($this->isHttpException($e)){
+			switch ($e->getStatusCode()) {
+                case '404':
+                            \Log::error($e);
+                        return  redirect('/');;
+                break;
+
+                case '500':
+                    \Log::error($exception);
+                        return redirect('/');; 
+                break;
+
+                default:
+                    return redirect('/');
+                break;
+            }
+        }
 		//add this to the render function
 		if ($e instanceof ModelNotFoundException)
             {
@@ -47,8 +58,6 @@ class Handler extends ExceptionHandler {
                 	return \redirect('/');;
                 endif;
             }
-
 		return parent::render($request, $e);
 	}
-
 }
