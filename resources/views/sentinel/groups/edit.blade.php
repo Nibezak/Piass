@@ -40,7 +40,7 @@ Edit Group
             <?php $permissionLabel =  explode('.', $permission); ?>
             @if (count($permissionLabel) > 0)
               @foreach ($permissionLabel as $key => $value)
-              {{-- if the permission doesn't have sub keys then display the key and contineu --}}
+              {{-- if the permission doesn't have sub keys then display the key and continue --}}
               @if ($key == 0  && count($permissionLabel) > 1)
                 <?php continue; ?>
               @endif
