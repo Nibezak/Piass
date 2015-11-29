@@ -197,7 +197,15 @@ class StudentController extends Controller {
 
 			return redirect()->back();
 		}
-		$student = $this->student->findOrFail($id);
+		$student = $this->student->with(['registeredModules','marks','educations','files','fees'])->findOrFail($id);
+
+		// Before we delete a student make sure we remove everything related to this student
+		$student->registeredModules()->delete();
+		$student->marks()->delete();
+		$student->educations()->delete();
+		$student->files()->delete();
+		$student->fees()->delete();
+		
 		$this->student->destroy($id);
 
 		Log::info($this->user->email . ' viewed student fees information of ' . json_encode($student));

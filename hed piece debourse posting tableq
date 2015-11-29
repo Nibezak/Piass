@@ -1,0 +1,520 @@
+[33mcommit f50d250fc7cc589afeb98e2ae281086650ade512[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Wed Oct 21 21:28:23 2015 +0200
+
+    Added online registration and batch uploads of the students registered online
+
+[33mcommit 0b2eafe617c790adaf1065d8c2919f66226e4e2a[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Wed Oct 21 21:27:49 2015 +0200
+
+    Added online registration
+
+[33mcommit 279248c8bfed3954f76f5c56b2b7f2aa4e53df2e[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Wed Oct 21 14:14:05 2015 +0200
+
+    Added export of students to csv
+
+[33mcommit f8b23ad0651aa754d0b089e4a83658f38928d9a1[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Wed Oct 21 12:02:52 2015 +0200
+
+    Added online registration
+
+[33mcommit 62278f6d54f327c35697b8a84904400895c54224[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Wed Oct 21 10:08:02 2015 +0200
+
+    Added marking permission
+
+[33mcommit 4529c874f53be6a43450876290acbb2d0facb454[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Mon Oct 19 23:22:35 2015 +0200
+
+    Added printable transcript and the excel export
+
+[33mcommit 9fa9dcc0fb2d6b20dfb67da82672829ebe32ded2[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Mon Oct 19 20:56:11 2015 +0200
+
+    Added transcript which are well formatted
+
+[33mcommit 5e8a60e95ba0420ccb39b28c1386cc09de6a3e05[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Sun Oct 18 16:21:31 2015 +0200
+
+    Added marks summary to the report
+
+[33mcommit 4b3ad40b04395f6a769a5bb83c4499ab14febf9d[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Sun Oct 18 16:13:47 2015 +0200
+
+    Added the student marking reports
+
+[33mcommit baa41d0092decd5c7eece903c002443b1bde4120[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Sun Oct 18 15:49:26 2015 +0200
+
+    added marking module for the student
+
+[33mcommit 7f294ca8fd8757acaacb61f4bca0c5b8128ec124[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Sat Oct 17 23:44:00 2015 +0200
+
+    added filter for marking module that enables someone to select which department he/she is going to mark
+
+[33mcommit 29c7388d54e0050c483a11dca5895b6dfa0c16c0[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Sat Oct 17 21:21:39 2015 +0200
+
+    Fixed the bug of object set to null in datepickjs
+
+[33mcommit 173a503db33b7015addadac0c4fd41db351a9856[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Sat Oct 17 20:30:25 2015 +0200
+
+    Added league/csv  to ease CSV parsing, writing and filtering in PHP
+
+[33mcommit 4e8f711ce86b8782ffd63aa46528e0dc02c5684d[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Thu Oct 8 10:07:07 2015 +0200
+
+    Fixed sql syntax issue in the migration of creating view
+
+[33mcommit faf4c52d720c56b744c0b208e2b0c9a6e3ff4c8b[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Thu Oct 8 09:55:13 2015 +0200
+
+    Remove the fees when a module is deleted
+
+[33mcommit 44a9748c41b9c49af680dbb9ff9f0dc9323a0234[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Sep 18 20:48:41 2015 +0200
+
+    Display information when available in student list
+
+[33mcommit 42e77c4e393c7849b4adc6e194c81557cb82512f[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Mon Jul 27 01:08:54 2015 +0200
+
+    Added option to delete student module
+
+[33mcommit 3c5a78776deaa084514c817633a0c64f5a979f3b[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Mon Jul 27 00:50:24 2015 +0200
+
+    Added the option to remove fees transaction
+
+[33mcommit ff491acf1650175b4b436df09f5348791a0e9f99[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Mon Jul 27 00:37:31 2015 +0200
+
+    Added softDelete columns to models
+
+[33mcommit 3ae4629bdbd5bf5488879578d0838f0841c37fa1[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Mon Jul 27 00:22:50 2015 +0200
+
+    Added more student details
+
+[33mcommit 68c3c66cf8088a1528c12ba816b0c84789ffc19e[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Mon Jul 27 00:14:45 2015 +0200
+
+    Add all student details for the student details report
+
+[33mcommit fddf28f9bc04772114a46be31830753a328614ec[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Sun Jul 12 14:00:17 2015 +0200
+
+     Fixed the spelling issue on the student controller
+
+[33mcommit 87ef19f019f757b6b76bbb277f3ca142fec40e61[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Sun Jul 12 13:49:52 2015 +0200
+
+    Added logs for all kind of transaction
+
+[33mcommit db63f111953e5f2bd718bd730ade52b0d070a3f4[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Sun Jul 12 12:23:28 2015 +0200
+
+    Reverted commited changes by mistakes
+
+[33mcommit 043751f23f2e9b8e05e8081c40b4fcbd89c61380[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Mon May 4 16:36:44 2015 +0200
+
+    Displayed report with the needed information as requested
+
+[33mcommit 829dc364dc76fc9e5ce7298a9ebf728b16cde51b[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Mon May 4 16:33:24 2015 +0200
+
+    Displayed report with the needed information as requested
+
+[33mcommit 894d12334a041a0e45c5b8fb5ed68bfc52c7e064[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Mon May 4 15:53:49 2015 +0200
+
+    Changed student number to  PIASS/Faculity/Academic year/ Number
+
+[33mcommit 0bfa00c22ea8a09d5dc5933208a31dd732f04016[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Mon May 4 15:40:48 2015 +0200
+
+    add the level where the registered modules are found!
+    it can be under Description - Registered for 7 modules in Level xxxx
+
+[33mcommit 9e255b2d2c2dccb2ccb5e0dd6bca874cde8f600a[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Sat Apr 25 15:23:55 2015 +0200
+
+    Add credit/debit balance on student list
+
+[33mcommit cb9524b17ed7da5d1b96a443d68749889e4cc1bf[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Sat Apr 25 15:20:02 2015 +0200
+
+    Add credit/debit balance on student list
+
+[33mcommit 7725f4ab987f8b6791b2ba219cc1dfe0918f6440[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Sat Apr 25 15:16:10 2015 +0200
+
+    Added serach by name or by CODE
+
+[33mcommit 07d7160903e6a0529b7f14d3c4adb70ee3c95a35[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Sat Apr 25 14:58:35 2015 +0200
+
+    Changed fields displayed in the student module
+
+[33mcommit 9c67c39cd708114be7f61ffec58b1558258ecd0d[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Wed Apr 8 20:11:14 2015 +0200
+
+    added some boil plate
+
+[33mcommit 46dc151984359229ee728e6dd31cd287cc3ae175[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Wed Apr 8 20:03:39 2015 +0200
+
+    added fine fees when a student is registering
+
+[33mcommit 39bb601688bd3f1d8c04d0118f238c3b821e9499[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Wed Apr 8 19:32:10 2015 +0200
+
+    fixed Call to a member function counts() on a non-object issue when registering module
+
+[33mcommit 4c627b24ff8c37552500c36eed7e23db4ced5ab1[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Wed Apr 8 17:42:04 2015 +0200
+
+    Added full time cost per credit
+
+[33mcommit 3b3ec24c3318c5a81bfadac7663ce09708d3de18[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Wed Apr 8 17:35:46 2015 +0200
+
+    Allowing one module to belong to multiple departments
+
+[33mcommit 780d0fdc9c9ee4f6216940a3a7b55b6d158f0ff9[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Wed Apr 8 16:55:03 2015 +0200
+
+    Changed readme
+
+[33mcommit 461aa83339fc1e8f2cb9b73b1e9614c85a006c45[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Wed Apr 8 08:17:44 2015 +0200
+
+    Updated readme file
+
+[33mcommit 3c4e861c0fc92da3887c503ca3d27fc8b38f8a9a[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Tue Apr 7 23:23:23 2015 +0200
+
+    Removed test route
+
+[33mcommit cea35b540ed390c9ab476c6c4d9d35b1c05dd93d[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Tue Apr 7 21:32:07 2015 +0200
+
+    Fixed the issue of the registration number
+
+[33mcommit b901b8e2a928dc2e7c7917ba7b82b456cf775a7f[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Tue Apr 7 21:25:52 2015 +0200
+
+    added option for registration number on creation
+
+[33mcommit 8ef008522e83f5bea1a21a7682bd5ac75f81e594[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Tue Apr 7 21:19:39 2015 +0200
+
+    Added grade to education history from A to E
+
+[33mcommit ca64a7cedba869f61ed65ad9aa05470e9270ce13[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Tue Apr 7 20:39:23 2015 +0200
+
+    added option to add registration number during registration
+
+[33mcommit d27712a198e2e40712811e616113669826bb28be[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Tue Apr 7 20:13:14 2015 +0200
+
+    changed courses to modules under student module
+
+[33mcommit 7c593e222db0253e9566191ab557491ab4abee57[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Tue Apr 7 15:51:00 2015 +0200
+
+    changed env
+
+[33mcommit 68c47411b8e99b16609d6376fedcc2d7ae7dcb78[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Mon Apr 6 13:21:16 2015 +0200
+
+    Fixed department error
+
+[33mcommit 193454977a9475d7b00795508ec990732e8bd02a[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Mon Apr 6 13:18:48 2015 +0200
+
+    Added intake marcha and september
+
+[33mcommit 291c42514ce549175a7583038446aa533ddafcf8[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Mon Apr 6 13:12:36 2015 +0200
+
+    Added intake
+
+[33mcommit f49858560d5f9b6b6cfb62fa4216a7dcf2caaf51[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Mon Apr 6 12:55:57 2015 +0200
+
+    Fixed faculity not available issue
+
+[33mcommit 11760892588df698cdc3df29459466bde66665a1[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Apr 3 15:38:24 2015 +0200
+
+    Fixed the issue of total modules amount on update
+
+[33mcommit 5a2e55440d40bff0f53401092938deee2c345dc4[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Apr 3 15:25:13 2015 +0200
+
+    Fixed reports display issues
+
+[33mcommit 878390c9a57a3c8568da1b2bdeb1d394d907ee2f[m
+Merge: a73a471 d8a6c43
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Apr 3 11:36:30 2015 +0200
+
+     Merge branch 'master' of https://github.com/kamaroly/piassstudent
+
+[33mcommit d8a6c43359e4f482113159af6e2c0335967e7a8e[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Mon Mar 30 11:03:22 2015 +0200
+
+    added Academic year
+
+[33mcommit 363909cb8748663aa70eca391e5f7d4dd629ecba[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Mon Mar 30 10:47:00 2015 +0200
+
+    Added academic years
+
+[33mcommit 18b04491a622522f1b89fe18efb1a724cab1a3e9[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Mon Mar 30 09:59:36 2015 +0200
+
+    Added registration fees charge automatically
+
+[33mcommit a73a4717e525b978c4c7916d3468d31382654dec[m
+Merge: c341306 24e8f3a
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Mar 27 22:34:08 2015 +0200
+
+    Merge branch 'master' of https://github.com/kamaroly/piassstudent
+
+[33mcommit c3413060e826d487e6d982473338ccadafe085cf[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Mar 27 22:33:45 2015 +0200
+
+    resolved conflicts
+
+[33mcommit 7d7c9d8c65151a3de535fa995146c676744d51f9[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Mar 27 22:32:56 2015 +0200
+
+    resolved conflicts
+
+[33mcommit bbb8931e23d0a33ea41b55d8377118351b1b1c89[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Mar 27 22:32:28 2015 +0200
+
+    resolved conflicts
+
+[33mcommit 24e8f3aeb18041854236590706d7fe3e63f995f4[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Mar 27 21:51:59 2015 +0200
+
+    Fixed reset password bug
+
+[33mcommit 79e506e7ffaa0d2be5a7210f49592d66dfebb8d1[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Mar 27 21:35:32 2015 +0200
+
+    fixes syntax error, unexpected ')' when editing user
+
+[33mcommit eb22095815c68849b533f49e117e8212843a28b0[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Mar 27 21:18:51 2015 +0200
+
+    Removed unnecessary views for reports
+
+[33mcommit 3de422597f3311a15e8af8cbb590a08f40ab2b07[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Mar 27 20:56:36 2015 +0200
+
+    Added boilePlates to the system
+
+[33mcommit a0d292048fc7e093cadbe4c2fd53d0cf8e3f924d[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Mar 27 20:33:04 2015 +0200
+
+    Refactored all reports
+
+[33mcommit 2e4fc3194ab2e3794a4a8fc57f9e3ecd3235936c[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Mar 27 19:58:50 2015 +0200
+
+    Refactored student reporting module
+
+[33mcommit 39281bd45758e5a1e29932e7ece657801055ddd7[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Mar 27 19:12:51 2015 +0200
+
+    Fixed undefined 0 index on the reporting filter
+
+[33mcommit e865ac4fd81395d1c3c45e2ccafaab0ff2718d22[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Mar 27 19:08:39 2015 +0200
+
+    Added logo to the app
+
+[33mcommit 7c2cca43858d4cbab9f2ed24c9b265f11048573c[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Mar 27 18:53:53 2015 +0200
+
+    Added validation on Faculity/Department and module
+
+[33mcommit 3e2e210ed23f2373519753dbae0e0b6c69bbd4b2[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Mar 27 16:56:49 2015 +0200
+
+    Added MiddleWare to report
+
+[33mcommit f46096a62153c9cf055f7f1ca6877c4a421f0a06[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Mar 27 10:14:01 2015 +0200
+
+    Added registration fees to the settings
+
+[33mcommit 722445da534c29aae2c3086ef50138f932a4382d[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Fri Mar 27 08:26:50 2015 +0200
+
+    Changed general settings
+
+[33mcommit a732d3a789411c0a4550736988e16075e1ecf352[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Thu Mar 26 18:19:00 2015 +0200
+
+    Fixed the export issue
+
+[33mcommit 4da7bc322343281300436431c59db6586f69960f[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Thu Mar 26 15:15:36 2015 +0200
+
+    fixed SessionController@create not found issue
+
+[33mcommit cabd52be5dc3f715e2092a239e935aed4fafd2fc[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Thu Mar 26 15:05:00 2015 +0200
+
+    Fixed the student report view migration
+
+[33mcommit 0157b926a23c4c81b6eb14d4a0682127812d259b[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Thu Mar 26 14:05:13 2015 +0200
+
+     fixed Undefined property: App\Http\Controllers\StudentEducationController::
+
+[33mcommit 0d92fd6b41b065aabf994290e8dd5eb228f835c7[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Thu Mar 26 13:54:43 2015 +0200
+
+    Fixed many bugs
+
+[33mcommit bab6c98ac6ac1f30e0cfa3a1eab1d0d79f8b8fb1[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Thu Mar 26 13:21:54 2015 +0200
+
+    Fixed the issue of the student fees display
+
+[33mcommit 5ff5390d2d1d8530c5728048a17a9dd43ccba080[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Thu Mar 26 12:52:36 2015 +0200
+
+    Fixed rest api for the module
+
+[33mcommit 3e95fca7303509e4ab3cadcc2beb19a101184f7a[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Thu Mar 26 12:39:02 2015 +0200
+
+     Fixed Case sensitive error on faculity route
+
+[33mcommit 4542784dd827d1e3c85b8b323b0318e217250c01[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Thu Mar 26 12:37:56 2015 +0200
+
+    Added validation for the department ID on student registration
+
+[33mcommit 93f245a717c871841d29be53bfb6f871cff51fe2[m
+Merge: bc31616 9d2d89b
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Thu Mar 26 12:24:54 2015 +0200
+
+    Merge branch 'master' of https://github.com/kamaroly/piassstudent
+
+[33mcommit 9d2d89b41b527582402987a39672e6bf09c4e733[m
+Merge: 83f89c5 eb124d0
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Thu Mar 26 12:24:13 2015 +0200
+
+    Merge branch 'master' of https://github.com/kamaroly/PiassStudent
+
+[33mcommit 83f89c5e2fc358542f2025775ff1fe4b1bf69f3e[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Thu Mar 26 12:20:18 2015 +0200
+
+    Changed the view of module table to support full and parttime student option
+
+[33mcommit bc316160ce48e918e317cc4024d6d3c6b65327e8[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Thu Mar 26 09:17:33 2015 +0200
+
+    Fixed the location of the settings.json
+
+[33mcommit eb124d0306917a376c4424ee3c5adfd24156c8de[m
+Author: Kamaro Lambert <kamaroly@gmail.com>
+Date:   Thu Mar 26 09:11:58 2015 +0200
+
+    Fixed the table spell issue

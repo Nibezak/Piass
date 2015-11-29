@@ -14,7 +14,10 @@ class AddOnlineRegistrationFields extends Migration {
 	{
 		Schema::table('students', function(Blueprint $table)
 		{
-			$table->integer('online_registered')->default(0);
+			if (Schema::hasColumn('students', 'online_registered') == false) {
+			
+				$table->integer('online_registered')->default(0);
+			}
 		});
 	}
 
@@ -27,7 +30,10 @@ class AddOnlineRegistrationFields extends Migration {
 	{
 		Schema::table('students', function(Blueprint $table)
 		{
-			//
+			if (Schema::hasColumn('students', 'online_registered')) {
+				
+			$table->dropColumn('online_registered');
+			}
 		});
 	}
 

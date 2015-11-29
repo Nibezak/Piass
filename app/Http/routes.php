@@ -22,6 +22,7 @@ Route::group(['prefix'=>'students'],	function()
 	 Route::get('/file/{id}/delete',['as'=>'student.file.delete','uses'=>'FileController@destroy']);
 	 Route::get('/upload', ['as'=>'students.upload','uses'=>'StudentController@upload']);
 	 Route::post('/upload', ['as'=>'students.upload','uses'=>'StudentController@upload']);
+	 Route::get('/{id}/delete',['as'=>'students.delete','uses'=>'StudentController@destroy']);
 	 Route::get('{studentId}/modules/registered/',['as'=>'student.registered.modules','uses'=>'StudentModulesController@registeredModules']);
 });
 

@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Reports extends Model {
 
 	protected $table = 'V_STUDENT_REPORTS';

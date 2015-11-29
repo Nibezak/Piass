@@ -51,6 +51,7 @@ class StudentModulesController extends Controller {
 		$StudentModules = (array) $request->all();
 		$StudentModules['modules'] = $this->arraysMatchIndexes($request->get('ids'), $request->get('credits'));
 
+		dd($StudentModules);
 		// Remove unecessary indexes
 		unset($StudentModules['ids'], $StudentModules['credits']);
 

@@ -40,6 +40,19 @@ class AddSoftDeleteColumns extends Migration {
 				$table->softDeletes();
 			}
 		});
+
+		Schema::table('student_educations', function ($table) {
+			if (Schema::hasColumn('student_educations', 'deleted_at') == false) {
+				$table->softDeletes();
+			}
+		});
+		Schema::table('files', function ($table) {
+			if (Schema::hasColumn('files', 'deleted_at') == false) {
+				$table->softDeletes();
+			}
+		});
+
+		
 	}
 
 	/**
@@ -77,6 +90,18 @@ class AddSoftDeleteColumns extends Migration {
 			if (Schema::hasColumn('student_modules', 'deleted_at')) {
 			$table->dropColumn('deleted_at');
 			}
-		});}
+		});
+		Schema::table('student_educations', function ($table) {
+			if (Schema::hasColumn('student_educations', 'deleted_at')) {
+			$table->dropColumn('deleted_at');
+			}
+		});
+		Schema::table('files', function ($table) {
+			if (Schema::hasColumn('files', 'deleted_at')) {
+			$table->dropColumn('deleted_at');
+			}
+		});
+		
+	}
 
 }
