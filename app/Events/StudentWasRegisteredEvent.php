@@ -17,12 +17,14 @@ class StudentWasRegisteredEvent extends Event {
 	 *
 	 * @return void
 	 */
-	public function __construct(Student $student)
+	public function __construct(Student $student,$charge_registration_fees=false)
 	{
 		$this->student = $student;
 
 		$this->id = $student->id;
 
-		$this->feetransaction = FeeTransactionRepository::registerTransaction($student);
+		if ($charge_registration_fees !== false) {
+			$this->feetransaction = FeeTransactionRepository::registerTransaction($student);
+		}
 	}
 }
