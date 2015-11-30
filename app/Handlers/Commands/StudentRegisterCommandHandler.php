@@ -21,7 +21,6 @@ class StudentRegisterCommandHandler {
 	{
 		// Prepare data before registering new student
 		$studentInfo 							= (array) $studentData;
-
 		$studentInfo['DOB']						= date('Y-m-d h:i:s',strtotime($studentData->DOB));
 		$studentInfo['registration_number'] 	= $studentInfo['registration_number']?:$this->getRegistrationNumber($studentData->department_id);
 		$studentInfo['created_by'] 				= (is_null(Sentry::getUser()) == false )? Sentry::getUser()->id : 0;
@@ -29,8 +28,9 @@ class StudentRegisterCommandHandler {
 		$student =  Student::create($studentInfo);
 		
 		
+		
 		if ($studentData->online_registered=="0") {	
-			$event 	 = new StudentWasRegisteredEvent($student);
+			$event 	 = new StudentWasRegisteredEvent($student,$studentInfo['registration_fees']);
 			Event::fire($event);
 			return $event;
 		}

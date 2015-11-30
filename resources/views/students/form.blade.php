@@ -137,11 +137,23 @@
                         <th>Departments:
                          {!! $errors->first('department_id','<em class="has-error">(:message)</em>') !!} 
                         </th>
-                        <td class=" {{ ($errors->has('department_id')) ? 'has-error' : '' }}">
-                          
+                        <td class=" {{ ($errors->has('department_id')) ? 'has-error' : '' }}">           
                           {!! Form::select('department_id', $departments, $student->department_id, ['class'=>'form-control']) !!}
                         </td>
                       </tr>
+                      @if ($student->exists == false)
+                      <tr>
+                        <th>Charge registration fees:
+                        </th>
+                        <td>           
+                        <div class="alert " style="border:1px solid #f39c12">
+                       <input name="registration_fees" type="checkbox" value="{!! Setting::get('registration_fees') !!}">
+                       {!! Setting::get('registration_fees') !!} Rwf
+                     </div>
+                        </td>
+                      </tr>
+
+                      @endif
                     </tbody>
                   </table>
                   

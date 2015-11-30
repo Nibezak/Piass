@@ -44,7 +44,7 @@ class StudentRegisterCommand extends Command {
     $this->campus			          = $student->campus;
 		$this->department_id	      = $student->department_id;
 		$this->registration_number 	= $student->registration_number?:false;
-
+    $this->registration_fees    = $student->registration_fees?:false;
     $this->online_registered    = $student->online_registered;
 	}
 
