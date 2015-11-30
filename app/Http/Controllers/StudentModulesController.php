@@ -94,7 +94,7 @@ class StudentModulesController extends Controller {
 
 	    $removeFees = $transaction->delete();
 
-	    $removeStudentModule = $module->delete();
+	    $removeStudentModule = (is_null($module)) ? : $module->delete();
         
 		if ($removeFees && $removeStudentModule) {
 			// All wend well
