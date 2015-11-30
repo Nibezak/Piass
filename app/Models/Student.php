@@ -1,9 +1,11 @@
 <?php namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model {
-
+	use SoftDeletes;
+	
 	protected $fillable = [
 							'names'          ,
 							'DOB'            ,
@@ -23,7 +25,8 @@ class Student extends Model {
 							'campus',
 							'created_by',
 							'updated_by',
-							'department_id'
+							'department_id',
+							'online_registered'
 	];
 
 	protected	$dates = ['DOB'];
@@ -54,39 +57,75 @@ class Student extends Model {
 	public function level()
 	{
 		// return 0 if we can't find level
-
 		if(! $level = $this->registeredModules()->max('department_level') )
 		{
-			return 'N/A' ;
+			return 0 ;
 		}
-
 		return $level;
 	}
+	/**
+	 * Scoping level for this 
+	 * 
+	 * @return int 
+	 */
+	public function scopeLevel()
+	{
+		return $this->level();
+	}
 
+	/**
+	 * Determine if this student is at level
+	 * 
+	 * @param  numeric  $level level to determine
+	 * @return boolean        [description]
+	 */
+	public function isLevel($level)
+	{
+		return $this->registeredModules()->max('department_level') == $level;
+	}
 	/**
 	 * Get current inTake of the student
 	 * @return [type]
 	 */
 	public function inTake()
 	{
-		// Get latest registered module
-
-		$latestModule = $this->registeredModules()
-					 		 ->orderBy('created_at','DESC')
-					   		 ->take(1)
-					   		 ->get();
-
-		// Do we have any registered module ?
-		$inTake = isset($latestModule[0]) ? $latestModule[0]->intake : false;
-
-		if(!$inTake)
-		{
-			return 'N/A' ;
-		}
-
-		return $inTake;
+		$latestModule = $this->getLastModule();
+		return !is_null($latestModule)?$latestModule->intake:'N/A';
 	}
 
+	/**
+	 * Scoping academic year for this student
+	 * 
+	 * @return string
+	 */
+	public function academicYear()
+	{
+		$latestModule = $this->getLastModule();
+		return !is_null($latestModule)?$latestModule->academic_year:'n/a';
+	}
+     
+    /**
+     * Get latest registered module for this student
+     * 
+     * @return obj
+     */
+    private function getLastModule()
+    {
+      return $this->registeredModules()
+    						 ->orderBy('created_at','DESC')
+					   		 ->take(1)
+					   		 ->first();
+    }
+    
+    /**
+     * Student marks
+     * 
+     * @return object
+     */
+    public function marks()
+    {
+    	return $this->hasMany('\App\Models\StudentMark');
+    }
 	/**
 	 * Relationship with the edication history model
 	 *

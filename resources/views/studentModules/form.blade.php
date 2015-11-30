@@ -55,9 +55,7 @@
                        {!! Form::checkbox('fine_fees', Setting::get('fine_fees'), null) !!}
                       Charge fine of {!! Setting::get('fine_fees') !!} Rwf
                      </div>
-                    {!! Form::submit($button, ['class'=>'btn btn-lg btn-success','onclick'=>'return confirm("Are you sure you want to register this modules to '.$student->name.'? this action cannot be undone")','style'=>'width:100%']) !!}
-
-                  
+                    {!! Form::submit($button, ['class'=>'btn btn-lg btn-success','onclick'=>'return confirm("Are you sure you want to register this modules to '.$student->name.'? this action cannot be undone")','style'=>'width:100%']) !!}    
                   </div>
             
                 </div><!-- /.box-body -->

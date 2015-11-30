@@ -33,10 +33,16 @@
                       </a>
                       <a href="{{route('students.modules.show',$student->id)}}" class="btn btn-sm btn-success"><i class="fa fa-book">Modules</i>
                       </a>
+                      <a href="{{route('student.marks',$student->id)}}" class="btn btn-sm btn-success"><i class="fa fa-book">Marks</i>
+                      </a>
                         <a href="{{route('fees.show',$student->id)}}" class="btn btn-sm btn-warning"><i class="fa fa-money"></i>
                           Payment
                         </a>
-                        <a href="{{route('students.edit',$student->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a></td>
+                        <a href="{{route('students.edit',$student->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>
+                         <a href="{{route('students.delete',$student->id)}}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete student {!! $student->names !!} ?');">
+                         <i class="fa fa-cancel"></i> Delete
+                         </a>
+                         </td>
                     </tr>
 					@endforeach
                   </tbody>

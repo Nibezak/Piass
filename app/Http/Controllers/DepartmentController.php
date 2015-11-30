@@ -79,7 +79,7 @@ class DepartmentController extends Controller {
 		);
 		// First log
 		Log::info($this->user->email . ' added department ' . json_encode($request->all()));
-		Flash::success('New department well added');
+		Flash::success('New department well added.');
 
 		return Redirect::route('settings.departments.index');
 	}
@@ -167,6 +167,7 @@ class DepartmentController extends Controller {
 
 		return Redirect::route('settings.departments.index');
 	}
+<<<<<<< HEAD
 
 	/*
 	|--------------------------------------------------------------------------
@@ -216,4 +217,6 @@ class DepartmentController extends Controller {
  
 		return response()->json($modules);
 	}
+=======
+>>>>>>> 44c5c88ea98a3c8a6d3d0c68c9337ea25a5c3b33
 }

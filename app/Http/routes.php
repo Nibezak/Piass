@@ -1,32 +1,51 @@
 <?php
+
 /*
 |--------------------------------------------------------------------------
 | Home routes
 |--------------------------------------------------------------------------
 */
-	Route::get('/', ['as'=>'home','uses'=>'DashboardController@index']);
-	Route::get('/dashboard', ['as'=>'dashboard','uses'=>'DashboardController@index']);
+Route::get('/', ['as'=>'home','uses'=>'DashboardController@index']);
+Route::get('/dashboard', ['as'=>'dashboard','uses'=>'DashboardController@index']);
 
 /*
 |--------------------------------------------------------------------------
 | Student routes
 |--------------------------------------------------------------------------
 */
-   Route::group(['prefix'=>'students'],	function()
-	{
+Route::group(['prefix'=>'students'],	function()
+{
+	 Route::resource('educations', 'StudentEducationController');		 
+	 Route::resource('modules','StudentModulesController');
+	 Route::get('fees/{studentId}',['as'=>'student.fees','uses'=>'StudentController@fees']);
+	 Route::get('{studentId}/marks',['as'=>'student.marks','uses'=>'StudentController@marks']);
+	 Route::get('/file/{id}/delete',['as'=>'student.file.delete','uses'=>'FileController@destroy']);
+	 Route::get('/upload', ['as'=>'students.upload','uses'=>'StudentController@upload']);
+	 Route::post('/upload', ['as'=>'students.upload','uses'=>'StudentController@upload']);
+	 Route::get('/{id}/delete',['as'=>'students.delete','uses'=>'StudentController@destroy']);
+	 Route::get('{studentId}/modules/registered/',['as'=>'student.registered.modules','uses'=>'StudentModulesController@registeredModules']);
+});
 
-		 Route::resource('educations', 'StudentEducationController');
+Route::resource('students', 'StudentController');
 
-		 Route::resource('modules','StudentModulesController');
-
-		 Route::get('fees/{studentId}',['as'=>'student.fees','uses'=>'StudentController@fees']);
-
-		 Route::get('/file/{id}/delete',['as'=>'student.file.delete','uses'=>'FileController@destroy']);
-
-		 Route::get('{studentId}/modules/registered/',['as'=>'student.registered.modules','uses'=>'StudentModulesController@registeredModules']);
+/*
+|--------------------------------------------------------------------------
+| Student routes
+|--------------------------------------------------------------------------
+*/
+   Route::group(['prefix'=>'marks'],	function(){
+   	 Route::get('/complete', ['as'=>'marks.complete','uses'=>'MarkController@complete']);
+	 Route::get('/cancel', ['as'=>'marks.cancel','uses'=>'MarkController@cancel']);
 	});
 
-	Route::resource('students', 'StudentController');
+  Route::resource('marks', 'MarkController');
+
+/*
+|--------------------------------------------------------------------------
+| TEACHER  routes
+|--------------------------------------------------------------------------
+*/
+Route::resource('/teachers', 'TeacherController');
 /*
 |--------------------------------------------------------------------------
 | Fees, Transactions and files routes
@@ -48,11 +67,8 @@ Route::get('departments/{departmentid}/level/{levelid}',['as' =>'departments.lev
 Route::group(['prefix'=>'settings'],function()
 	{
 		Route::resource('faculities','FaculityController');
-
 		Route::resource('departments','DepartmentController');
-
 		Route::get('/',['as'=>'settings.index','uses'=>'SettingController@index']);
-
 		Route::post('/store',['as'=>'settings.store','uses'=>'SettingController@store']);
 	});
 
@@ -65,11 +81,8 @@ Route::group(['prefix'=>'settings'],function()
 Route::group(['prefix'=>'reports'],function()
 {
 	Route::get('/','ReportController@index');
-
 	Route::get('/students/details', ['as'=>'reports.students.details','uses'=>'ReportStudentController@details']);
-
 	Route::get('/students/payments/progression',['as'=>'reports.students.payments.progression','uses'=>'ReportStudentController@paymentProgression'] );
-
 	Route::get('/students/payments/full',['as'=>'reports.students.payments.paid','uses'=>'ReportStudentController@fullPaid'] );
 	Route::get('/students/payments/pending',['as'=>'reports.students.payments.pending','uses'=>'ReportStudentController@pendingPayment'] );
 
@@ -82,16 +95,15 @@ Route::group(['prefix'=>'reports'],function()
 */
 Route::group(['prefix'=>'api','middleware'=>'sentry.auth'], function()
 	{
-		Route::get('departments/{faculityId}','DepartmentController@apiDepartments');
-
-		Route::get('department/level/{departmentId}', 'DepartmentController@apiLevel');
-
-		Route::get('department/{departmentId}/level/{level}', 'DepartmentController@apiModules');
-      
+		Route::get('departments/{faculityId}','ApiController@apiDepartments');
+		Route::get('department/level/{departmentId}', 'ApiController@apiLevel');
+		Route::get('department/{departmentId}/level/{level}', 'ApiController@apiModules');
+		Route::get('department/{departmentId}/level/{level}/modules','ApiController@departmentLevelModules');
+		Route::get('level/{level}/modules/{moduleId}/academicyears','ApiController@moduleAcademicYears');
+      //http://piassms.app/level/1/modules/1/academicyears
 });
 
 
-Route::get('test', function()
-	{
-		dd(strlen('2015-10-08 07:37'));
-	});
+Route::get('registration/',['as'=>'student.online.registration.index','uses'=>'OnlineRegistrationController@index']);
+Route::post('registration/store',['as'=>'student.online.registration','uses'=>'OnlineRegistrationController@register']);
+Route::get('registration/export',['as'=>'student.online.registration.export','uses'=>'OnlineRegistrationController@export']);

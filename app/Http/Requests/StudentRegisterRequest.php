@@ -1,7 +1,6 @@
 <?php namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-
 class StudentRegisterRequest extends Request {
 
 	/**
@@ -11,6 +10,10 @@ class StudentRegisterRequest extends Request {
 	 */
 	public function authorize()
 	{
+		if ($this->online_registered == "1") {
+			return true;
+		}
+
 		return \Sentry::check();
 	}
 

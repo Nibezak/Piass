@@ -1,14 +1,15 @@
 <?php namespace App\Handlers\Commands;
 
-use Event;
-
 use App\Commands\StudentRegisterCommand;
-use App\Models\Student;
-use App\Models\Department;
 use App\Events\StudentWasRegisteredEvent;
+use App\Models\Department;
+use App\Models\Student;
+use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Event;
 use Illuminate\Queue\InteractsWithQueue;
 
 class StudentRegisterCommandHandler {
+
 
 	/**
 	 * Handle the command.
@@ -23,14 +24,18 @@ class StudentRegisterCommandHandler {
 
 		$studentInfo['DOB']						= date('Y-m-d h:i:s',strtotime($studentData->DOB));
 		$studentInfo['registration_number'] 	= $studentInfo['registration_number']?:$this->getRegistrationNumber($studentData->department_id);
-		$studentInfo['created_by'] 				= \Sentry::getUser()->id;
+		$studentInfo['created_by'] 				= (is_null(Sentry::getUser()) == false )? Sentry::getUser()->id : 0;
+
 		$student =  Student::create($studentInfo);
 		
-		$event 	 = new StudentWasRegisteredEvent($student);
+		
+		if ($studentData->online_registered=="0") {	
+			$event 	 = new StudentWasRegisteredEvent($student);
+			Event::fire($event);
+			return $event;
+		}
 
-		Event::fire($event);
-
-		return $event;
+		return $student;
 	}
 
 	/**

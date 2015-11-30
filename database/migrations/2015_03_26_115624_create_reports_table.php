@@ -12,6 +12,7 @@ class CreateReportsTable extends Migration {
     				     SELECT student_id, 
     				     MAX( department_level ) AS Level
 						FROM student_modules
+						WHERE s.deleted_at is not null
 						GROUP BY student_id'
 						);
 
@@ -23,7 +24,8 @@ class CreateReportsTable extends Migration {
 			    		sum(credit) as credit,
 			    		sum(debit)-sum(credit) as balance 
 			    		FROM `fee_transactions` 
-		    		  GROUP BY student_id');
+			    		WHERE s.deleted_at is not null
+		    		    GROUP BY student_id');
 
     	// CREATE FINAL STUDENT TABLE 
         DB::statement( 'CREATE VIEW V_STUDENT_REPORTS AS SELECT
@@ -67,6 +69,7 @@ class CreateReportsTable extends Migration {
 						LEFT JOIN V_STUDENT_FEES as fees ON s.id = fees.student_id
 						LEFT JOIN users as register ON s.created_by = register.id
 						LEFT JOIN users as updator ON s.created_by = updator.id
+						WHERE s.deleted_at is not null
 						');
     }
 

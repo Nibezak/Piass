@@ -430,6 +430,7 @@ $.AdminLTE.boxWidget = {
 
 })(jQuery);
 
+
 /*
  * TODO LIST CUSTOM PLUGIN
  * -----------------------
