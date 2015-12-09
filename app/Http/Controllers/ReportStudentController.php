@@ -237,6 +237,10 @@ class ReportStudentController extends Controller {
 				return $student + $data;
 			}
 
+			$intake = $this->student->where('registration_number', $student['registration_number'])->first();
+			if (!is_null($intake)) {
+				$intake = $intake->inTake();
+			}
 			return [
 				'Names' => $student['names'],
 				'Reg #' => $student['registration_number'],
@@ -244,7 +248,7 @@ class ReportStudentController extends Controller {
 				'Faculity' => $student['Faculity'],
 				'Department' => $student['Department'],
 				'Level' => $student['level'],
-				'InTake' => $this->student->where('registration_number', $student['registration_number'])->first()->inTake(),
+				'InTake' => $intake,
 				'Mode' => $student['mode_of_study'],
 				'Debit' => (float) $student['debit'],
 				'Credit' => (float) $student['credit'],
