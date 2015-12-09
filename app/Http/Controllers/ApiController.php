@@ -65,7 +65,7 @@ class ApiController extends Controller {
 
 		$modules = $this->department->findOrFail((int) $departmentId)->modules;
        
-		$modules = $modules->where('department_level',(int) $level);
+		$modules = $modules->where('department_level',$level);
  		
  		$this->markFactory->setLevel($level);
 
