@@ -184,12 +184,14 @@ class ReportStudentController extends Controller {
 	 */
 	private function studentDetails($status = null) {
 
-		$faculity = !Input::get('faculity') ? false : $this->faculity->findOrFail(Input::get('faculity'))->name;
-		$department = !Input::get('department') ? false : $this->department->findOrFail(Input::get('department'))->name;
-		$level = (int) Input::get('level');
-		$module = !Input::get('module') ? false : $this->module->findOrFail(Input::get('module'))->name;
+		$faculity = !Input::has('faculity') ? false : Input::get('faculity');
+		$department = !Input::has('department') ? false : Input::get('department');
+		$level = (int) !Input::has('level') ? false : Input::get('level');;
+		$module = !Input::has('module') ? false : Input::get('module');
 
-		return $students = $this->reports->studentDetails($faculity, $department, $level, $module, $status)->get()->toArray();
+		
+		 return $this->reports->studentDetails($faculity, $department, $level, $module, $status)->get()->toArray();
+		 
 
 	}
 

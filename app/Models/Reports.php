@@ -14,18 +14,19 @@ class Reports extends Model {
 	 */
 	public function studentDetails($faculity=false,$department=false,$level=false,$module=false,$status=null)
 	{
+
 	 return static::where(function ($query) use($faculity,$department,$level,$module,$status) {
-				if($faculity)
+				if($faculity!=false)
 				{
-					$query->where('Faculity',$faculity);
+					$query->where('faculity_id',$faculity);
 				}
 
-				if ($department) 
+				if ($department!=false) 
 				{
-					$query->where('Department',$department);
+					$query->where('department_id',$department);
 				}
 
-				if($level)
+				if($level!=false)
 				{
 					$query->where('level',$level);
 				}
@@ -37,5 +38,6 @@ class Reports extends Model {
 					$query->where('balance',$sign,0);
 				}
 		});
+
 	}
 }
