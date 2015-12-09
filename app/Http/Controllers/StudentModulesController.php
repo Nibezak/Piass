@@ -51,7 +51,6 @@ class StudentModulesController extends Controller {
 		$StudentModules = (array) $request->all();
 		$StudentModules['modules'] = $this->arraysMatchIndexes($request->get('ids'), $request->get('credits'));
 
-		dd($StudentModules);
 		// Remove unecessary indexes
 		unset($StudentModules['ids'], $StudentModules['credits']);
 
@@ -110,7 +109,7 @@ class StudentModulesController extends Controller {
 
 			Flash::success('You have succesffully deleted module:'.$module->name.'.');
 
-			return Redirect::back();
+		return redirect()->route('student.registered.modules',['studentId'=>$module->student_id]);
 		}
 		
 		// If we reach here, it means something went wrong rollback and build the error	
@@ -120,7 +119,7 @@ class StudentModulesController extends Controller {
 
 		Flash::error('Error occured while deleting module:'.$module->name.'.');
 
-		return Redirect::back();
+		return redirect()->route('student.registered.modules',['studentId'=>$module->student_id]);
 
 	}
 
