@@ -38,12 +38,15 @@
 	    /** If a department is chosen then load it's levels */
 	   $('select#departmentlevel').change(function()
 	    {
+
+	    	var loadingbar = 'Please wait we are loading module for this level...<div class="progress progress-xs progress-striped active" style="block"><div class="progress-bar progress-bar-warning" style="width:100%"></div></div>';
+            $('tbody.levelmodules').html(loadingbar);
 	        var departmentId = $('select#departments').val();
 	        var level        = $(this).val();
 	        
 	        $.get('/api/department/'+departmentId+'/level/'+level,function(data)
 	            {
-
+	           $('tbody.levelmodules').html('');
 	            @if($student->mode_of_study=='Full time')
 	           $.each(data, function(modules,module)
 	            {
@@ -61,6 +64,8 @@
 	        document.getElementById('moduletable').style.display="block";
 	        document.getElementById('button').style.display="block";
 	        }
+
+	        $('#loading').hide();
 	    });
 	});
 </script>
