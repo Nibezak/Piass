@@ -9,7 +9,7 @@
                     {!!Form::hidden('student_id', $student->id) !!}
                     <!-- text input -->
                     <div class="form-group {!! ($errors->has('credit')) ? 'has-error' : '' !!}">
-                      {!! Form::label('Amount', 'Debit amount') !!}
+                      {!! Form::label('Amount', 'Amount') !!}
                       {!! Form::input('number','credit', null, ['class'=>'form-control']) !!}
                       {!! $errors->first('credit','<label class="has-error"><i class="fa fa-times-circle-o"></i>:message</label>') !!} 
                     </div>

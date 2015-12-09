@@ -61,8 +61,10 @@ class CreateReportsViewWithsoftDelete extends Migration {
 						completion_year,
 						/** Student department columns */
 						d.name as Department,
+						d.id as department_id,
 						/** Student FACULITY columns */
 						f.name as Faculity,
+						f.id as faculity_id,
 						debit,
 						credit,
 						balance

@@ -70,6 +70,7 @@ class ViewComposersProvider extends ServiceProvider {
 			'studentModules.form',
 			'studentModules.form',
 			'marks.module_filter',
+			'reports.students.filter',
 		];
 
 		view()->composer($views,'App\Http\Composers\ViewComposer@faculityForm');
@@ -81,7 +82,8 @@ class ViewComposersProvider extends ServiceProvider {
 		$views = [
 			'students.form',
 			'studentModules.form',
-			'reports.students.filter',	
+			'reports.students.filter',
+
 			];
 		view()->composer($views,'App\Http\Composers\ViewComposer@departmentForm');
 	}
@@ -95,11 +97,13 @@ class ViewComposersProvider extends ServiceProvider {
 	{
 		$viewsAcademicYeaers = [
 		'studentModules.form',
+		'reports.students.filter',
 		];
 		$viewsCompanyname = [
 							 'partials.header',
 					         'layouts.default',
-		 			         'sentinel.sessions.login'
+		 			         'sentinel.sessions.login',
+		 			         'reports.students.filter',
 		 			       ];
 		view()->composer($viewsAcademicYeaers,'App\Http\Composers\ViewComposer@academicYears');
 		view()->composer($viewsCompanyname,'App\Http\Composers\ViewComposer@companyName');
