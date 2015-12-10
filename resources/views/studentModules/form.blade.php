@@ -55,6 +55,10 @@
                        {!! Form::checkbox('fine_fees', Setting::get('fine_fees'), null) !!}
                       Charge fine of {!! Setting::get('fine_fees') !!} Rwf
                      </div>
+                     <div class="alert " style="border:1px solid #f39c12">
+                       <input name="registration_fees" type="checkbox" value="{!! Setting::get('registration_fees') !!}">
+                      Charge registration fees of {!! Setting::get('registration_fees') !!} Rwf
+                     </div>
                     {!! Form::submit($button, ['class'=>'btn btn-lg btn-success','onclick'=>'return confirm("Are you sure you want to register this modules to '.$student->name.'? this action cannot be undone")','style'=>'width:100%']) !!}    
                   </div>
             

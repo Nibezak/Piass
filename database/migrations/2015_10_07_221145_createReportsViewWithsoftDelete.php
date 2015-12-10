@@ -35,6 +35,7 @@ class CreateReportsViewWithsoftDelete extends Migration {
     	// CREATE FINAL STUDENT TABLE 
         DB::statement( 'CREATE OR REPLACE VIEW V_STUDENT_REPORTS AS SELECT
 					 /** Selecting Student columns */
+					    s.id as student_id,
 						names,
 						DOB,
 						gender,
@@ -76,7 +77,8 @@ class CreateReportsViewWithsoftDelete extends Migration {
 						LEFT JOIN V_STUDENT_FEES as fees ON s.id = fees.student_id
 						LEFT JOIN users as register ON s.created_by = register.id
 						LEFT JOIN users as updator ON s.created_by = updator.id
-						WHERE d.deleted_at is null AND f.deleted_at is null
+						WHERE d.deleted_at is null AND f.deleted_at is null 
+						AND s.deleted_at IS NULL
 						');
     }
 

@@ -78,12 +78,12 @@ class StudentModuleRegisterCommadHandler {
 		//Register Fee transactions if there is a module
 		if((bool) count($modules))
 		{		
-			$this->saveFees($debitAmount,count($modules),$command->student_id,$command->academic_year,$command->intake,$command->fine_fees,$module['department_level']);
+			$this->saveFees($debitAmount,count($modules),$command->student_id,$command->academic_year,$command->intake,$command->fine_fees,$module['department_level'],$command->registration_fees);
 		}
 	}
 
     /** Debit the account of the student */
-	public function saveFees($debitAmount,$countModule,$student_id,$academic_year,$intake,$fine_fees=0,$level)
+	public function saveFees($debitAmount,$countModule,$student_id,$academic_year,$intake,$fine_fees=0,$level,$registration_fees = 0)
 	{
 		$studentFee['date'] 			= 	date('Y-m-d h:i:s');
 		$studentFee['credit'] 			= 	0;
@@ -99,6 +99,11 @@ class StudentModuleRegisterCommadHandler {
 			$this->registerFine($fine_fees,$student_id,$academic_year,$intake);
 		}
 
+		//Charge registration fees if needed
+		if ((float) $registration_fees > 0) {
+			$this->registerRegistrationFee($registration_fees,$student_id,$academic_year,$intake);
+		}
+
 		return $this->feeTransaction->create($studentFee);
 	}
 	
@@ -111,6 +116,19 @@ class StudentModuleRegisterCommadHandler {
 		$studentFee['done_by'] 			=	 \Sentry::getUser()->id;
 		$studentFee['student_id'] 		=	$student_id;
 		$studentFee['balance'] 			=	$this->newBalance($student_id,$fine_fees);
+
+		return $this->feeTransaction->create($studentFee);
+	}
+
+	private function registerRegistrationFee($registration_fees=0,$student_id,$academic_year,$intake)
+	{
+		$studentFee['date'] 			= 	date('Y-m-d h:i:s');
+		$studentFee['credit'] 			= 	0;
+		$studentFee['description']		= 	'Charged registration fee of :'.$registration_fees.' for Academic year:'.$academic_year.', intake:'.$intake.'.';
+		$studentFee['debit']  			= 	(float) $registration_fees;
+		$studentFee['done_by'] 			=	 \Sentry::getUser()->id;
+		$studentFee['student_id'] 		=	$student_id;
+		$studentFee['balance'] 			=	$this->newBalance($student_id,$registration_fees);
 
 		return $this->feeTransaction->create($studentFee);
 	}

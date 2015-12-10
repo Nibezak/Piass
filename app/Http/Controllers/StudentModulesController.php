@@ -88,6 +88,7 @@ class StudentModulesController extends Controller {
 
 		$transaction = $feeTransaction->where('student_id',$module->student_id)
 									  ->where(DB::raw('LEFT(created_at,10)'),substr($module->created_at, 0,10))
+									  ->orderBy('id','DESC')
 									  ->first();
 	    DB::beginTransaction();
 
@@ -95,8 +96,11 @@ class StudentModulesController extends Controller {
 	    if (!is_null($transaction)) {
 	    	$transaction->debit -= $module->amount;
 	    	$transaction->balance -= $module->amount;
-
-	    	$removeFees = $transaction->save();
+            $removeFees = $transaction->save();
+            if ($transaction->balance <= 0) {
+            	$transaction->delete();
+            }
+	    	
 	    }
 	    
 	    $removeStudentModule = (is_null($module)) ? : $module->delete();
@@ -109,7 +113,7 @@ class StudentModulesController extends Controller {
 
 			Flash::success('You have succesffully deleted module:'.$module->name.'.');
 
-		return redirect()->route('student.registered.modules',['studentId'=>$module->student_id]);
+			return redirect()->route('student.registered.modules',['studentId'=>$module->student_id]);
 		}
 		
 		// If we reach here, it means something went wrong rollback and build the error	

@@ -165,7 +165,7 @@ class Student extends Model {
     {
     	if ($this->latestFees()->count())
          {
-    		return $this->latestFees()->first()->balance;
+    		return $this->totalDebitAmount() - $this->totalCreditAmount();
        	}
 
        	return 0;
