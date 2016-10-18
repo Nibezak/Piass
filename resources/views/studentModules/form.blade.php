@@ -34,7 +34,7 @@
                       <div>
                        {!! Form::label('intake', 'InTake') !!}
                         
-                       {!! Form::select('intake',['March'=>'March','September'=>'September'],null,['class'=>'form-control','id'=>'intake']) !!}
+                       {!! Form::select('intake',['March-'.((string)date('Y'))=>'March-'.((string)date('Y')),'September-'.((string)date('Y'))=>'September-'.((string)date('Y'))],null,['class'=>'form-control','id'=>'intake']) !!}
                       </select>
                     </div>
                      
