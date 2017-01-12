@@ -71,7 +71,6 @@ class ApiController extends Controller {
 
 		return response()->json($modules);
 	}
-
 	/**
 	 * Select module lists based on the departments and level
 	 * @param  ApiRequest $request      
@@ -80,13 +79,9 @@ class ApiController extends Controller {
 	 * @return json                 
 	 */
 	public function departmentLevelModules(ApiRequest $request, $departmentId, $level) {
-
-		$modules = $this->department->findOrFail((int) $departmentId)->modules;
-       
-		$modules = $modules->where('department_level',(int) $level)->lists('name','id');
-
+		$modules = $this->department->findOrFail((int) $departmentId)->modules()->where('department_level',$level)->lists('name','id');
  		$modules[0] = 'select a module';
-        $this->markFactory->setLevel($level);
+                $this->markFactory->setLevel($level);
 		return response()->json($modules);
 	}
 
