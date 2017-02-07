@@ -41,10 +41,20 @@ class FeeRegisterCommandHandler {
 
 	public function save($fee)
 	{
+		$amount     = $fee->credit;
 		$studentFee = (array) $fee;
-		$studentFee['debit']   = 0;
+		$studentFee['debit']   = $amount;
 		$studentFee['done_by'] = Sentry::getUser()->id;
-		$studentFee['balance'] = $this->newBalance($fee->student_id,$fee->credit);
+		$studentFee['balance'] = $this->newBalance($fee->student_id,$amount,$fee->transaction_type);
+
+		switch ($fee->transaction_type) {
+			case 'debit':
+				$studentFee['credit'] = 0;
+				break;
+			default:
+				$studentFee['debit']  = 0;
+				break;
+		}
 
 		return $this->feeTransaction->create($studentFee);
 	}
@@ -54,9 +64,20 @@ class FeeRegisterCommandHandler {
 	 * @param  numeric $credit     Credited amount to this student
 	 * @return numeric
 	 */
-	private function newBalance($studentID,$credit)
+	private function newBalance($studentID,$amount,$type='credit')
 	{
-		return  $this->oldBalance($studentID) - $credit;
+		$balance =  $this->oldBalance($studentID);
+
+		switch ($type) {
+			case 'credit':
+				$balance = $balance - $amount;
+				break;
+			case 'debit':
+				$balance = $balance + $amount;
+				break;
+		}
+
+		return $balance;
 	}
 	/**
 	 * Get current balance before we add this record to the database

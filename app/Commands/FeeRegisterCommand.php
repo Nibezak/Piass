@@ -11,6 +11,7 @@ class FeeRegisterCommand extends Command{
 	public $payslip_number;
 	public $date;
 	public $student_id;
+	public $transaction_type;
 
 	/**
 	 * Create a new command instance.
@@ -19,11 +20,12 @@ class FeeRegisterCommand extends Command{
 	 */
 	public function __construct($request)
 	{
-			$this->credit         = $request->credit; 
-			$this->description    = $request->description;
-			$this->payslip_number = $request->payslip_number;           
-			$this->date           = $request->date; 
-			$this->student_id     = $request->student_id;       
+			$this->credit           = $request->credit; 
+			$this->description      = $request->description;
+			$this->payslip_number   = $request->payslip_number;           
+			$this->date             = $request->date; 
+			$this->student_id       = $request->student_id;       
+			$this->transaction_type = $request->transaction_type;
 	}
 
 }

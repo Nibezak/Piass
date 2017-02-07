@@ -62,6 +62,7 @@ class FeeController extends Controller {
 
 			return redirect()->back();
 		}
+
 		$this->dispatch(new FeeRegisterCommand($request));
 
 		// First log

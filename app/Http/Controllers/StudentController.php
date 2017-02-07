@@ -141,6 +141,11 @@ class StudentController extends Controller {
 		return Redirect::route('students.edit', $student->id);
 	}
 
+	/**
+	 * Show student fees table
+	 * @param  string $studentId 
+	 * @return         
+	 */
 	public function fees($studentId) {
 		// First check if the user has the permission to do this
 		if (!$this->user->hasAccess('student.fees')) {
@@ -173,6 +178,7 @@ class StudentController extends Controller {
 		if (Request::get('export') == 'printer') {
 			 return view('layouts.print',compact('report'));
 		}
+
 		if (Request::get('export') == 'excel') {
 			
 			 $filename = $student->names .'-marks.xls';

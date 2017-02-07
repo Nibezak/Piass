@@ -23,7 +23,7 @@ class FeeRequest extends Request {
 	 */
 	public function rules()
 	{
-		return [
+		$rules = [
 
 				'credit'=>'required|numeric',
 				'description'=>'required',
@@ -31,6 +31,12 @@ class FeeRequest extends Request {
 				'date'=>'required|date',
 				'student_id'=>'required',
 		];
+
+		if (trim(strtolower($this->get('transaction_type'))) === 'debit') {
+			$rules['payslip_number'] = 'unique:fee_transactions';
+		}
+
+		return $rules;
 	}
 
 }
