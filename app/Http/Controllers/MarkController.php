@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use Flash;
 use App\Factories\MarkFactory;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
@@ -11,6 +12,7 @@ class MarkController extends Controller {
 	function __construct(StudentModules $studentmodules,MarkFactory $markFactory) {
 		$this->StudentModules = $studentmodules;
 		$this->markFactory = $markFactory;
+		parent::__construct();
 	}
 
 
@@ -51,9 +53,9 @@ class MarkController extends Controller {
 		// First check if the user has the permission to do this
 		if (!$this->user->hasAccess($permission)) {
 			Flash::error(trans('Sentinel::users.noaccess'));
-
 			return redirect()->back();
 		}
+		
 		$this->markFactory->complete();
 
 		Log::info($this->user->email . ' has completed to mark'.implode(',', $markingDetails));
@@ -89,6 +91,11 @@ class MarkController extends Controller {
 		return view('marks.index',compact('students','markingDetails'));
 	}
 
+	/** Just fixing a bug */
+	public function show($id=null)
+	{
+		return $this->reload();
+	}
 	/**
 	 * Set students to be marked
 	 */
