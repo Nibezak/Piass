@@ -32,7 +32,7 @@ class MarkController extends Controller {
 	 */
 	public function update($studentId)
 	{
-		$this->markFactory->updateMarks(Request::get('student_id'),Request::get('marks'));
+		$this->markFactory->updateMarks(Request::get('student_id'),Request::get('cat'),Request::get('exam'));
 
 		return $this->reload();
 	}
@@ -83,8 +83,8 @@ class MarkController extends Controller {
 
 
 		/** Get student to be marked and the marking details*/
-	 	$students = $this->markFactory->getStudents();
-	 	$markingDetails  = $this->markFactory->getFilterDetails();
+		$students       = $this->markFactory->getStudents();
+		$markingDetails = $this->markFactory->getFilterDetails();
 
 		return view('marks.index',compact('students','markingDetails'));
 	}

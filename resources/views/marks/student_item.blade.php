@@ -6,8 +6,8 @@
 	<td>{!! $student->department !!}</td>
 	<td>{!! $student->level !!}
 	<td>{!! $student->academicYear !!}</td>
-
-	<td>{!! Form::text('marks',  $student->marks , ['class'=>'form-control','size'=>'3'])!!}</td>
+	<td>{!! Form::text('cat',  $student->cat , ['class'=>'form-control','size'=>'3'])!!}</td>
+	<td>{!! Form::text('exam',  $student->exam , ['class'=>'form-control','size'=>'3'])!!}</td>
 	<td>
 		{!! Form::hidden('student_id', $student->id) !!}
 		<button  class="btn btn-primary">

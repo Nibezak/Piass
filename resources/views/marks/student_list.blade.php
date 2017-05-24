@@ -19,7 +19,8 @@
         <th>Department</th>
         <th>Level</th>
         <th>Academic Year</th>
-        <th>Marks</th>
+        <th>Cat</th>
+        <th>Exam</th>
       </tr>
       </thead>
       <tbody>

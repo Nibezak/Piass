@@ -46,8 +46,7 @@ class MarkFactory
         	return ;
         }
 
-		$module = $this->getModule();
-
+		$module       = $this->getModule();
 		$academicYear = $this->getAcademicYear();
 
 		$this->addStudents($module,$academicYear);
@@ -68,18 +67,19 @@ class MarkFactory
 
 		foreach ($studentModules as $studentModule) {
 			$student = new \stdClass();
-			$student->id = $studentModule->student->id;
+			$student->id                  = $studentModule->student->id;
 			$student->registration_number = $studentModule->student->registration_number;
-			$student->names = $studentModule->student->names;
-			$student->faculity = $studentModule->student->department->faculity->name;
-			$student->department = $studentModule->student->department->name;
-			$student->level = $studentModule->student->level();
-			$student->academicYear = $studentModule->student->academicYear();
-			$student->marks = 0;
+			$student->names               = $studentModule->student->names;
+			$student->faculity            = $studentModule->student->department->faculity->name;
+			$student->department          = $studentModule->student->department->name;
+			$student->level               = $studentModule->student->level();
+			$student->academicYear        = $studentModule->student->academicYear();
+			$student->exam                = 0;
+			$student->cat                 = 0;
 
 			$students[] = $student;
 		}
-
+		
 		Session::set('studentToMarks',(object) $students);
 	}
 
@@ -89,13 +89,14 @@ class MarkFactory
 	 * @param  int $studentId 
 	 * @param  int $marks     
 	 */
-	public function updateMarks($studentId,$marks)
+	public function updateMarks($studentId,$cat,$exam)
 	{
 		$students = $this->getStudents();
 
 		foreach ($students as $key => $student) {
 			if ($student->id == $studentId) {
-				$students->$key->marks = $marks;
+				$students->$key->cat = $cat;
+				$students->$key->exam = $exam;
 				break;
 			}
 		}
@@ -116,19 +117,20 @@ class MarkFactory
 		$count = 0;
 		foreach ($students as  $student) 
 		{
-		 	$newStudentMark = new StudentMark;
-			$newStudentMark->student_id = $student->id;
+			$newStudentMark                              = new StudentMark;
+			$newStudentMark->student_id                  = $student->id;
 			$newStudentMark->student_registration_number = $student->registration_number;
-			$newStudentMark->faculity_id= $this->getFaculity();
-			$newStudentMark->department_id = $this->getDepartment();
-			$newStudentMark->level = $this->getLevel();
-			$newStudentMark->academicYear = $this->getAcademicYear();
-			$newStudentMark->marks = $student->marks;
-			$newStudentMark->module_id = $this->getModule();
-			$newStudentMark->module_name = $this->getFilterDetails()->module;
-			$newStudentMark->module_code = $this->getFilterDetails()->module_code;
-			$newStudentMark->module_credits = $this->getFilterDetails()->module_credits;
-			$newStudentMark->user_id = Sentry::getUser()->id;
+			$newStudentMark->faculity_id                 = $this->getFaculity();
+			$newStudentMark->department_id               = $this->getDepartment();
+			$newStudentMark->level                       = $this->getLevel();
+			$newStudentMark->academicYear                = $this->getAcademicYear();
+			$newStudentMark->cat                         = $student->cat;
+			$newStudentMark->exam                        = $student->exam;
+			$newStudentMark->module_id                   = $this->getModule();
+			$newStudentMark->module_name                 = $this->getFilterDetails()->module;
+			$newStudentMark->module_code                 = $this->getFilterDetails()->module_code;
+			$newStudentMark->module_credits              = $this->getFilterDetails()->module_credits;
+			$newStudentMark->user_id                     = Sentry::getUser()->id;
 			$newStudentMark->save();
 			$count++;
 		 }
